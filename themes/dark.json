@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "base": "dark",
+  "tokens": {
+    "--background": "#262624",
+    "--editor-surface": "#1A1A19",
+    "--foreground": "#ECE9E0",
+    "--card-foreground": "#ECE9E0",
+    "--popover-foreground": "#ECE9E0",
+    "--secondary-foreground": "#ECE9E0",
+    "--accent-foreground": "#ECE9E0",
+    "--sidebar-foreground": "#ECE9E0",
+    "--sidebar-accent-foreground": "#ECE9E0",
+    "--worktree-sidebar-foreground": "#ECE9E0",
+    "--worktree-sidebar-accent-foreground": "#ECE9E0",
+    "--tab-active-foreground": "#ECE9E0",
+    "--card": "#30302D",
+    "--popover": "#30302D",
+    "--primary": "#D97757",
+    "--ring": "#D97757",
+    "--sidebar-primary": "#D97757",
+    "--sidebar-ring": "#D97757",
+    "--worktree-sidebar-ring": "#D97757",
+    "--tab-active-indicator": "#D97757",
+    "--split-divider-hover": "#D97757",
+    "--chart-1": "#D97757",
+    "--primary-foreground": "#201914",
+    "--sidebar-primary-foreground": "#201914",
+    "--secondary": "#383833",
+    "--muted": "#383833",
+    "--muted-foreground": "#B9B3A7",
+    "--host-badge-foreground": "#B9B3A7",
+    "--tab-inactive-foreground": "#B9B3A7",
+    "--git-decoration-ignored": "#B9B3A7",
+    "--accent": "#493A30",
+    "--sidebar-accent": "#493A30",
+    "--worktree-sidebar-accent": "#493A30",
+    "--worktree-sidebar-active": "#493A30",
+    "--host-badge": "#493A30",
+    "--border": "#494840",
+    "--input": "#494840",
+    "--sidebar-border": "#494840",
+    "--worktree-sidebar-border": "#494840",
+    "--worktree-sidebar-active-border": "#494840",
+    "--split-divider": "#494840",
+    "--sidebar": "#20201E",
+    "--worktree-sidebar": "#20201E",
+    "--tab-bar": "#20201E",
+    "--tab-inactive": "#20201E",
+    "--tab-active": "#262624",
+    "--chat-user-message": "#383631",
+    "--text-link": "#EDA184",
+    "--diff-added": "#A4BF88",
+    "--git-decoration-added": "#A4BF88",
+    "--git-decoration-untracked": "#A4BF88",
+    "--chart-2": "#A4BF88",
+    "--diff-removed": "#E6A08B",
+    "--git-decoration-deleted": "#E6A08B",
+    "--git-decoration-modified": "#D6B575",
+    "--chart-3": "#D6B575",
+    "--git-decoration-renamed": "#9FBBD1",
+    "--chart-4": "#9FBBD1",
+    "--git-decoration-copied": "#C5ACD4",
+    "--chart-5": "#C5ACD4",
+    "--diff-added-background": "#303D2B",
+    "--diff-added-gutter": "#303D2B",
+    "--diff-removed-background": "#45312C",
+    "--diff-removed-gutter": "#45312C",
+    "--diff-added-emphasis": "#405035",
+    "--diff-removed-emphasis": "#5D3D32"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#B9B3A7",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "storage"
+      ],
+      "settings": {
+        "foreground": "#EDA184"
+      }
+    },
+    {
+      "scope": [
+        "string",
+        "markup.inserted"
+      ],
+      "settings": {
+        "foreground": "#A4BF88"
+      }
+    },
+    {
+      "scope": [
+        "constant.numeric",
+        "constant.language"
+      ],
+      "settings": {
+        "foreground": "#D6B575"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#9FBBD1"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.type",
+        "support.type",
+        "entity.other.attribute-name"
+      ],
+      "settings": {
+        "foreground": "#C5ACD4"
+      }
+    },
+    {
+      "scope": [
+        "variable",
+        "punctuation"
+      ],
+      "settings": {
+        "foreground": "#ECE9E0"
+      }
+    },
+    {
+      "scope": [
+        "markup.deleted",
+        "invalid"
+      ],
+      "settings": {
+        "foreground": "#E6A08B"
+      }
+    },
+    {
+      "scope": [
+        "markup.heading"
+      ],
+      "settings": {
+        "foreground": "#EDA184",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": [
+        "markup.underline.link"
+      ],
+      "settings": {
+        "foreground": "#EDA184",
+        "fontStyle": "underline"
+      }
+    }
+  ]
+}

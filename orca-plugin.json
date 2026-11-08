@@ -1,0 +1,43 @@
+{
+  "manifestVersion": 2,
+  "id": "claude-paper",
+  "name": "Claude Paper",
+  "version": "0.1.1",
+  "description": "Unofficial Claude-inspired warm light and dark app, chat, editor and terminal colors. Content only; preserves native layouts and fonts.",
+  "engines": {
+    "orca": ">=1.4.253"
+  },
+  "execution": "data",
+  "contributes": {
+    "themes": [
+      {
+        "id": "claude-paper-light",
+        "title": "Claude Paper · 暖纸",
+        "path": "themes/light.json"
+      },
+      {
+        "id": "claude-paper-dark",
+        "title": "Claude Paper · 暖夜",
+        "path": "themes/dark.json"
+      }
+    ],
+    "terminalThemes": [
+      {
+        "id": "claude-paper-terminal-light",
+        "title": "Claude Paper · 暖纸",
+        "path": "themes/terminal-light.json"
+      },
+      {
+        "id": "claude-paper-terminal-dark",
+        "title": "Claude Paper · 暖夜",
+        "path": "themes/terminal-dark.json"
+      }
+    ]
+  },
+  "license": "MIT",
+  "repository": "https://github.com/GongXLiang/Claude-paper",
+  "author": {
+    "url": "https://github.com/GongXLiang",
+    "name": "GongXLiang"
+  }
+}
