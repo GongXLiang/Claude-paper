@@ -1,3 +1,10 @@
+# 0.4.1
+
+- English and Chinese READMEs, static website pages, SVG galleries and runnable public examples. Language links preserve the current scene and color mode.
+- 16 folder categories cover 118 exact names, including plugins and output; unlisted names retain the slate fallback. The website explains Orca's matching boundary.
+- Distinct Python, Notebook, C, C++, Fortran, JavaScript and TypeScript marks. 77 SVGs and 512 mappings; redundant `.lock` filename entries now use the identical suffix fallback.
+- 应用与终端配色不变。新增完整双语展示、通用目录规则和独立语言图标；保留未知目录的灰蓝色兜底。
+
 # 0.4.0
 
 - New GPT-generated origami orca identity, following Opus 5.5 design consultation.

@@ -31,12 +31,16 @@ for(const asset of manifest.screenshots){
   total+=png(asset.path,1600,1000,1536*1024);checked.add(asset.path);
 }
 assert.ok(total<=8*1024*1024);
-for(const name of ['chat-light','chat-dark','diff-light','diff-dark','editor-light','editor-dark','terminal-light','terminal-dark','icons','cli-compare']){
+for(const name of ['chat-light','chat-dark','diff-light','diff-dark','editor-light','editor-dark','terminal-light','terminal-dark','icons','icons-zh','cli-compare']){
   const path=`docs/assets/${name}.png`;
   if(!checked.has(path))png(path,1600,1000,1536*1024);
 }
 png(manifest.icon,256,256,256*1024);
-const html=readFileSync(resolve(root,'docs/index.html'),'utf8');
+for(const page of ['index.html','zh-CN.html']) {
+const html=readFileSync(resolve(root,'docs',page),'utf8');
+assert.ok(html.includes('data-language-link'));
+assert.ok(html.includes(page==='index.html' ? '<html lang="en"' : '<html lang="zh-CN"'));
+assert.ok(!html.includes('{{'),'Unresolved template placeholder');
 const allIds=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]),ids=new Set(allIds);
 assert.equal(ids.size,allIds.length,'Duplicate HTML id');
 for(const match of html.matchAll(/\b(?:src|href)="([^"]+)"/g)){
@@ -50,8 +54,22 @@ for(const match of html.matchAll(/<img\b[^>]*>/g))assert.ok(/\balt="[^"]*"/.test
 assert.equal([...html.matchAll(/<script\b/g)].length,1);
 assert.ok(!/https?:\/\/[^"'\s]+\.(?:js|css|woff)/i.test(html),'Unexpected external resource');
 assert.ok(html.includes('<noscript>'),'Missing static navigation fallback');
+}
+
 const css=readFileSync(resolve(root,'docs/style.css'),'utf8');
 assert.ok(css.includes('prefers-reduced-motion:reduce'));
-const readme=readFileSync(resolve(root,'README.md'),'utf8');
-for(const m of readme.matchAll(/docs\/assets\/[a-z-]+\.png/g))assert.ok(existsSync(resolve(root,m[0])),m[0]);
-console.log(`Passed: 11 scene PNGs + identity icon, dimensions/metadata, links, alt text, unique IDs and static fallback; store gallery ${(total/1024).toFixed(0)} KiB.`);
+for(const page of ['README.md','README.zh-CN.md','examples/README.md','examples/README.zh-CN.md']) {
+  const readme=readFileSync(resolve(root,page),'utf8');
+  for(const match of readme.matchAll(/\]\(([^)]+)\)/g)) {
+    const path=match[1];
+    if(path.startsWith('https://') || path.startsWith('#')) continue;
+    assert.ok(existsSync(resolve(root,dirname(page),path.split('#')[0])),`${page}: ${path}`);
+  }
+}
+const folders=JSON.parse(readFileSync(resolve(root,'icons/folders.json'),'utf8'));
+const theme=JSON.parse(readFileSync(resolve(root,'icons/theme.json'),'utf8'));
+const copy=JSON.parse(readFileSync(resolve(root,'scripts/site-copy.json'),'utf8'));
+assert.deepEqual(Object.keys(copy.en).sort(),Object.keys(copy.zh).sort());
+assert.equal(new Set(Object.values(folders).flatMap(x=>x.names)).size,Object.keys(theme.folderNames).length);
+assert.ok(Object.keys(theme.folderNames).every(name=>!name.includes('/')));
+console.log(`Passed: bilingual pages, READMEs and examples; 12 scene/gallery PNGs + identity, asset sizes/metadata, links, alt text, unique IDs and static fallback; store gallery ${(total/1024).toFixed(0)} KiB.`);

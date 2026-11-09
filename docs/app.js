@@ -2,20 +2,16 @@
   'use strict';
   const root = document.documentElement;
   const preference = matchMedia('(prefers-color-scheme: dark)');
-  const scenes = {
-    chat: ['chat', '对话：公开任务、原生回复与输入框'],
-    diff: ['diff', '改动：真实代码差异与行内高亮'],
-    editor: ['editor', '代码：语法配色与纸折文件图标'],
-    terminal: ['terminal', '终端：实际测试输出与 ANSI 色样'],
-    icons: ['icons', '原始 SVG 图鉴：细分文件类型与目录，明暗共用', true],
-    cli: ['cli-compare', '原生终端拼版：ANSI 随色板变化，真彩色保持程序原色', true]
-  };
+  const tabs = [...document.querySelectorAll('[data-scene]')];
+  const scenes = Object.fromEntries(tabs.map(tab => [tab.dataset.scene,
+    [tab.dataset.file, tab.dataset.caption, tab.dataset.paired === 'true']]));
+  const params = new URLSearchParams(location.search);
   let chosen = null;
   try { chosen = localStorage.getItem('claude-paper-theme'); } catch {}
   if (!['light','dark'].includes(chosen)) chosen = null;
+  if (['light','dark'].includes(params.get('theme'))) chosen = params.get('theme');
   let mode = chosen || (preference.matches ? 'dark' : 'light');
-  let scene = 'chat';
-  const tabs = [...document.querySelectorAll('[data-scene]')];
+  let scene = Object.hasOwn(scenes, params.get('scene')) ? params.get('scene') : 'chat';
   const modes = [...document.querySelectorAll('[data-mode]')];
   const panel = document.querySelector('#scene-panel');
   const shot = document.querySelector('#scene-image');
@@ -25,10 +21,21 @@
     document.querySelector('meta[name="theme-color"]').content = mode === 'light' ? '#F9F8F5' : '#2A2927';
     const [file, caption, paired] = scenes[scene];
     const path = 'assets/' + file + (paired ? '' : '-' + mode) + '.png';
-    const label = (paired ? '' : (mode === 'light' ? '暖纸 · ' : '暖夜 · ')) + caption;
+    const modeName = modes.find(button => button.dataset.mode === mode).textContent;
+    const label = (paired ? '' : modeName + ' · ') + caption;
     shot.src = path; shot.alt = label; link.href = path;
     document.querySelector('#scene-caption').textContent = label;
     panel.setAttribute('aria-labelledby','tab-' + scene);
+    // Static language pages also work without JS; enhancement preserves the current view.
+    const languageLink = document.querySelector('[data-language-link]');
+    const target = new URL(languageLink.href);
+    target.searchParams.set('scene',scene); target.searchParams.set('theme',mode);
+    target.hash = location.hash;
+    const current = new URL(location.href);
+    if (params.has('scene') || scene !== 'chat') current.searchParams.set('scene',scene);
+    if (params.has('theme') || chosen) current.searchParams.set('theme',mode);
+    try {history.replaceState(null,'',current);} catch {}
+    languageLink.href = target.href;
     for (const tab of tabs) {
       const active = tab.dataset.scene === scene;
       tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1;
@@ -52,6 +59,7 @@
   preference.addEventListener('change', e => {if (!chosen) {mode = e.matches ? 'dark' : 'light'; render();}});
   document.querySelectorAll('[data-enhanced]').forEach(el => {el.hidden = false;});
   render();
+  window.addEventListener('hashchange', render);
 
   let timer;
   function notify(text) {
@@ -60,8 +68,8 @@
   }
   const copy = document.querySelector('[data-copy-command]'); copy.hidden = false;
   copy.addEventListener('click', async () => {
-    try {await navigator.clipboard.writeText(document.querySelector('#install-command').textContent); notify('安装命令已复制。');}
-    catch {notify('无法自动复制，请选中安装命令手动复制。');}
+    try {await navigator.clipboard.writeText(document.querySelector('#install-command').textContent); notify(copy.dataset.copied);}
+    catch {notify(copy.dataset.copyError);}
   });
   const dialog = document.querySelector('#lightbox');
   if (typeof dialog.showModal !== 'function') return;

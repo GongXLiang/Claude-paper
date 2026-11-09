@@ -50,3 +50,16 @@ for suffix in ("docx","xlsx","pptx","pdf","svg","html","dockerfile"):
 assert len({icons["fileExtensions"][s] for s in ("docx","xlsx","pptx","pdf","svg","html","dockerfile")})==7
 for name in ("skills","references","graphify","raw"):
     assert icons["folderNames"][name] != icons["icons"]["folder"]
+
+for suffix in ('py','ipynb','c','cpp','f90','js','ts'):
+    assert icons['fileExtensions'][suffix] != icons['icons']['file']
+assert len({icons['fileExtensions'][suffix] for suffix in ('py','ipynb','c','cpp','f90','js','ts')}) == 7
+for filename in ('bun.lock','cargo.lock','gemfile.lock','composer.lock','flake.lock','poetry.lock','uv.lock'):
+    assert icons['fileNames'].get(filename, icons['fileExtensions']['lock']) == 'icons/lock.svg'
+for role,group in json.loads((ROOT/'icons/folders.json').read_text(encoding='utf-8')).items():
+    for name in group['names']:
+        assert icons['folderNames'][name] == f'icons/folder-{role}.svg'
+        assert icons['folderNamesExpanded'][name] == f'icons/folder-{role}-open.svg'
+assert all('/' not in name and chr(92) not in name for name in icons['folderNames'])
+assert 'my-personal-notes' not in icons['folderNames']
+assert icons['icons']['folder'] == 'icons/folder.svg'

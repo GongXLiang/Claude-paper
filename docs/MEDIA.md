@@ -1,3 +1,9 @@
+# 0.4.1 · Bilingual icon galleries / 双语图鉴
+
+`assets/icons.png` (English) and `assets/icons-zh.png` (中文) render the actual 0.4.1 SVGs, including distinct programming-language marks and general folder categories. Generate the source SVGs with `python scripts/build-gallery.py`, then rasterize with resvg. On this Windows build, Microsoft YaHei regular was supplied to the renderer to keep Chinese glyph weights consistent; no font file is distributed.
+
+文件夹标签表示用途分类；匹配仍由 Orca 按自身名称执行。`raw` 与 `data` 是独立别名，宣传图不再将其写为路径。新图鉴不是实机截图；原生场景保持原图与原文，中英文网页分别提供说明和图注。所有新增素材只含公开示例。
+
 # 0.4.0 asset update
 
 `assets/icon.png` is the GPT-generated Paper Orca mark, downsampled to 256 px. `assets/identity-master.png` preserves the generated master. The built-in tool does not expose a model version selector. See `IDENTITY.md` for the exact prompt.

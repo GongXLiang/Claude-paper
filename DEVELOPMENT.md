@@ -1,3 +1,28 @@
+# Development quick start / 双语展示维护
+
+The plugin root is this repository. It is a data-only theme; do not patch Orca resources or add unsupported theme fields. Source files:
+
+- `icons/folders.json`: folder categories, bilingual labels and exact aliases. Expanded and closed mappings are generated together. All icon maps combined must stay at or below 512 entries (0.4.1 uses all 512).
+- `scripts/build-icons.py`: original SVGs and the icon map.
+- `scripts/site-template.html` and `scripts/site-copy.json`: one page template and complete English/Chinese strings; `scripts/build-site.py` writes `docs/index.html` and `docs/zh-CN.html`.
+- `scripts/build-gallery.py`: English/Chinese SVG gallery sources. Rasterize them to `docs/assets/icons.png` and `docs/assets/icons-zh.png` using resvg; inspect both images before publishing.
+- `README.md`, `README.zh-CN.md`, `examples/README.md`, `examples/README.zh-CN.md`: keep content and commands equivalent.
+
+```sh
+python scripts/build-icons.py
+python scripts/build-gallery.py
+python scripts/build-site.py
+python scripts/check-theme.py
+node scripts/check-site.mjs
+node --check docs/app.js
+node --test examples/date-kit/format.test.mjs
+orca plugin validate . --json
+```
+
+For browser verification, evaluate `scripts/check-browser.js` on each language page. It checks gallery modes, keyboard tabs, labels, language URLs, overflow, the lightbox and copy feedback (clipboard calls are stubbed and restored). Also click the actual language link and check desktop/mobile appearance; test responsive mode after each navigation. The script changes only the preview page's controls and theme preference.
+
+中文说明：修改通用目录请编辑 `icons/folders.json`；网页中英文文案编辑 `scripts/site-copy.json`，不要直接改生成的两个 HTML。发布前运行以上校验、检查双语图片与真实浏览器切换，再更新本地插件并发布新的版本标签。中英文示例应始终使用同一份公开代码，原生截图保持原文。
+
 # 开发与发布
 
 本文件用于后续人工或 AI（例如 Opus）维护。此仓库根目录就是插件根目录。

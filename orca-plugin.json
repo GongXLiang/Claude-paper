@@ -2,7 +2,7 @@
   "manifestVersion": 2,
   "id": "claude-paper",
   "name": "Claude Paper",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Warm paper light and charcoal dark for Orca: chat, code, diffs and terminal, with original Paper Fold file icons. Unofficial, data-only.",
   "engines": {
     "orca": ">=1.4.255"
@@ -75,8 +75,8 @@
     },
     {
       "path": "docs/assets/icons.png",
-      "alt": "Rendered gallery of original Paper Fold SVGs: distinct file formats and semantic folders on both theme backgrounds.",
-      "caption": "纸折图标 · 文件类型图鉴 / SVG gallery"
+      "alt": "Original Paper Fold SVG gallery: file formats and folder categories in light and dark. Folder names match exactly; unknown names use slate.",
+      "caption": "文件类型与通用目录 / Files & common folders"
     },
     {
       "path": "docs/assets/cli-compare.png",

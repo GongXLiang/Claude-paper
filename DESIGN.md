@@ -1,3 +1,11 @@
+# 0.4.1 · 通用目录与双语展示
+
+用户确认保留纯主题方案：扩展通用名称，明确宿主边界，未知目录维持灰蓝图标。目录元数据统一存于 `icons/folders.json`，生成器、网页规则表共用同一份来源。现在为 16 类、118 个精确名称；图鉴按用途分类，不把 `raw` 和 `data` 写成路径。
+
+Python、C、C++、Fortran、JavaScript、TypeScript 使用原创矢量字母标记；Notebook 保留笔记本和代码单元特征。全部 77 个 SVG 不依赖图标字体；512 条映射已到当前宿主上限，后续扩展应先合并无行为差异的重复项。
+
+English and Chinese pages are generated from one template and parallel translation dictionaries. Both are complete static documents; the language link works without JavaScript. With enhancement, it carries the current scene and color mode. Public native screenshots remain in their original language; the SVG galleries, captions and runnable example guides are localized.
+
 # 0.4.0：折纸虎鲸与文件分类
 
 保留原有应用与终端颜色。69 个 SVG（39 个文件图标、30 个文件夹图标），423 条映射，14 类语义目录。未知目录改用灰蓝色；Word、Excel、PPT、PDF、SVG、HTML、Docker 等各有独立符号。新标识由 Opus 5.5 / medium 提供设计方向、GPT 生图工具生成。已检查 16px 文件图标及 32/64px 标识。下面保留此前版本的设计记录。

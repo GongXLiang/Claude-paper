@@ -1,0 +1,216 @@
+{
+  "skills": {
+    "en": "Skills",
+    "zh": "技能",
+    "names": [
+      "skills",
+      "skill",
+      ".skills"
+    ]
+  },
+  "refs": {
+    "en": "References",
+    "zh": "参考资料",
+    "names": [
+      "references",
+      "reference",
+      "ref",
+      "refs",
+      "bibliography"
+    ]
+  },
+  "graph": {
+    "en": "Graphs & knowledge",
+    "zh": "图谱与知识",
+    "names": [
+      "graphify",
+      "graph",
+      "graphs",
+      "graphify-out",
+      "knowledge",
+      "knowledge-base",
+      "knowledge_graph"
+    ]
+  },
+  "data": {
+    "en": "Data",
+    "zh": "数据",
+    "names": [
+      "raw",
+      "data",
+      "dataset",
+      "datasets",
+      "database",
+      "databases",
+      "db",
+      "sql"
+    ]
+  },
+  "src": {
+    "en": "Source code",
+    "zh": "源代码",
+    "names": [
+      "src",
+      "source",
+      "lib",
+      "app",
+      "packages",
+      "components",
+      "sources",
+      "code",
+      "core",
+      "modules",
+      "services"
+    ]
+  },
+  "test": {
+    "en": "Tests",
+    "zh": "测试",
+    "names": [
+      "test",
+      "tests",
+      "__tests__",
+      "spec",
+      "specs",
+      "e2e",
+      "__mocks__",
+      "fixtures",
+      "testing",
+      "integration",
+      "unit"
+    ]
+  },
+  "docs": {
+    "en": "Documentation",
+    "zh": "文档",
+    "names": [
+      "docs",
+      "doc",
+      "documentation",
+      "wiki",
+      "guides",
+      "guide",
+      "examples",
+      "tutorials",
+      "notes"
+    ]
+  },
+  "assets": {
+    "en": "Assets",
+    "zh": "素材",
+    "names": [
+      "assets",
+      "public",
+      "static",
+      "images",
+      "img",
+      "media",
+      "icons",
+      "fonts",
+      "image",
+      "pictures",
+      "resources"
+    ]
+  },
+  "config": {
+    "en": "Configuration",
+    "zh": "配置",
+    "names": [
+      "config",
+      "configs",
+      ".config",
+      ".vscode",
+      ".github",
+      ".idea",
+      ".husky",
+      ".devcontainer",
+      "settings"
+    ]
+  },
+  "scripts": {
+    "en": "Scripts & tools",
+    "zh": "脚本与工具",
+    "names": [
+      "scripts",
+      "script",
+      "bin",
+      "tools",
+      "utilities",
+      "utils"
+    ]
+  },
+  "agent": {
+    "en": "AI agents",
+    "zh": "智能体",
+    "names": [
+      ".claude",
+      ".codex",
+      ".cursor",
+      ".agents",
+      "prompts",
+      "agents",
+      ".gemini",
+      ".opencode"
+    ]
+  },
+  "deps": {
+    "en": "Dependencies",
+    "zh": "依赖",
+    "names": [
+      "node_modules",
+      "vendor",
+      ".venv",
+      "venv",
+      ".pnpm-store",
+      "pods"
+    ]
+  },
+  "build": {
+    "en": "Build & cache",
+    "zh": "构建与缓存",
+    "names": [
+      "dist",
+      "build",
+      "out",
+      "target",
+      ".next",
+      ".nuxt",
+      ".output",
+      ".turbo",
+      ".cache",
+      "coverage"
+    ]
+  },
+  "vcs": {
+    "en": "Version control",
+    "zh": "版本控制",
+    "names": [
+      ".git",
+      ".hg",
+      ".svn"
+    ]
+  },
+  "plugins": {
+    "en": "Plugins",
+    "zh": "插件",
+    "names": [
+      "plugins",
+      "plugin",
+      "extensions",
+      "extension",
+      "addons"
+    ]
+  },
+  "output": {
+    "en": "Output & reports",
+    "zh": "输出与报告",
+    "names": [
+      "output",
+      "outputs",
+      "result",
+      "results",
+      "reports",
+      "exports"
+    ]
+  }
+}

@@ -66,6 +66,17 @@ for name,(d,role,fill) in extra.items():
     if name=='spreadsheet':body+=path('M1.5 8.5h9V11h-9z',colors[role],fill=True)
     write(name,body)
 write('table',corner+path(glyphs['table'][0],colors['teal']))
+# Compact vector monograms keep common languages recognizable without embedded fonts.
+language_marks={
+ 'code-python':path('M2 15V8h2.5a2 2 0 0 1 0 4H2',colors['blue'],1.5)+path('M7 10.5v2a1.5 1.5 0 0 0 3 0v-2M10 12.5V13.5a1.5 1.5 0 0 1-1.5 1.5',colors['amber'],1.5),
+ 'code-c':path('M9 8.75C3 5.5 1 14 6 15a4 4 0 0 0 3-.75',colors['blue'],1.75),
+ 'code-cpp':path('M5.25 9.25C1 7 0 13.75 3.75 14.75l1.5-.5M6.25 12h2M7.25 11v2M9.25 12h2M10.25 11v2',colors['blue'],1.2),
+ 'code-fortran':path('M3 15V8h6M3 11.5h5',colors['plum'],1.8),
+ 'code-js':path('M2 8h3v5a1.75 1.75 0 0 1-3.5 0M10 8.75c-4-2.5-4 2-.75 2.75s2 5-1.75 3',colors['amber'],1.4),
+ 'code-ts':path('M1 8h5M3.5 8v7M10 8.75c-4-2.5-4 2-.75 2.75s2 5-1.75 3',colors['blue'],1.4),
+}
+for name,mark in language_marks.items():write(name,corner+mark)
+write('notebook',corner+path('M3 8h7v7H3zM1.5 9.5H4M1.5 13.5H4',colors['plum'],1.25)+path('M5.5 10h3M5.5 12.5h3',colors['clay'],1.5))
 folderglyphs={
  'src':'M6.25 7.75 4.5 9.75l1.75 2M9.75 7.75l1.75 2-1.75 2',
  'test':'M5 9.5l2 2 4-4', 'docs':'M5 8h6M5 10h6M5 12h4',
@@ -76,7 +87,8 @@ folderglyphs={
  'vcs':'M6 7.5v5M6 10c4 0 4-1 4-2M5.5 7.5h1M9.5 7.5h1M5.5 12.5h1'
 }
 folderglyphs.update(skills='M8 7.5 8.75 9.25 10.5 10 8.75 10.75 8 12.5 7.25 10.75 5.5 10 7.25 9.25z',refs='M6 7.5h4v5L8 11l-2 1.5z',graph='M8 8.5 5.5 12h5z',data='M5.5 8.75c0-1.2 5-1.2 5 0s-5 1.2-5 0v2.75c0 1.2 5 1.2 5 0V8.75')
-folderroles=dict(skills='clay',refs='plum',graph='teal',data='blue',src='blue',test='green',docs='plum',assets='green',config='teal',scripts='teal',agent='clay',deps='ink',build='ink',vcs='ink')
+folderglyphs.update(plugins='M6 7.5v2.5M10 7.5v2.5M5.5 9.5h5v1A2.5 2.5 0 0 1 8 13v1',output='M4.5 11v2h7v-2M8 7v4M6 9l2 2 2-2')
+folderroles=dict(plugins='plum',output='teal',skills='clay',refs='plum',graph='teal',data='blue',src='blue',test='green',docs='plum',assets='green',config='teal',scripts='teal',agent='clay',deps='ink',build='ink',vcs='ink')
 for name,role in [('folder','slate')]+[(f'folder-{n}',r) for n,r in folderroles.items()]:
     for opened in (False,True):
         back='M1.5 3.5a1 1 0 0 1 1-1h3.59a1 1 0 0 1 .7.29L8 4'+('h4.5a1 1 0 0 1 1 1v2h-10l-2 7z' if opened else 'h5.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z')
@@ -100,7 +112,7 @@ def assign(group,keys,name):
         maps[group][key]='icons/'+name+'.svg'
 extensions={
  'markdown':'md mdx markdown rst adoc org', 'doc':'txt text log', 'word':'doc docx docm dotx odt rtf pages', 'spreadsheet':'xls xlsx xlsm xlsb ods numbers', 'slides':'ppt pptx pptm odp', 'pdf':'pdf xps', 'vector':'svg svgz eps ai', 'html':'html htm xhtml shtml', 'notebook':'ipynb qmd rmd', 'latex':'tex ltx sty cls bib bst', 'code-ts':'ts tsx mts cts', 'code-js':'js jsx mjs cjs',
- 'code-script':'py pyi rb php lua pl r','code-compiled':'rs go c h cc cpp hpp cs java kt kts swift scala zig dart',
+ 'code-python':'py pyi','code-c':'c h','code-cpp':'cc cpp hpp cxx hxx','code-fortran':'f for ftn f90 f95 f03 f08 f18','code-script':'rb php lua pl r','code-compiled':'rs go cs java kt kts swift scala zig dart',
  'code-declaration':'d.ts d.mts d.cts','markup':'xml xsd xsl xslt plist rss atom vue svelte astro','style':'css scss sass less styl pcss',
  'data':'json jsonc json5 jsonl ndjson geojson webmanifest','config':'yaml yml toml ini conf cfg properties config.ts config.js config.mjs config.cjs config.json',
  'lock':'lock lockb','env':'pem key crt p12','shell':'sh bash zsh fish ps1 psm1 bat cmd nu',
@@ -113,7 +125,7 @@ names={
  'readme':'README README.md README.txt README.rst',
  'config':'tsconfig.json jsconfig.json .editorconfig .prettierrc .eslintrc .npmrc .nvmrc .babelrc biome.json',
  'package':'package.json Cargo.toml pyproject.toml go.mod Gemfile composer.json requirements.txt pubspec.yaml deno.json',
- 'lock':'package-lock.json pnpm-lock.yaml yarn.lock bun.lock Cargo.lock poetry.lock uv.lock go.sum Gemfile.lock composer.lock flake.lock',
+ 'lock':'package-lock.json pnpm-lock.yaml yarn.lock go.sum',
  'env':'.env .env.local .env.development .env.production .env.test .env.example .envrc',
  'agent':'AGENTS.md AGENT.md CLAUDE.md GEMINI.md .cursorrules .windsurfrules copilot-instructions.md llms.txt orca-plugin.json',
  'license':'LICENSE LICENSE.md LICENSE.txt LICENCE COPYING NOTICE','history':'CHANGELOG.md CHANGES.md HISTORY.md RELEASES.md NEWS.md',
@@ -121,18 +133,12 @@ names={
  'container':'Containerfile', 'docker':'Dockerfile Dockerfile.dev Dockerfile.prod .dockerignore compose.yaml compose.yml docker-compose.yml docker-compose.yaml',
  'build':'Makefile GNUmakefile justfile Taskfile.yml CMakeLists.txt BUILD BUILD.bazel meson.build'
 }
-folders={
- 'skills':'skills skill','refs':'references reference','graph':'graphify graph graphs graphify-out','data':'raw data dataset datasets',
- 'src':'src source lib app packages components','test':'test tests __tests__ spec specs e2e __mocks__ fixtures',
- 'docs':'docs doc documentation wiki guides','assets':'assets public static images img media icons fonts',
- 'config':'config configs .config .vscode .github .idea .husky .devcontainer','scripts':'scripts script bin tools',
- 'agent':'.claude .codex .cursor .agents prompts','deps':'node_modules vendor .venv venv .pnpm-store pods',
- 'build':'dist build out target .next .nuxt .output .turbo .cache coverage','vcs':'.git .hg .svn'
-}
+folders={role:' '.join(group['names']) for role,group in json.loads((icons/'folders.json').read_text(encoding='utf-8')).items()}
 for n,k in extensions.items(): assign('fileExtensions',k,n)
 for n,k in names.items(): assign('fileNames',k,n)
 for n,k in folders.items():
     assign('folderNames',k,'folder-'+n);assign('folderNamesExpanded',k,'folder-'+n+'-open')
 theme={'schemaVersion':1,'icons':{n:'icons/'+n+'.svg' for n in ('file','folder','folder-open')},**maps}
+assert sum(len(v) for v in maps.values())+3 <= 512, 'Orca allows at most 512 mappings'
 (icons/'theme.json').write_text(json.dumps(theme,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(f'Generated {len(list(icons.glob("*.svg")))} file/folder SVGs; {sum(len(v) for v in maps.values())+3} mappings.')

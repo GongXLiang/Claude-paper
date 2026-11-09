@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="{{lang}}" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{description}}"><meta name="theme-color" content="#F9F8F5">
+  <meta property="og:title" content="{{page_title}}"><meta property="og:description" content="{{description}}">
+  <meta property="og:image" content="https://gongxliang.github.io/Claude-paper/assets/cover.png">
+  <meta property="og:url" content="https://gongxliang.github.io/Claude-paper/{{filename}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="en" href="https://gongxliang.github.io/Claude-paper/">
+  <link rel="alternate" hreflang="zh-CN" href="https://gongxliang.github.io/Claude-paper/zh-CN.html">
+  <title>{{page_title}}</title>
+  <link rel="icon" href="assets/icon.png" type="image/png"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">{{skip}}</a>
+<header class="wrap header">
+  <a class="brand" href="#main"><img src="assets/icon.png" width="32" height="32" alt="">Claude Paper <small>FOR ORCA</small></a>
+  <nav aria-label="{{navigation}}"><a href="#gallery">{{preview}}</a><a href="#install">{{install}}</a><a href="https://github.com/GongXLiang/Claude-paper">GitHub ↗</a><a class="language-switch" data-language-link href="{{other_page}}" lang="{{other_lang}}" hreflang="{{other_lang}}" aria-label="{{switch_label}}">{{other_language}}</a></nav>
+</header>
+<main id="main">
+  <section class="wrap hero" aria-labelledby="title">
+    <div><p class="eyebrow">{{eyebrow}}</p><h1 id="title">{{title_one}}<em>{{title_two}}</em></h1><p class="lead">{{lead}}</p><p class="english">{{subline}}</p></div>
+    <div class="hero-action"><a class="button primary" href="#install">{{install_product}} <span aria-hidden="true">↓</span></a><p>{{version}} · {{version_note}}</p></div>
+  </section>
+  <section class="wrap showcase" id="gallery" aria-label="{{gallery_label}}">
+    <div class="stage-bar" data-enhanced hidden>
+      <div class="scene-tabs" role="tablist" aria-label="{{scenes_label}}">{{tabs_html}}</div>
+      <div class="mode" role="group" aria-label="{{mode_label}}"><button data-mode="light" aria-pressed="true">{{light}}</button><button data-mode="dark" aria-pressed="false">{{dark}}</button></div>
+    </div>
+    <div class="stage" id="scene-panel" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
+      <a href="assets/chat-light.png" data-lightbox id="scene-link"><img id="scene-image" src="assets/chat-light.png" width="1600" height="1000" fetchpriority="high" alt="{{chat_alt}}"></a>
+    </div>
+    <div class="stage-caption"><p id="scene-caption">{{chat_caption}}</p><span>{{enlarge}}</span></div>
+    <p class="provenance">{{provenance}} <a href="MEDIA.md">{{media_record}}</a></p>
+    <noscript><p>{{static_gallery}} {{static_links_html}}</p></noscript>
+  </section>
+  <section class="wrap details" aria-labelledby="details-title">
+    <div class="section-head"><p class="eyebrow">ONE WORKSPACE, ONE VISUAL LANGUAGE</p><h2 id="details-title">{{details_title}}</h2><p>{{details_intro}}</p></div>
+    <div class="features">
+      <article><span class="number">01 / CHAT & CODE</span><h3>{{chat_title}}</h3><p>{{chat_body}}</p><a href="assets/diff-dark.png" data-lightbox><img src="assets/diff-dark.png" width="1600" height="1000" loading="lazy" alt="{{diff_alt}}"></a></article>
+      <article><span class="number">02 / PAPER FOLD ICONS</span><h3>{{icons_title}}</h3><p>{{icons_body}}</p><a href="assets/{{icons_asset}}" data-lightbox><img src="assets/{{icons_asset}}" width="1600" height="1000" loading="lazy" alt="{{icons_alt}}"></a></article>
+      <article><span class="number">03 / TERMINAL</span><h3>{{terminal_title}}</h3><p>{{terminal_body}}</p><a href="assets/terminal-dark.png" data-lightbox><img src="assets/terminal-dark.png" width="1600" height="1000" loading="lazy" alt="{{terminal_alt}}"></a></article>
+    </div>
+  </section>
+  <section class="wrap folder-rules" id="folders" aria-labelledby="folders-title">
+    <p class="eyebrow">COMMON FOLDERS, CLEAR RULES</p><h2 id="folders-title">{{folders_title}}</h2><p>{{folders_intro}}</p>
+    <div class="folder-summary">{{folder_summary_html}}</div>
+    <p class="folder-note">{{folder_limit}}</p>
+    <details><summary>{{folder_details}}</summary><div class="table-scroll"><table><caption class="sr-only">{{folder_table_caption}}</caption><thead><tr><th>{{category}}</th><th>{{exact_names}}</th></tr></thead><tbody>{{folder_rows_html}}</tbody></table></div></details>
+    <p class="folder-note"><a href="https://github.com/stablyai/orca/blob/v1.4.255/docs/reference/plugin-themes.md#icon-themes">{{folder_source}} ↗</a></p>
+  </section>
+  <section class="wrap demo" id="example" aria-labelledby="example-title"><div><p class="eyebrow">A PUBLIC EXAMPLE</p><h2 id="example-title">{{example_title}}</h2><p>{{example_body}}</p><blockquote>{{example_prompt}}</blockquote><a href="{{example_url}}">{{example_link}} ↗</a></div><div><pre><code>import { formatDate } from './format.mjs';
+
+const date = new Date('2026-11-09T23:30:00Z');
+formatDate(date, 'UTC');            // 09 Nov 2026
+formatDate(date, 'Asia/Shanghai');  // 10 Nov 2026</code></pre><p>{{example_note}}</p></div></section>
+  <section class="install-band" id="install" aria-labelledby="install-title"><div class="wrap install-layout">
+    <div><p class="eyebrow">MAKE IT YOURS</p><h2 id="install-title">{{install_title}}</h2><p>{{install_summary}}</p><a href="https://www.onorca.dev/plugins/gongxliang/claude-paper">{{store_install}} ↗</a></div>
+    <div class="install-card"><p class="step-label">{{step_one}}</p><div class="command"><code id="install-command">orca plugin install GongXLiang/Claude-paper --json</code><button data-copy-command data-copied="{{copied}}" data-copy-error="{{copy_error}}" hidden>{{copy}}</button></div><p class="step-label">{{step_two}}</p><p>{{step_two_body}}</p><p class="step-label">{{step_three}}</p><p>{{step_three_body}}</p><p class="step-label">{{step_optional}}</p><p>{{step_optional_body}}</p><small>{{requirements}}</small></div>
+  </div></section>
+  <section class="wrap scope" aria-labelledby="scope-title"><div><p class="eyebrow">WHAT CHANGES</p><h2 id="scope-title">{{scope_title}}</h2><p>{{scope_intro}}</p></div><div class="table-scroll"><table><caption class="sr-only">{{scope_caption}}</caption><thead><tr><th>{{scope}}</th><th>Claude Paper</th></tr></thead><tbody>{{scope_rows_html}}</tbody></table></div></section>
+  <section class="wrap palette" aria-label="{{palette_label}}"><span>{{light}} <i style="background:#F9F8F5"></i><code>#F9F8F5</code></span><span>{{dark}} <i style="background:#2A2927"></i><code>#2A2927</code></span><span>{{clay}} <i style="background:#D97757"></i><code>#D97757</code></span><span>{{blue}} <i style="background:#8DB5E0"></i><code>#8DB5E0</code></span></section>
+</main>
+<footer class="wrap footer"><a class="brand" href="#main"><img src="assets/icon.png" width="28" height="28" alt="">Claude Paper</a><p>{{unofficial}}</p><a href="https://github.com/GongXLiang/Claude-paper/releases">{{releases}} ↗</a><a href="https://github.com/GongXLiang/Claude-paper/blob/main/LICENSE">MIT ↗</a></footer>
+<dialog id="lightbox" aria-label="{{lightbox_label}}"><button id="close-lightbox" aria-label="{{close_label}}">{{close}} ×</button><img width="1600" height="1000" alt=""><p></p></dialog>
+<p id="status" role="status" aria-live="polite"></p>
+</body></html>
