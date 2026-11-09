@@ -2,7 +2,7 @@
   "manifestVersion": 2,
   "id": "claude-paper",
   "name": "Claude Paper",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Unofficial Claude-inspired warm light and dark app, chat, editor and terminal colors. Content only; preserves native layouts and fonts.",
   "engines": {
     "orca": ">=1.4.253"
@@ -39,5 +39,42 @@
   "author": {
     "url": "https://github.com/GongXLiang",
     "name": "GongXLiang"
-  }
+  },
+  "homepage": "https://GongXLiang.github.io/Claude-paper/",
+  "cover": {
+    "path": "docs/assets/cover.png",
+    "alt": "Claude Paper: a split light/dark view of the same native Orca chat demo, with warm paper and charcoal colors."
+  },
+  "screenshots": [
+    {
+      "path": "docs/assets/chat-light.png",
+      "alt": "Warm light native Orca chat detail with lists, a TypeScript block and blue links.",
+      "caption": "暖纸 · 原生聊天局部 / Light chat detail"
+    },
+    {
+      "path": "docs/assets/chat-dark.png",
+      "alt": "Warm dark version of the same native Orca chat demo.",
+      "caption": "暖夜 · 原生聊天局部 / Dark chat detail"
+    },
+    {
+      "path": "docs/assets/diff-light.png",
+      "alt": "Warm light inline diff detail showing additions, deletions and word highlights.",
+      "caption": "暖纸 · 代码差异局部 / Light diff detail"
+    },
+    {
+      "path": "docs/assets/editor-dark.png",
+      "alt": "Warm dark TypeScript editor detail with keywords, strings, types and comments.",
+      "caption": "暖夜 · 编辑器局部 / Dark editor detail"
+    },
+    {
+      "path": "docs/assets/terminal-light.png",
+      "alt": "Warm light terminal detail with real date-formatting output and normal/bright ANSI samples.",
+      "caption": "暖纸 · 终端局部 / Light terminal detail"
+    },
+    {
+      "path": "docs/assets/terminal-dark.png",
+      "alt": "Warm dark terminal detail with real date-formatting output and normal/bright ANSI samples.",
+      "caption": "暖夜 · 终端局部 / Dark terminal detail"
+    }
+  ]
 }

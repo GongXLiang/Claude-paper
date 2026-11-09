@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1
+
+- Added a split light/dark cover and six store gallery images from public native Orca demos.
+- Rebuilt the README around real chat, editor, diff and terminal previews; added a seventh scene on the website and README.
+- Added a dependency-free GitHub Pages showcase with theme switching, a keyboard-accessible comparison slider, image lightbox and copy controls.
+- Added descriptive media metadata, a homepage link and a repeatable asset/link check.
+- Preserved the 0.2.0 theme palettes and data-only permission profile.
+
 ## 0.2.0
 
 - Redesigned both light and dark palettes with neutral warm surface layers and quieter separators.

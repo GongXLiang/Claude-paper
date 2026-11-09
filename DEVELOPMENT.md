@@ -12,7 +12,7 @@
 
 保留纯数据插件和原生布局。不要增加未公开的令牌，也不要修改 Orca 安装资源。
 配色必须满足 Orca 的对比度要求，否则宿主可能丢弃该颜色并回退。
-不要把本机聊天截图、账号信息、绝对路径、缓存、压缩包或商业字体放入仓库。
+仅允许提交经过逐张隐私检查的公开演示截图；原始整窗截图、私人聊天、账号信息、绝对路径、缓存、压缩包或商业字体不得进入仓库。详见 [素材维护规则](docs/MEDIA.md)。
 
 当前 `publisher` 字段按 Orca 1.4.253 的作者指南省略：Git 安装由仓库所有者派生身份，目录安装使用 `local`。不要为了旧网页示例随意添加发布者字段。
 
@@ -51,3 +51,9 @@ git push origin vX.Y.Z
 在 [插件状态页](https://www.onorca.dev/plugins/GongXLiang/Claude-paper) 检查自动收录结果。
 
 [官方发布说明](https://www.onorca.dev/plugins/add) · [主题规范](https://github.com/stablyai/orca/blob/main/docs/reference/plugin-themes.md) · [颜色令牌](https://github.com/stablyai/orca/blob/main/docs/reference/plugin-theme-tokens.md)
+
+## 展示页与素材
+
+网站位于 `docs/`，由 GitHub Pages 从 `main:/docs` 发布。图片位于 `docs/assets/`，由 README 和商店清单共同引用。网页交互脚本仅在访问网站时执行，不属于主题插件运行代码。
+
+发布前运行 `node scripts/check-site.mjs` 和 `node --check docs/app.js`，然后检查手机/桌面效果与所有公开图片。更新版本标签后再检查商店索引结果。
