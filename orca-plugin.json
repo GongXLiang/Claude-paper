@@ -2,7 +2,7 @@
   "manifestVersion": 2,
   "id": "claude-paper",
   "name": "Claude Paper",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Unofficial Claude-inspired warm light and dark app, chat, editor and terminal colors. Content only; preserves native layouts and fonts.",
   "engines": {
     "orca": ">=1.4.253"
