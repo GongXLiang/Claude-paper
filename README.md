@@ -1,113 +1,116 @@
-<p align="center">
-  <a href="https://GongXLiang.github.io/Claude-paper/">
-    <img src="docs/assets/cover.png" alt="Claude Paper 暖纸与暖夜：同一 Orca 原生聊天局部的左右明暗对照" width="100%">
-  </a>
-</p>
+<p align="center"><a href="https://gongxliang.github.io/Claude-paper/"><img src="docs/assets/cover.png" alt="Claude Paper：浅色 Orca 原生聊天与输入框，搭配深色纸折文件图标和终端输出" width="100%"></a></p>
 
 <h1 align="center">Claude Paper for Orca</h1>
-<p align="center"><b>一张纸，两种光。</b><br>Warm light &amp; dark colors for the app, native chat, editor and terminal.</p>
-<p align="center"><a href="https://GongXLiang.github.io/Claude-paper/">交互效果展示</a> · <a href="https://www.onorca.dev/plugins/gongxliang/claude-paper">Orca 商店</a> · <a href="#安装">安装</a> · <a href="#english">English</a></p>
+<p align="center"><b>一张纸，两种光。</b><br>Warm light &amp; dark. Chat, code, terminal and original Paper Fold icons.</p>
+<p align="center"><a href="https://gongxliang.github.io/Claude-paper/">查看全部实机效果</a> · <a href="https://www.onorca.dev/plugins/gongxliang/claude-paper">Orca 社区商店</a> · <a href="#安装">安装</a> · <a href="#english">English</a></p>
 
-为 Orca 换上一张暖纸：中性暖白、暖炭灰、克制的陶土强调色，以及清晰的蓝色链接。两套应用主题与两套终端配色，覆盖从对话到代码的工作过程。
+让 Orca 更接近你喜欢的 Claude 质感。暖白与暖炭灰构成安静的底色，陶土强调动作，蓝色标记链接。把对话、代码、差异、终端与文件树，放进同一套视觉语言。
 
-**非官方社区主题 · 免费 · MIT**。与 Anthropic 或 Stably 无隶属或背书关系。
+| 暖纸与暖夜 | 纸折图标 | 配套终端 |
+| --- | --- | --- |
+| 两套应用主题，73 个色彩令牌 | 51 个原创 SVG，355 条映射 | 两套 16 色 ANSI 色板 |
+| 聊天、侧栏、编辑器与 Diff | 文件类型、常用文件名、10 类语义目录及展开态 | 前景、背景、光标、光标下文字与选区 |
+
+**0.3.0 · 免费 · MIT · 纯数据插件**。非官方社区作品，与 Anthropic 或 Stably 无隶属或背书关系。
 
 ## 安装
 
-需要 **Orca 1.4.253 或更新版本**。
+需要 **Orca 1.4.255+**。可从[社区商店](https://www.onorca.dev/plugins/gongxliang/claude-paper)安装，或运行：
 
 ```sh
 orca plugin install GongXLiang/Claude-paper --json
 ```
 
-1. 打开 **设置 → 外观**，浅色主题选「Claude Paper · 暖纸」，深色主题选「Claude Paper · 暖夜」。
-2. 终端主题分别选择同名配色。
-3. 在 **设置 → 聊天界面** 中，关闭「匹配终端外观」可让聊天跟随应用主题；开启时，请同时选择匹配的终端配色。
+在 **设置 → 外观** 中完成三项选择：
 
-## 暖纸与暖夜
+1. 应用浅色主题选 **Claude Paper · 暖纸**，深色主题选 **Claude Paper · 暖夜**。
+2. 终端主题选择同名配色，或使用应用主题下的「使用其终端配色」。
+3. 图标主题选 **Claude Paper · 纸折图标**。
 
-同一段公开演示回复，在两种光线下的样子。暖白适合白天，暖炭灰适合夜晚；文字、列表、代码块和链接保留 Orca 原生呈现。
+在 **设置 → 聊天界面** 中关闭「匹配终端外观」，可使用独立的聊天细节色；开启时，聊天采用终端的配色与字体。
 
-### 暖纸 · 原生聊天
+**使用 Claude Code CLI？** Orca 的终端主题设置还提供 **Match Claude Code to Terminal Theme**。这是宿主的可选同步功能，会修改本机 Claude Code 的主题设置，使其界面跟随所选终端色板；插件安装本身不会打开它。详见[Orca 的同步实现](https://github.com/stablyai/orca/blob/v1.4.255/src/main/claude/theme-sync/claude-code-theme.ts)。
 
-![暖纸原生聊天局部：暖白画布、列表、TypeScript 代码块与墨蓝链接](docs/assets/chat-light.png)
+## 对话，有了温度
 
-### 暖夜 · 原生聊天
+完整的公开任务、原生回复和输入框，连同文件树一起展示。浅色与深色使用同一段演示内容；正文、行内代码、链接和代码块各有清楚的层次。
 
-![暖夜原生聊天局部：暖炭灰画布、柔和文字与雾蓝链接](docs/assets/chat-dark.png)
+![暖纸模式：Orca 原生聊天、完整回复、输入框与纸折文件图标](docs/assets/chat-light.png)
 
-[在展示页拖动比较明暗 →](https://GongXLiang.github.io/Claude-paper/)
+<details><summary>展开暖夜聊天</summary>
 
-## 从代码到差异
-
-紫色关键字、绿色字符串、青色类型；绿色新增与玫瑰色删除，让不同信息有自己的位置。
-
-![暖夜 TypeScript 编辑器局部：关键字、字符串、类型与注释配色](docs/assets/editor-dark.png)
-
-![暖纸内联 diff 局部：绿色新增、玫瑰色删除和字符级高亮](docs/assets/diff-light.png)
-
-<details>
-<summary>查看暖纸代码编辑器</summary>
-
-![暖纸 TypeScript 编辑器局部](docs/assets/editor-light.png)
+![暖夜模式下同一段原生聊天与输入框](docs/assets/chat-dark.png)
 
 </details>
 
+## 从代码，到每一行改动
+
+保留熟悉的原生编辑器，让语法、注释、增加与删除各自清楚。下方差异图同时展示该任务真实执行的测试输出。
+
+| 暖纸 · 编辑器 | 暖夜 · 差异与测试 |
+| --- | --- |
+| [![暖纸 JavaScript 编辑器与文件树](docs/assets/editor-light.png)](docs/assets/editor-light.png) | [![暖夜原生代码差异、测试输出与文件树拼版](docs/assets/diff-dark.png)](docs/assets/diff-dark.png) |
+
+[查看暖夜代码](docs/assets/editor-dark.png) · [查看暖纸差异](docs/assets/diff-light.png)
+
+## 文件，也有自己的形状
+
+原创 **Paper Fold 纸折图标**：纸页轮廓、折角与大号语义符号。代码、文档、测试、配置、图片和智能体文件各有记号；文件夹具有对应的关闭与展开图标。同一套 SVG 适配两种模式，不借用品牌标志。
+
+![原生文件树的明暗对照：源代码、文档、脚本、图片和 AGENTS.md 的纸折图标](docs/assets/icons.png)
+
+覆盖常见扩展名，以及 `README.md`、`AGENTS.md`、`package.json` 等文件名。`d.ts`、`test.ts`、`config.ts` 使用更具体的映射；未匹配的文件与目录仍有通用图标。[查看完整映射](icons/theme.json)
+
 ## 命令行，也在同一张纸上
 
-编辑器与终端使用协调的底色；两套终端主题均提供 normal / bright ANSI 配色。下图包含真实日期格式化输出与专门准备的色样。
+两套终端色板与应用画布协调，普通／高亮 ANSI 颜色分别设置。下面是实际运行的 `npm test`、Git 状态与色样；演示项目的 4 项测试通过。
 
-| 暖纸 · Light terminal | 暖夜 · Dark terminal |
+![暖夜终端：公开项目的真实命令、测试结果与 ANSI 色样](docs/assets/terminal-dark.png)
+
+[查看暖纸终端](docs/assets/terminal-light.png)
+
+### 颜色能改变什么？
+
+同一终端输出，左侧是 **Ghostty Default Style Dark**，右侧是 **Claude Paper · 暖夜**。ANSI 颜色跟随色板，`Truecolor #D97757` 一行保持程序指定的颜色。这是原生终端对照，并非 Claude Code CLI 的界面截图。
+
+![两套终端色板的真实对照：ANSI 变化，24 位真彩色不变](docs/assets/cli-compare.png)
+
+| 范围 | Claude Paper 的作用 |
 | --- | --- |
-| [![暖纸终端局部：实际命令输出与 ANSI 色样](docs/assets/terminal-light.png)](docs/assets/terminal-light.png) | [![暖夜终端局部：实际命令输出与 ANSI 色样](docs/assets/terminal-dark.png)](docs/assets/terminal-dark.png) |
+| 应用、聊天、编辑器、Diff | 73 个公开颜色令牌与语法配色 |
+| 文件与目录 | 原创纸折图标、文件名与后缀匹配、文件夹展开态 |
+| 终端 | 背景、前景、光标、选区、16 色 ANSI |
+| CLI 硬编码的 24 位真彩色 | 单靠终端色板不改写；Claude Code 可另用 Orca 的宿主同步功能 |
+| 布局、圆角、动效、按钮图标 | 由 Orca 控制 |
+| 字体与字号 | 本插件不附带字体，沿用 Orca 与使用者设置 |
 
-**图片说明：**以上素材来自 Orca 1.4.253 中的公开演示内容，采用真实界面局部裁切、等比例放大和展示框排版。封面为同一聊天的明暗拼接；未重绘界面或替换截图中文字。公开素材不含个人聊天、项目列表、设备名、账号、用量或本机路径。字体、字号和代码块样式由 Orca 与使用者设置决定。
+主题是纯数据内容，没有入口脚本、后台进程或额外能力权限。展示网页的标签切换、灯箱与轻微过渡只属于网页。
 
-## 覆盖范围
+## 关于图片与这一版
 
-- 两套应用主题，每套设置 66 个公开颜色令牌。
-- 应用表面、侧栏、标签页、菜单、按钮、聊天与 Git/diff 配色。
-- 编辑器语法高亮与两套匹配的终端 ANSI 颜色。
-- 纯数据插件，无运行脚本、网络请求、后台进程或额外能力权限。
+图片来自 **Orca 1.4.255 / Claude Paper 0.3.0** 的公开 `date-kit` 演示。仅做区域裁切、等比缩小与外部拼版；没有生成式重绘，也没有替换界面文字。聊天保留完整回复与输入框，编辑器路径栏、机器名、账号、私人项目与用量信息均未进入公开图片。[素材与复现说明](docs/MEDIA.md)
 
-布局、字体、圆角、阴影、动效与工具卡片仍由 Orca 决定。展示网页中的交互与动效仅属于网页。
+0.3.0 保留第二版的原有配色，加入 7 个当前宿主支持的聊天细节令牌、光标下文字颜色、纸折图标及独立插件图标。封面、六张商店图片和网页一起重做；网页提供十张场景图，可按场景与明暗模式浏览。
 
-## 版本与维护
+[设计说明](DESIGN.md) · [开发与发布](DEVELOPMENT.md) · [更新记录](CHANGELOG.md) · [版本下载](https://github.com/GongXLiang/Claude-paper/releases)
 
-**0.2.1 是第二版配色的展示更新**：新增封面、场景图库、交互网页与商店媒体字段，主题颜色保持 0.2.0 原样。
-
-[设计说明](DESIGN.md) · [开发与发布](DEVELOPMENT.md) · [素材说明](docs/MEDIA.md) · [更新记录](CHANGELOG.md) · [GitHub Releases](https://github.com/GongXLiang/Claude-paper/releases)
-
-商店由 Orca 按版本标签自动索引，GitHub 发布与商店刷新可能不同步；以[商店页面](https://www.onorca.dev/plugins/gongxliang/claude-paper)实际显示为准。
-
-## 卸载
-
-在 **设置 → 插件** 找到 Claude Paper 并卸载。也可先运行 `orca plugin list --json` 查看确切插件标识，再运行：
-
-```sh
-orca plugin uninstall <pluginKey> --json
-```
-
-卸载前可先切换到其他应用和终端主题。
-
-## 验证
-
-0.2.0 在 Orca 1.4.253 上通过 `plugin validate`、`plugin check` 与 190 项独立对比度检查。两套模式均已查看实际聊天、设置、diff 与 ANSI 终端色样，浅色另检查了普通 JSON 编辑器。0.2.1 另采集并检查了两种模式的公开 TypeScript 编辑器与终端画面。未穷举所有语言与终端程序；具体配色验证范围见 [DESIGN.md](DESIGN.md)。
+商店按版本标签异步索引，可能晚于 GitHub 发布；以[商店实际显示](https://www.onorca.dev/plugins/gongxliang/claude-paper)为准。
 
 ## 致谢
 
-第二版的层次、品牌色与功能色分工参考 [open-claude-ui](https://github.com/Caho1/open-claude-ui) 的社区研究，具体颜色针对 Orca 独立调整；未引入其组件、CSS、字体或动效代码。
+- [open-claude-ui](https://github.com/Caho1/open-claude-ui)：层次与克制用色的社区研究。
+- [HwFee DSH CDS theme](https://github.com/HwFee/HwFee-dsh/tree/master/plugins/cds-theme)：初版视觉方向的参考。
+- [Claude Theme for Orca](https://github.com/jiangwanyutao/orca-claude-theme)：以实际工作场景介绍主题的展示思路。
+- [Orca 主题规范](https://github.com/stablyai/orca/blob/v1.4.255/docs/reference/plugin-themes.md)：本插件使用的公开接口。
 
-初版视觉方向参考 [HwFee 的 DSH CDS 主题](https://github.com/HwFee/HwFee-dsh/tree/master/plugins/cds-theme)，基于 [Orca 的公开主题接口](https://github.com/stablyai/orca/blob/v1.4.253/docs/reference/plugin-themes.md) 独立实现。本仓库未包含 DSH 的代码、字体资产或 Anthropic 商业字体。
+配色、图标与页面独立实现；未复制上述项目的主题代码、SVG、截图、组件或字体资产。
 
 ## English
 
-Claude Paper brings warm light and dark colors to Orca's application, native chat, editor and terminal. [Explore the interactive showcase](https://GongXLiang.github.io/Claude-paper/) or browse the screenshots above.
+Claude Paper brings a coherent, Claude-inspired palette to Orca: warm light and charcoal dark themes for chat, code, diffs and terminal, plus original **Paper Fold file icons**. It includes 2 app themes, 2 terminal palettes and 1 icon family with 51 SVGs and 355 mappings.
 
-Requires **Orca >=1.4.253**. Run `orca plugin install GongXLiang/Claude-paper --json`, then select **Claude Paper · 暖纸** for the light app theme and **Claude Paper · 暖夜** for the dark app theme in Settings → Appearance. Select the matching terminal palettes separately.
+Requires **Orca 1.4.255+**. Install with `orca plugin install GongXLiang/Claude-paper --json`, then select **Claude Paper · 暖纸** for light mode, **Claude Paper · 暖夜** for dark mode, the matching terminal palettes, and **Claude Paper · 纸折图标** in Settings → Appearance.
 
-The gallery shows **cropped, proportionally enlarged native Orca captures with public demo content**, placed in presentation frames. The cover combines light and dark versions of the same chat. No private conversations, account details or local paths appear in the published images.
+[Explore all scenes](https://gongxliang.github.io/Claude-paper/). Images are cropped, downscaled native Orca captures of a public demo, composed into presentation frames. No private chats, account information or local paths are published. The CLI comparison shows terminal palettes, not a Claude Code CLI screenshot. Hardcoded truecolor remains program-controlled; Orca's optional Claude Code theme sync is a separate host setting.
 
-This is a content-only color theme. Layouts, fonts, radii, animations and tool renderers remain controlled by Orca. Version 0.2.1 adds presentation assets; its theme palettes are identical to 0.2.0. Website interactions are separate from the installed theme.
-
-Unofficial community project; not affiliated with or endorsed by Anthropic or Stably. Free under the [MIT license](LICENSE).
+A data-only community plugin. Native layouts, animations and controls remain Orca's; fonts follow your settings. Unofficial, not affiliated with or endorsed by Anthropic or Stably. [MIT licensed](LICENSE).

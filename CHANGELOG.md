@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0
+
+- Added original Paper Fold file/folder icons: 51 SVGs, 355 mappings and expanded states for 10 semantic folder categories.
+- Added an original plugin identity icon for the store and website.
+- Preserved the existing app/syntax/ANSI palettes; added seven supported chat detail tokens and terminal cursorAccent.
+- Replaced the split-reply cover with native chat, file tree and terminal scenes. Added six store screenshots and ten website scene images from a public demo.
+- Rebuilt the README and showcase around scene tabs, light/dark switching and a keyboard-accessible lightbox. Removed the comparison slider.
+- Documented terminal truecolor boundaries and Orca's optional Claude Code theme sync.
+- Requires Orca 1.4.255 or newer; remains a data-only plugin without extra permissions.
+
 ## 0.2.1
 
 - Added a split light/dark cover and six store gallery images from public native Orca demos.

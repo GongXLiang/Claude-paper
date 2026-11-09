@@ -1,72 +1,80 @@
 (() => {
   'use strict';
   const root = document.documentElement;
-  const toggle = document.querySelector('#theme-toggle');
   const preference = matchMedia('(prefers-color-scheme: dark)');
-  const palettes = {
-    light: {surfaces:['#F3F2EF','#F9F8F5','#FCFCFA','#FFFFFF'],ink:'#1F1E1C',clay:'#AC4B2B',blue:'#295E90'},
-    dark: {surfaces:['#201F1D','#2A2927','#2E2D2B','#33322F'],ink:'#EDEBE6',clay:'#D97757',blue:'#8DB5E0'}
+  const scenes = {
+    chat: ['chat', '对话：公开任务、原生回复与输入框'],
+    diff: ['diff', '改动：真实代码差异与行内高亮'],
+    editor: ['editor', '代码：语法配色与纸折文件图标'],
+    terminal: ['terminal', '终端：实际测试输出与 ANSI 色样'],
+    icons: ['icons', '原生文件树拼版：同一套图标，暖纸与暖夜共用', true],
+    cli: ['cli-compare', '原生终端拼版：ANSI 随色板变化，真彩色保持程序原色', true]
   };
-  let chosen;
-  try {chosen = localStorage.getItem('claude-paper-theme');} catch {}
-  if (!Object.hasOwn(palettes, chosen)) chosen = null;
-  function setTheme(theme) {
-    root.dataset.theme = theme;
-    const p = palettes[theme], dark = theme === 'dark';
-    toggle.textContent = dark ? '切换为暖纸' : '切换为暖夜';
-    toggle.setAttribute('aria-label', toggle.textContent + '（仅此网页）');
-    document.querySelector('meta[name="theme-color"]').content = p.surfaces[0];
-    document.querySelector('#palette-mode').textContent = (dark ? '暖夜' : '暖纸') + ' · 四层表面';
-    document.querySelectorAll('#surfaces button').forEach((b, i) => {
-      b.dataset.copy = p.surfaces[i]; b.style.setProperty('--swatch',p.surfaces[i]); b.style.color = p.ink;
-      b.querySelector('code').textContent = p.surfaces[i];
-    });
-    for (const id of ['clay','blue']) {
-      const b = document.getElementById(id); b.dataset.copy = p[id]; b.querySelector('code').textContent = p[id];
+  let chosen = null;
+  try { chosen = localStorage.getItem('claude-paper-theme'); } catch {}
+  if (!['light','dark'].includes(chosen)) chosen = null;
+  let mode = chosen || (preference.matches ? 'dark' : 'light');
+  let scene = 'chat';
+  const tabs = [...document.querySelectorAll('[data-scene]')];
+  const modes = [...document.querySelectorAll('[data-mode]')];
+  const panel = document.querySelector('#scene-panel');
+  const shot = document.querySelector('#scene-image');
+  const link = document.querySelector('#scene-link');
+  function render() {
+    root.dataset.theme = mode;
+    document.querySelector('meta[name="theme-color"]').content = mode === 'light' ? '#F9F8F5' : '#2A2927';
+    const [file, caption, paired] = scenes[scene];
+    const path = 'assets/' + file + (paired ? '' : '-' + mode) + '.png';
+    const label = (paired ? '' : (mode === 'light' ? '暖纸 · ' : '暖夜 · ')) + caption;
+    shot.src = path; shot.alt = label; link.href = path;
+    document.querySelector('#scene-caption').textContent = label;
+    panel.setAttribute('aria-labelledby','tab-' + scene);
+    for (const tab of tabs) {
+      const active = tab.dataset.scene === scene;
+      tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1;
     }
-    document.querySelector('#blue span').textContent = dark ? '雾蓝 / 链接' : '墨蓝 / 链接';
+    // Mode always controls the page; paired scenes keep their own two-panel image.
+    for (const button of modes) button.setAttribute('aria-pressed',String(button.dataset.mode === mode));
   }
-  setTheme(chosen || (preference.matches ? 'dark' : 'light'));
-  toggle.hidden = false;
-  toggle.addEventListener('click', () => {
-    chosen = root.dataset.theme === 'dark' ? 'light' : 'dark'; setTheme(chosen);
-    try {localStorage.setItem('claude-paper-theme',chosen);} catch {}
+  for (const tab of tabs) {
+    tab.addEventListener('click', () => {scene = tab.dataset.scene; render();});
+    tab.addEventListener('keydown', e => {
+      const index = tabs.indexOf(tab);
+      const next = {ArrowRight:(index + 1) % tabs.length, ArrowLeft:(index + tabs.length - 1) % tabs.length, Home:0, End:tabs.length - 1}[e.key];
+      if (next === undefined) return;
+      e.preventDefault(); scene = tabs[next].dataset.scene; render(); tabs[next].focus();
+    });
+  }
+  for (const button of modes) button.addEventListener('click', () => {
+    chosen = mode = button.dataset.mode; render();
+    try {localStorage.setItem('claude-paper-theme', chosen);} catch {}
   });
-  preference.addEventListener('change', e => {if (!chosen) setTheme(e.matches ? 'dark' : 'light');});
+  preference.addEventListener('change', e => {if (!chosen) {mode = e.matches ? 'dark' : 'light'; render();}});
+  document.querySelectorAll('[data-enhanced]').forEach(el => {el.hidden = false;});
+  render();
 
-  const comparison = document.querySelector('#comparison');
-  const range = document.querySelector('#compare-range');
-  comparison.classList.add('enhanced');
-  document.querySelector('.compare-control').hidden = false;
-  function compare() {
-    comparison.style.setProperty('--pos', range.value + '%');
-    document.querySelector('#compare-value').value = range.value + '%';
-    range.setAttribute('aria-valuetext', `暖纸 ${range.value}%，暖夜 ${100 - range.value}%`);
+  let timer;
+  function notify(text) {
+    const status = document.querySelector('#status'); status.textContent = text;
+    clearTimeout(timer); timer = setTimeout(() => {status.textContent = '';}, 3500);
   }
-  range.addEventListener('input', compare); compare();
-
-  let notificationTimer;
-  function notify(message) {
-    const status = document.querySelector('#status'); status.textContent = message;
-    clearTimeout(notificationTimer); notificationTimer = setTimeout(() => {status.textContent = '';}, 3200);
-  }
-  async function copy(value) {
-    try {await navigator.clipboard.writeText(value); notify('已复制：' + value);}
-    catch {notify('无法自动复制，请选中内容手动复制。');}
-  }
-  document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copy(b.dataset.copy)));
-  const copyCommand = document.querySelector('[data-copy-command]'); copyCommand.hidden = false;
-  copyCommand.addEventListener('click', () => copy(document.querySelector('#install-command').textContent));
-
+  const copy = document.querySelector('[data-copy-command]'); copy.hidden = false;
+  copy.addEventListener('click', async () => {
+    try {await navigator.clipboard.writeText(document.querySelector('#install-command').textContent); notify('安装命令已复制。');}
+    catch {notify('无法自动复制，请选中安装命令手动复制。');}
+  });
   const dialog = document.querySelector('#lightbox');
-  if (typeof dialog.showModal === 'function') {
-    document.querySelectorAll('[data-lightbox]').forEach(a => a.addEventListener('click', e => {
-      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-      e.preventDefault(); const source = a.querySelector('img');
-      const image = dialog.querySelector('img'); image.src = a.href; image.alt = source.alt;
-      dialog.querySelector('p').textContent = source.alt; dialog.showModal();
-    }));
-    document.querySelector('#close-lightbox').addEventListener('click', () => dialog.close());
-    dialog.addEventListener('click', e => {if (e.target === dialog) {const b = dialog.getBoundingClientRect(); if (e.clientX < b.left || e.clientX > b.right || e.clientY < b.top || e.clientY > b.bottom) dialog.close();}});
-  }
+  if (typeof dialog.showModal !== 'function') return;
+  for (const anchor of document.querySelectorAll('[data-lightbox]')) anchor.addEventListener('click', e => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    e.preventDefault(); const source = anchor.querySelector('img');
+    const image = dialog.querySelector('img'); image.src = anchor.href; image.alt = source.alt;
+    dialog.querySelector('p').textContent = source.alt; dialog.showModal();
+  });
+  document.querySelector('#close-lightbox').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', e => {
+    if (e.target !== dialog) return;
+    const rect = dialog.getBoundingClientRect();
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) dialog.close();
+  });
 })();

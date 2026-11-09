@@ -22,6 +22,7 @@
     "brightBlue": "#3F77AB",
     "brightMagenta": "#9062A4",
     "brightCyan": "#2E8383",
-    "brightWhite": "#FFFFFF"
+    "brightWhite": "#FFFFFF",
+    "cursorAccent": "#F9F8F5"
   }
 }

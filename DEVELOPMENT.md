@@ -7,6 +7,10 @@
 - `orca-plugin.json`：插件清单、版本与兼容范围。
 - `themes/light.json`、`themes/dark.json`：应用、聊天与编辑器颜色。
 - `themes/terminal-light.json`、`themes/terminal-dark.json`：终端颜色。
+- `icons/theme.json` 与 `icons/*.svg`：纸折图标及匹配规则。
+- `scripts/build-icons.py`：图标生成器；修改后运行并检查实际文件树。
+- `scripts/check-theme.py`：新增聊天、光标、图标对比度与 SVG 安全检查。
+- `scripts/media-studio.html`：只读取外部私有截图的拼版模板。
 
 ## 修改原则
 
@@ -14,7 +18,7 @@
 配色必须满足 Orca 的对比度要求，否则宿主可能丢弃该颜色并回退。
 仅允许提交经过逐张隐私检查的公开演示截图；原始整窗截图、私人聊天、账号信息、绝对路径、缓存、压缩包或商业字体不得进入仓库。详见 [素材维护规则](docs/MEDIA.md)。
 
-当前 `publisher` 字段按 Orca 1.4.253 的作者指南省略：Git 安装由仓库所有者派生身份，目录安装使用 `local`。不要为了旧网页示例随意添加发布者字段。
+当前 `publisher` 字段按 Orca 1.4.255 的作者指南省略：Git 安装由仓库所有者派生身份，目录安装使用 `local`。不要为了旧网页示例随意添加发布者字段。
 
 ## 校验与预览
 
@@ -56,4 +60,4 @@ git push origin vX.Y.Z
 
 网站位于 `docs/`，由 GitHub Pages 从 `main:/docs` 发布。图片位于 `docs/assets/`，由 README 和商店清单共同引用。网页交互脚本仅在访问网站时执行，不属于主题插件运行代码。
 
-发布前运行 `node scripts/check-site.mjs` 和 `node --check docs/app.js`，然后检查手机/桌面效果与所有公开图片。更新版本标签后再检查商店索引结果。
+发布前运行 `python scripts/check-theme.py`、`node scripts/check-site.mjs` 和 `node --check docs/app.js`，然后检查手机/桌面效果与所有公开图片。更新版本标签后再检查商店索引结果。

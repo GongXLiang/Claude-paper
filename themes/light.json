@@ -67,7 +67,14 @@
     "--diff-removed-background": "#FBE6E4",
     "--diff-removed-gutter": "#F8D8D6",
     "--diff-added-emphasis": "#CFE6C6",
-    "--diff-removed-emphasis": "#F8D3CF"
+    "--diff-removed-emphasis": "#F8D3CF",
+    "--chat-bold-foreground": "#161513",
+    "--chat-muted-foreground": "#5F5C56",
+    "--chat-inline-code": "#E6E4DE",
+    "--chat-inline-code-foreground": "#2B2A27",
+    "--chat-code-block": "#F3F2EF",
+    "--chat-selection": "#D1E2F3",
+    "--chat-selection-foreground": "#1F1E1C"
   },
   "tokenColors": [
     {

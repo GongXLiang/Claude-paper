@@ -4,3 +4,8 @@ node_modules/
 .env.*
 *.zip
 *.tgz
+
+# Private source captures never belong in the public plugin.
+media-source/
+.media-source/
+*-raw.png
