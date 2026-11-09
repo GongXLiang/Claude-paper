@@ -28,7 +28,8 @@ for mapping in maps:
     for value in mapping.values():
         assert value.startswith('icons/') and '..' not in value
         paths.add(value)
-assert len(paths)==51
+assert len(paths)<=512
+assert paths == {"icons/"+p.name for p in (ROOT/"icons").glob("*.svg")}
 for value in paths:
     data=(ROOT/value).read_text();assert len(data.encode())<=65536
     doc=ET.fromstring(data);assert doc.attrib['viewBox']=='0 0 16 16'
@@ -39,7 +40,13 @@ for value in paths:
 for key in ('d.ts','test.ts','config.ts'):assert icons['fileExtensions'][key]!=icons['fileExtensions']['ts']
 assert icons['fileNames']['package.json']!=icons['fileExtensions']['json']
 backgrounds=['#F3F2EF','#E6E5E0','#E1E0DA','#F9F8F5','#201F1D','#31302D','#363532','#2A2927']
-colors=['#817E77','#977A4F','#4D83B5','#A97416','#578B46','#3C8B87','#996FA9','#C6605D','#C26540']
+colors=['#817E77','#6D8190','#4D83B5','#A97416','#578B46','#3C8B87','#996FA9','#C6605D','#C26540']
 minimum=min(contrast(c,b) for c in colors for b in backgrounds)
 assert minimum>=3
-print('51 SVGs,',sum(map(len,maps)),'mappings; folder expansion and SVG safety checks passed; icon contrast minimum',round(minimum,2))
+print(len(paths),'SVGs,',sum(map(len,maps)),'mappings; folder expansion and SVG safety checks passed; icon contrast minimum',round(minimum,2))
+
+for suffix in ("docx","xlsx","pptx","pdf","svg","html","dockerfile"):
+    assert icons["fileExtensions"][suffix] != icons["icons"]["file"]
+assert len({icons["fileExtensions"][s] for s in ("docx","xlsx","pptx","pdf","svg","html","dockerfile")})==7
+for name in ("skills","references","graphify","raw"):
+    assert icons["folderNames"][name] != icons["icons"]["folder"]

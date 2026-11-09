@@ -1,3 +1,9 @@
+# 0.4.0 asset update
+
+`assets/icon.png` is the GPT-generated Paper Orca mark, downsampled to 256 px. `assets/identity-master.png` preserves the generated master. The built-in tool does not expose a model version selector. See `IDENTITY.md` for the exact prompt.
+
+`assets/icons.png` replaces the older native file-tree image with a labeled gallery rendered directly from original plugin SVGs; source: `icons-gallery.svg`. It is not a screenshot. All other scene images remain the documented 0.3.0 native captures; their app/terminal colors are unchanged in 0.4.0. No private images were added.
+
 # 宣传素材与网页维护
 
 展示页为 `index.html`、`style.css` 与 `app.js`，零依赖，无远程字体、分析脚本或构建步骤。GitHub Pages 从 `main:/docs` 发布。主题运行时不执行网页脚本。

@@ -1,5 +1,7 @@
 <p align="center"><a href="https://gongxliang.github.io/Claude-paper/"><img src="docs/assets/cover.png" alt="Claude Paper：浅色 Orca 原生聊天与输入框，搭配深色纸折文件图标和终端输出" width="100%"></a></p>
 
+<p align="center"><img src="docs/assets/icon.png" width="96" height="96" alt="Claude Paper 折纸虎鲸标识"></p>
+
 <h1 align="center">Claude Paper for Orca</h1>
 <p align="center"><b>一张纸，两种光。</b><br>Warm light &amp; dark. Chat, code, terminal and original Paper Fold icons.</p>
 <p align="center"><a href="https://gongxliang.github.io/Claude-paper/">查看全部实机效果</a> · <a href="https://www.onorca.dev/plugins/gongxliang/claude-paper">Orca 社区商店</a> · <a href="#安装">安装</a> · <a href="#english">English</a></p>
@@ -8,10 +10,10 @@
 
 | 暖纸与暖夜 | 纸折图标 | 配套终端 |
 | --- | --- | --- |
-| 两套应用主题，73 个色彩令牌 | 51 个原创 SVG，355 条映射 | 两套 16 色 ANSI 色板 |
-| 聊天、侧栏、编辑器与 Diff | 文件类型、常用文件名、10 类语义目录及展开态 | 前景、背景、光标、光标下文字与选区 |
+| 两套应用主题，73 个色彩令牌 | 69 个原创 SVG，423 条映射 | 两套 16 色 ANSI 色板 |
+| 聊天、侧栏、编辑器与 Diff | 文件类型、常用文件名、14 类语义目录及展开态 | 前景、背景、光标、光标下文字与选区 |
 
-**0.3.0 · 免费 · MIT · 纯数据插件**。非官方社区作品，与 Anthropic 或 Stably 无隶属或背书关系。
+**0.4.0 · 免费 · MIT · 纯数据插件**。非官方社区作品，与 Anthropic 或 Stably 无隶属或背书关系。
 
 ## 安装
 
@@ -57,7 +59,9 @@ orca plugin install GongXLiang/Claude-paper --json
 
 原创 **Paper Fold 纸折图标**：纸页轮廓、折角与大号语义符号。代码、文档、测试、配置、图片和智能体文件各有记号；文件夹具有对应的关闭与展开图标。同一套 SVG 适配两种模式，不借用品牌标志。
 
-![原生文件树的明暗对照：源代码、文档、脚本、图片和 AGENTS.md 的纸折图标](docs/assets/icons.png)
+![0.4.0 原始 SVG 图鉴：文件类型与文件夹的明暗对照](docs/assets/icons.png)
+
+新版图鉴直接渲染插件 SVG，并非 Orca 窗口截图。Word、Excel、PPT、PDF、SVG、HTML、Docker 现在各有独立符号；未知文件夹使用灰蓝色，skills、references、graphify、raw 等目录也有专属图标。
 
 覆盖常见扩展名，以及 `README.md`、`AGENTS.md`、`package.json` 等文件名。`d.ts`、`test.ts`、`config.ts` 使用更具体的映射；未匹配的文件与目录仍有通用图标。[查看完整映射](icons/theme.json)
 
@@ -98,6 +102,8 @@ orca plugin install GongXLiang/Claude-paper --json
 
 ## 致谢
 
+- [Monospace Icons for Orca](https://github.com/faisalmuhammad/orca-monospace-icons)：文件类型细分思路参考；未复制其 SVG。
+
 - [open-claude-ui](https://github.com/Caho1/open-claude-ui)：层次与克制用色的社区研究。
 - [HwFee DSH CDS theme](https://github.com/HwFee/HwFee-dsh/tree/master/plugins/cds-theme)：初版视觉方向的参考。
 - [Claude Theme for Orca](https://github.com/jiangwanyutao/orca-claude-theme)：以实际工作场景介绍主题的展示思路。
@@ -107,7 +113,7 @@ orca plugin install GongXLiang/Claude-paper --json
 
 ## English
 
-Claude Paper brings a coherent, Claude-inspired palette to Orca: warm light and charcoal dark themes for chat, code, diffs and terminal, plus original **Paper Fold file icons**. It includes 2 app themes, 2 terminal palettes and 1 icon family with 51 SVGs and 355 mappings.
+Claude Paper brings a coherent, Claude-inspired palette to Orca: warm light and charcoal dark themes for chat, code, diffs and terminal, plus original **Paper Fold file icons**. It includes 2 app themes, 2 terminal palettes and 1 icon family with 69 SVGs and 423 mappings.
 
 Requires **Orca 1.4.255+**. Install with `orca plugin install GongXLiang/Claude-paper --json`, then select **Claude Paper · 暖纸** for light mode, **Claude Paper · 暖夜** for dark mode, the matching terminal palettes, and **Claude Paper · 纸折图标** in Settings → Appearance.
 

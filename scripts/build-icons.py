@@ -6,8 +6,8 @@ import sys
 root = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parents[1]
 icons = root / 'icons'
 icons.mkdir(exist_ok=True)
-colors = dict(ink='#817E77', manila='#977A4F', blue='#4D83B5', amber='#A97416', green='#578B46', teal='#3C8B87', plum='#996FA9', rose='#C6605D', clay='#C26540')
-backs = dict(ink='#65635E', manila='#765F3E', blue='#3B668E', amber='#845B11', green='#456D37', teal='#2F6C69', plum='#7C538C', rose='#AA3F3C', clay='#994E31')
+colors = dict(ink='#817E77', slate='#6D8190', blue='#4D83B5', amber='#A97416', green='#578B46', teal='#3C8B87', plum='#996FA9', rose='#C6605D', clay='#C26540')
+backs = dict(ink='#65635E', slate='#556570', blue='#3B668E', amber='#845B11', green='#456D37', teal='#2F6C69', plum='#7C538C', rose='#AA3F3C', clay='#994E31')
 def path(d, color, width=1.5, fill=False):
     return f'<path d="{d}" '+(f'fill="{color}"' if fill else f'stroke="{color}" stroke-width="{width}"')+'/>'
 def svg(body):
@@ -49,6 +49,23 @@ for name, role in [('ts','blue'),('js','amber'),('script','teal'),('compiled','p
 write('lock',corner+path('M3.75 10.5V9.25a1.75 1.75 0 0 1 3.5 0v1.25',colors['ink'],1.25)+'<rect x="2.25" y="10.5" width="6.5" height="4.5" rx="1" fill="#817E77"/>')
 write('image',corner+path('M1.5 14.75 4.5 10.5l2.25 2.75 1.25-1.5 2.25 3z',colors['green'],fill=True)+'<circle cx="8.25" cy="9" r="1.25" fill="#578B46"/>')
 write('diff',corner+path('M2 10h7M5.5 7v6',colors['green'])+path('M2 15h7',colors['rose']))
+write('markdown',sheet+path('M5.5 7.5h4',colors['plum'],2)+path('M5.5 10h6M5.5 12.5h3',colors['ink'],1))
+extra={
+ 'word':('M6 8.5H4.5a2 2 0 0 0 0 4H6M6 8.5v7M9 8.5v7M5 8.5h5','blue',False),
+ 'spreadsheet':('M1.5 8.5h9v7h-9zM1.5 11h9M4.5 8.5v7M7.5 8.5v7','green',False),
+ 'slides':('M3.5 8h7v4.5h-7zM1.5 10.5h7v5h-7z','clay',True),
+ 'pdf':('M2 8h4l2.5 2.5v5H2z','rose',True),
+ 'vector':('M2.5 14.5C3.5 10.5 6 9 9.5 9M1.5 13.5h2v2h-2zM8.5 8h2v2h-2z','amber',False),
+ 'html':('M6 8.5a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5ZM2.75 11.75h6.5M6 8.5c-2 2-2 4.5 0 6.5M6 8.5c2 2 2 4.5 0 6.5','clay',False),
+ 'notebook':('M3 8.5h6.5v7H3zM1.5 9.5H4M1.5 12H4M1.5 14.5H4','plum',False),
+ 'latex':('M9 8.5H2.5L6 12l-3.5 3.5H9','teal',False),
+ 'docker':('M1.5 9.5h9V15h-9zM4 10v4.5M6 10v4.5M8 10v4.5','blue',False),
+}
+for name,(d,role,fill) in extra.items():
+    body=corner+path(d,colors[role],1.25,fill)
+    if name=='spreadsheet':body+=path('M1.5 8.5h9V11h-9z',colors[role],fill=True)
+    write(name,body)
+write('table',corner+path(glyphs['table'][0],colors['teal']))
 folderglyphs={
  'src':'M6.25 7.75 4.5 9.75l1.75 2M9.75 7.75l1.75 2-1.75 2',
  'test':'M5 9.5l2 2 4-4', 'docs':'M5 8h6M5 10h6M5 12h4',
@@ -58,16 +75,21 @@ folderglyphs={
  'build':'M5 7.5h2v2H5zM9 10.5h2v2H9zM7 8.5h3v2',
  'vcs':'M6 7.5v5M6 10c4 0 4-1 4-2M5.5 7.5h1M9.5 7.5h1M5.5 12.5h1'
 }
-folderroles=dict(src='blue',test='green',docs='plum',assets='green',config='teal',scripts='teal',agent='clay',deps='ink',build='ink',vcs='ink')
-for name,role in [('folder','manila')]+[(f'folder-{n}',r) for n,r in folderroles.items()]:
+folderglyphs.update(skills='M8 7.5 8.75 9.25 10.5 10 8.75 10.75 8 12.5 7.25 10.75 5.5 10 7.25 9.25z',refs='M6 7.5h4v5L8 11l-2 1.5z',graph='M8 8.5 5.5 12h5z',data='M5.5 8.75c0-1.2 5-1.2 5 0s-5 1.2-5 0v2.75c0 1.2 5 1.2 5 0V8.75')
+folderroles=dict(skills='clay',refs='plum',graph='teal',data='blue',src='blue',test='green',docs='plum',assets='green',config='teal',scripts='teal',agent='clay',deps='ink',build='ink',vcs='ink')
+for name,role in [('folder','slate')]+[(f'folder-{n}',r) for n,r in folderroles.items()]:
     for opened in (False,True):
         back='M1.5 3.5a1 1 0 0 1 1-1h3.59a1 1 0 0 1 .7.29L8 4'+('h4.5a1 1 0 0 1 1 1v2h-10l-2 7z' if opened else 'h5.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z')
         front='M3.5 7h11.75l-2 7H1.5z' if opened else 'M1.5 5.5h13V13a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z'
-        body=path(back,backs[role],fill=True)+path(front,colors[role],fill=True)
+        body=path(back,backs[role],fill=True)
+        if name=='folder' and opened:body+=path('M4 5h8.5v2.5H4z','#E6E5E0',fill=True)
+        body+=path(front,colors[role],fill=True)
         if name!='folder':
             d=folderglyphs[name[7:]]
             # Shared glyph stays within both front silhouettes at y=7..12.5.
-            body+=path(d,'#FAF9F6',1.25)
+            body+=path(d,'#FAF9F6',1.25,name in ('folder-skills','folder-refs'))
+            if name=='folder-graph':
+                for x,y in [(8,8.5),(5.5,12),(10.5,12)]:body+=f'<circle cx="{x}" cy="{y}" r="1" fill="#FAF9F6"/>'
         write(name+('-open' if opened else ''),body)
 
 maps={k:{} for k in ('fileNames','fileExtensions','folderNames','folderNamesExpanded')}
@@ -77,15 +99,15 @@ def assign(group,keys,name):
         assert key not in maps[group],key
         maps[group][key]='icons/'+name+'.svg'
 extensions={
- 'doc':'md mdx txt rst adoc org log', 'code-ts':'ts tsx mts cts', 'code-js':'js jsx mjs cjs',
- 'code-script':'py pyi rb php lua pl r ipynb','code-compiled':'rs go c h cc cpp hpp cs java kt kts swift scala zig dart',
- 'code-declaration':'d.ts d.mts d.cts','markup':'html htm xml xhtml vue svelte astro','style':'css scss sass less styl pcss',
- 'data':'json jsonc json5 ndjson geojson webmanifest','config':'yaml yml toml ini conf cfg properties config.ts config.js config.mjs config.cjs config.json',
+ 'markdown':'md mdx markdown rst adoc org', 'doc':'txt text log', 'word':'doc docx docm dotx odt rtf pages', 'spreadsheet':'xls xlsx xlsm xlsb ods numbers', 'slides':'ppt pptx pptm odp', 'pdf':'pdf xps', 'vector':'svg svgz eps ai', 'html':'html htm xhtml shtml', 'notebook':'ipynb qmd rmd', 'latex':'tex ltx sty cls bib bst', 'code-ts':'ts tsx mts cts', 'code-js':'js jsx mjs cjs',
+ 'code-script':'py pyi rb php lua pl r','code-compiled':'rs go c h cc cpp hpp cs java kt kts swift scala zig dart',
+ 'code-declaration':'d.ts d.mts d.cts','markup':'xml xsd xsl xslt plist rss atom vue svelte astro','style':'css scss sass less styl pcss',
+ 'data':'json jsonc json5 jsonl ndjson geojson webmanifest','config':'yaml yml toml ini conf cfg properties config.ts config.js config.mjs config.cjs config.json',
  'lock':'lock lockb','env':'pem key crt p12','shell':'sh bash zsh fish ps1 psm1 bat cmd nu',
  'test':'test.ts test.tsx test.js test.jsx test.mjs test.py spec.ts spec.tsx spec.js spec.jsx',
- 'image':'png jpg jpeg gif webp avif bmp ico svg heic tif tiff','media':'mp4 mov webm mkv mp3 wav flac ogg m4a',
- 'archive':'zip tar gz tgz bz2 xz zst 7z rar whl jar','database':'sql sqlite sqlite3 db prisma','table':'csv tsv xlsx xls ods parquet',
- 'diff':'diff patch','container':'dockerfile','build':'mk cmake'
+ 'image':'png jpg jpeg gif webp avif bmp ico heic heif tif tiff psd','media':'mp4 mov webm mkv mp3 wav flac ogg m4a',
+ 'archive':'zip tar gz tgz bz2 xz zst 7z rar whl jar','database':'sql sqlite sqlite3 db prisma','table':'csv tsv psv parquet feather arrow',
+ 'diff':'diff patch','docker':'dockerfile','build':'mk cmake'
 }
 names={
  'readme':'README README.md README.txt README.rst',
@@ -96,10 +118,11 @@ names={
  'agent':'AGENTS.md AGENT.md CLAUDE.md GEMINI.md .cursorrules .windsurfrules copilot-instructions.md llms.txt orca-plugin.json',
  'license':'LICENSE LICENSE.md LICENSE.txt LICENCE COPYING NOTICE','history':'CHANGELOG.md CHANGES.md HISTORY.md RELEASES.md NEWS.md',
  'vcs':'.gitignore .gitattributes .gitmodules .gitkeep .mailmap .git-blame-ignore-revs',
- 'container':'Dockerfile Containerfile .dockerignore compose.yaml compose.yml docker-compose.yml docker-compose.yaml',
+ 'container':'Containerfile', 'docker':'Dockerfile Dockerfile.dev Dockerfile.prod .dockerignore compose.yaml compose.yml docker-compose.yml docker-compose.yaml',
  'build':'Makefile GNUmakefile justfile Taskfile.yml CMakeLists.txt BUILD BUILD.bazel meson.build'
 }
 folders={
+ 'skills':'skills skill','refs':'references reference','graph':'graphify graph graphs graphify-out','data':'raw data dataset datasets',
  'src':'src source lib app packages components','test':'test tests __tests__ spec specs e2e __mocks__ fixtures',
  'docs':'docs doc documentation wiki guides','assets':'assets public static images img media icons fonts',
  'config':'config configs .config .vscode .github .idea .husky .devcontainer','scripts':'scripts script bin tools',
@@ -112,6 +135,4 @@ for n,k in folders.items():
     assign('folderNames',k,'folder-'+n);assign('folderNamesExpanded',k,'folder-'+n+'-open')
 theme={'schemaVersion':1,'icons':{n:'icons/'+n+'.svg' for n in ('file','folder','folder-open')},**maps}
 (icons/'theme.json').write_text(json.dumps(theme,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-identity='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="96" fill="#2A2927"/><path d="M152 104h144l64 64v240H152z" fill="#F9F8F5"/><path d="M296 104v64h64z" fill="#D97757"/></svg>\n'
-(root/'docs/icon.svg').write_text(identity,encoding='utf-8')
 print(f'Generated {len(list(icons.glob("*.svg")))} file/folder SVGs; {sum(len(v) for v in maps.values())+3} mappings.')

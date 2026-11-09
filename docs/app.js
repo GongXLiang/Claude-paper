@@ -7,7 +7,7 @@
     diff: ['diff', '改动：真实代码差异与行内高亮'],
     editor: ['editor', '代码：语法配色与纸折文件图标'],
     terminal: ['terminal', '终端：实际测试输出与 ANSI 色样'],
-    icons: ['icons', '原生文件树拼版：同一套图标，暖纸与暖夜共用', true],
+    icons: ['icons', '原始 SVG 图鉴：细分文件类型与目录，明暗共用', true],
     cli: ['cli-compare', '原生终端拼版：ANSI 随色板变化，真彩色保持程序原色', true]
   };
   let chosen = null;

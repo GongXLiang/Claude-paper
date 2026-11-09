@@ -1,3 +1,10 @@
+# 0.4.0
+
+- New GPT-generated origami orca identity, following Opus 5.5 design consultation.
+- Slate default folders; skills, references, graph and data folder families.
+- Distinct Word, Excel, PowerPoint, PDF, vector, HTML, notebook, Docker and LaTeX glyphs.
+- Original SVG gallery; app and terminal colors unchanged.
+
 # Changelog
 
 ## 0.3.0
