@@ -44,39 +44,42 @@ glyphs = {
 filecolors=dict(markup='rose',style='plum',data='green',config='teal',package='amber',env='amber',shell='teal',test='green',agent='clay',license='amber',history='plum',media='plum',archive='ink',database='blue',table='green',vcs='rose',container='teal',build='ink')
 for name, role in filecolors.items():
     d, fill=glyphs[name]; write(name,corner+path(d,colors[role],fill=fill))
-for name, role in [('ts','blue'),('js','amber'),('script','teal'),('compiled','plum'),('declaration','ink')]:
+for name, role in [('script','teal'),('compiled','plum'),('declaration','ink')]:
     write('code-'+name,corner+path(glyphs['code'][0],colors[role]))
 write('lock',corner+path('M3.75 10.5V9.25a1.75 1.75 0 0 1 3.5 0v1.25',colors['ink'],1.25)+'<rect x="2.25" y="10.5" width="6.5" height="4.5" rx="1" fill="#817E77"/>')
 write('image',corner+path('M1.5 14.75 4.5 10.5l2.25 2.75 1.25-1.5 2.25 3z',colors['green'],fill=True)+'<circle cx="8.25" cy="9" r="1.25" fill="#578B46"/>')
 write('diff',corner+path('M2 10h7M5.5 7v6',colors['green'])+path('M2 15h7',colors['rose']))
-write('markdown',sheet+path('M5.5 7.5h4',colors['plum'],2)+path('M5.5 10h6M5.5 12.5h3',colors['ink'],1))
-extra={
- 'word':('M6 8.5H4.5a2 2 0 0 0 0 4H6M6 8.5v7M9 8.5v7M5 8.5h5','blue',False),
- 'spreadsheet':('M1.5 8.5h9v7h-9zM1.5 11h9M4.5 8.5v7M7.5 8.5v7','green',False),
- 'slides':('M3.5 8h7v4.5h-7zM1.5 10.5h7v5h-7z','clay',True),
- 'pdf':('M2 8h4l2.5 2.5v5H2z','rose',True),
- 'vector':('M2.5 14.5C3.5 10.5 6 9 9.5 9M1.5 13.5h2v2h-2zM8.5 8h2v2h-2z','amber',False),
- 'html':('M6 8.5a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5ZM2.75 11.75h6.5M6 8.5c-2 2-2 4.5 0 6.5M6 8.5c2 2 2 4.5 0 6.5','clay',False),
- 'notebook':('M3 8.5h6.5v7H3zM1.5 9.5H4M1.5 12H4M1.5 14.5H4','plum',False),
- 'latex':('M9 8.5H2.5L6 12l-3.5 3.5H9','teal',False),
- 'docker':('M1.5 9.5h9V15h-9zM4 10v4.5M6 10v4.5M8 10v4.5','blue',False),
+# File types use a complete colored paper silhouette, with room for the recognizer.
+# All marks are original vector paths: no installed font or external logo dependency.
+paper_ink='#FAF9F6'
+def mark(d,width=1.4):
+    return path(d,paper_ink,width)
+def paper(role,body,fold_role=None):
+    face=path('M3.25 1H10l4 4v8.75A1.25 1.25 0 0 1 12.75 15h-9.5A1.25 1.25 0 0 1 2 13.75v-11A1.25 1.25 0 0 1 3.25 1Z',colors[role],fill=True)
+    fold=path('M10 1v3a1 1 0 0 0 1 1h3Z',colors[fold_role] if fold_role else backs[role],fill=True)
+    return face+fold+body
+
+file_marks={
+ 'code-python':('blue',mark('M4 12.8V6.5h1.8a1.75 1.75 0 0 1 0 3.5H4M8.4 8.1l1.7 2.8 1.7-2.8M10.1 10.9 9 13',1.35)),
+ 'code-c':('blue',mark('M10.7 6.9C8.5 5.3 5 6.7 5 9.6s3.5 4.3 5.7 2.7',1.7)),
+ 'code-cpp':('blue',mark('M7.2 7.3C5.4 5.9 3.7 7.4 3.7 9.7s1.7 3.7 3.5 2.3',1.45)+mark('M8.5 9.7H10M9.25 8.9v1.6M11.1 9.7h1.5M11.85 8.9v1.6',1)),
+ 'code-fortran':('plum',mark('M5.5 12.8V6.5h5M5.5 9.5h4',1.7)),
+ 'code-js':('amber',mark('M3.8 6.6h2.3v4.6c0 2.1-2.6 2.1-2.6.2M12 7.1c-3.5-1.9-4.3 1.6-1.8 2.3s2.8 4.1-1.1 3',1.35)),
+ 'code-ts':('blue',mark('M3.1 6.6h4M5.1 6.6v6.2M12 7.1c-3.5-1.9-4.3 1.6-1.8 2.3s2.8 4.1-1.1 3',1.35)),
+ 'word':('blue',mark('M3.8 6.8l1.4 5.8L8 8.9l2.8 3.7 1.4-5.8',1.5)),
+ 'spreadsheet':('green',mark('M5.3 6.7l5.4 6M10.7 6.7l-5.4 6',1.75)),
+ 'slides':('clay',mark('M5.7 12.8V6.5h2.7a2 2 0 0 1 0 4H5.7',1.7)),
+ 'pdf':('rose',mark('M3.5 12V7.5h1a1.2 1.2 0 0 1 0 2.4h-1M7 12V7.5h.6c2.5 0 2.5 4.5 0 4.5H7M10.9 12V7.5H13M10.9 9.7h1.7',1)),
+ 'vector':('amber',mark('M4 12c0-3.5 2.5-5 7.5-5M8 7h3.5v3.5',1.25)+path('M3 11h2v2H3zM10.5 6h2v2h-2z',paper_ink,fill=True)),
+ 'html':('clay',mark('M5.3 7.5 3.3 9.8l2 2.3M10.7 7.5l2 2.3-2 2.3M8.8 6.6 7.2 13',1.25)),
+ 'notebook':('clay',mark('M3.5 7h1M3.5 10h1M3.5 13h1',1.2)+'<rect x="6" y="6.4" width="5.7" height="2.3" rx=".35" stroke="#FAF9F6" stroke-width="1"/><rect x="6" y="10.5" width="5.7" height="2.3" rx=".35" stroke="#FAF9F6" stroke-width="1"/>'),
+ 'docker':('blue',path('M4 7h2v2H4zM7 7h2v2H7zM10 7h2v2h-2zM7 4h2v2H7zM3 10h10c-.6 2.4-2.2 3.4-5.1 3.4S3.7 12.5 3 10Z',paper_ink,fill=True)),
+ 'markdown':('plum',mark('M3.6 12V7l2.1 2.5L7.8 7v5M11.1 7.2v5M9.6 10.7l1.5 1.5 1.5-1.5',1.25)),
 }
-for name,(d,role,fill) in extra.items():
-    body=corner+path(d,colors[role],1.25,fill)
-    if name=='spreadsheet':body+=path('M1.5 8.5h9V11h-9z',colors[role],fill=True)
-    write(name,body)
+for name,(role,body) in file_marks.items():
+    write(name,paper(role,body,'amber' if name=='code-python' else None))
+write('latex',corner+path('M9 8.5H2.5L6 12l-3.5 3.5H9',colors['teal'],1.25))
 write('table',corner+path(glyphs['table'][0],colors['teal']))
-# Compact vector monograms keep common languages recognizable without embedded fonts.
-language_marks={
- 'code-python':path('M2 15V8h2.5a2 2 0 0 1 0 4H2',colors['blue'],1.5)+path('M7 10.5v2a1.5 1.5 0 0 0 3 0v-2M10 12.5V13.5a1.5 1.5 0 0 1-1.5 1.5',colors['amber'],1.5),
- 'code-c':path('M9 8.75C3 5.5 1 14 6 15a4 4 0 0 0 3-.75',colors['blue'],1.75),
- 'code-cpp':path('M5.25 9.25C1 7 0 13.75 3.75 14.75l1.5-.5M6.25 12h2M7.25 11v2M9.25 12h2M10.25 11v2',colors['blue'],1.2),
- 'code-fortran':path('M3 15V8h6M3 11.5h5',colors['plum'],1.8),
- 'code-js':path('M2 8h3v5a1.75 1.75 0 0 1-3.5 0M10 8.75c-4-2.5-4 2-.75 2.75s2 5-1.75 3',colors['amber'],1.4),
- 'code-ts':path('M1 8h5M3.5 8v7M10 8.75c-4-2.5-4 2-.75 2.75s2 5-1.75 3',colors['blue'],1.4),
-}
-for name,mark in language_marks.items():write(name,corner+mark)
-write('notebook',corner+path('M3 8h7v7H3zM1.5 9.5H4M1.5 13.5H4',colors['plum'],1.25)+path('M5.5 10h3M5.5 12.5h3',colors['clay'],1.5))
 folderglyphs={
  'src':'M6.25 7.75 4.5 9.75l1.75 2M9.75 7.75l1.75 2-1.75 2',
  'test':'M5 9.5l2 2 4-4', 'docs':'M5 8h6M5 10h6M5 12h4',

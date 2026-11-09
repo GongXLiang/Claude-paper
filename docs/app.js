@@ -23,7 +23,11 @@
     const path = 'assets/' + file + (paired ? '' : '-' + mode) + '.png';
     const modeName = modes.find(button => button.dataset.mode === mode).textContent;
     const label = (paired ? '' : modeName + ' · ') + caption;
-    shot.src = path; shot.alt = label; link.href = path;
+    // Preserve native pixels for high-density chat previews and the lightbox.
+    const fullPath = scene === 'chat' ? path.replace('.png', '-large.png') : path;
+    if (scene === 'chat') shot.srcset = `${path} 1600w, ${fullPath} 2560w`;
+    else shot.removeAttribute('srcset');
+    shot.src = path; shot.alt = label; link.href = fullPath;
     document.querySelector('#scene-caption').textContent = label;
     panel.setAttribute('aria-labelledby','tab-' + scene);
     // Static language pages also work without JS; enhancement preserves the current view.
@@ -33,6 +37,7 @@
     target.hash = location.hash;
     const current = new URL(location.href);
     if (params.has('scene') || scene !== 'chat') current.searchParams.set('scene',scene);
+    else current.searchParams.delete('scene');
     if (params.has('theme') || chosen) current.searchParams.set('theme',mode);
     try {history.replaceState(null,'',current);} catch {}
     languageLink.href = target.href;

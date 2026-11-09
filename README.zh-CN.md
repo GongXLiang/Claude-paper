@@ -11,7 +11,7 @@
 | 2 套应用主题，73 个色彩令牌 | 77 个原创 SVG，512 条映射 | 2 套 16 色 ANSI 色板 |
 | 聊天、侧栏、编辑器与差异 | 16 类目录，118 个精确名称 | 背景、光标、选区与文字 |
 
-**0.4.1 · 免费 · MIT · 纯数据。** 非官方社区作品，与 Anthropic 或 Stably 无隶属或背书关系。
+**0.4.2 · 免费 · MIT · 纯数据。** 非官方社区作品，与 Anthropic 或 Stably 无隶属或背书关系。
 
 ## 安装
 
@@ -53,7 +53,7 @@ orca plugin install GongXLiang/Claude-paper --json
 
 ## 一眼辨认语言与文件
 
-Python、Notebook、C、C++、Fortran、JavaScript 和 TypeScript 使用独立符号，统一保留纸页折角。Word、Excel、PPT、PDF、SVG、HTML、Docker 也各有自己的标记。
+Python、Notebook、C、C++、Fortran、JavaScript 和 TypeScript 使用居中的独立符号与彩色折纸轮廓。Word、Excel、PPT、PDF、SVG、HTML、Docker 也各有自己的标记。
 
 ![语言、文件类型与目录用途的明暗 SVG 图鉴](docs/assets/icons-zh.png)
 
@@ -118,7 +118,7 @@ formatDate(date, 'Asia/Shanghai');  // 10 Nov 2026
 
 ## 素材、开发与致谢
 
-原生场景取自 Orca 1.4.255 / Claude Paper 0.3.0 的公开中文演示，应用与终端配色沿用至今。英文图注解释场景，截图文字保持原样。双语图标图鉴展示当前 0.4.1 资源；折纸虎鲸标识由 Opus 5.5 提供设计咨询，再经 GPT 生图生成。[素材记录](docs/MEDIA.md) · [标识提示词](docs/IDENTITY.md)
+原生场景取自 Orca 1.4.255 / Claude Paper 0.3.0 的公开中文演示，应用与终端配色沿用至今。英文图注解释场景，截图文字保持原样。双语图标图鉴展示当前 0.4.2 资源；折纸虎鲸标识由 Opus 5.5 提供设计咨询，再经 GPT 生图生成。[素材记录](docs/MEDIA.md) · [标识提示词](docs/IDENTITY.md)
 
 [开发说明](DEVELOPMENT.md) · [设计历史](DESIGN.md) · [更新记录](CHANGELOG.md) · [版本下载](https://github.com/GongXLiang/Claude-paper/releases)
 

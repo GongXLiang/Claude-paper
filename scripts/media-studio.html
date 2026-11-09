@@ -6,11 +6,16 @@
 // Supply a private capture directory as ?raw=file:///.../ and select ?scene=cover|chat-light|...
 const params=new URLSearchParams(location.search), scene=params.get('scene')||'cover';
 const raw=params.get('raw')||'./', canvas=document.querySelector('canvas'), ctx=canvas.getContext('2d');
+const outputWidth=Number(params.get('width')||1600),outputScale=outputWidth/1600;
+if(![1600,2560].includes(outputWidth))throw Error('Unsupported output width');
+canvas.width=outputWidth;canvas.height=1000*outputScale;
+for(const el of [document.documentElement,document.body,canvas]){el.style.width=outputWidth+'px';el.style.height=1000*outputScale+'px';}
+ctx.scale(outputScale,outputScale);
 const dark=scene.endsWith('-dark'), p=dark?{bg:'#201F1D',ink:'#EDEBE6',muted:'#B5B2AB',line:'#464541'}:{bg:'#F3F2EF',ink:'#1F1E1C',muted:'#65625C',line:'#DEDDD8'};
 const shots={};
 function text(value,x,y,size=20,color=p.ink,font='"Segoe UI","Microsoft YaHei",sans-serif',weight='400'){ctx.fillStyle=color;ctx.font=`${weight} ${size}px ${font}`;ctx.fillText(value,x,y);}
 function plate(x,y,w,h,fill,r=10){ctx.save();ctx.shadowColor='#17161322';ctx.shadowBlur=25;ctx.shadowOffsetY=12;ctx.fillStyle=fill;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();ctx.restore();}
-function crop(name,sx,sy,sw,sh,x,y,w,h,r=0){if(w>sw+.01||h>sh+.01)throw Error('No enlargement');ctx.save();ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.clip();ctx.drawImage(shots[name],sx,sy,sw,sh,x,y,w,h);ctx.restore();}
+function crop(name,sx,sy,sw,sh,x,y,w,h,r=0){if(w*outputScale>sw+.01||h*outputScale>sh+.01)throw Error('No enlargement: requested output exceeds native crop pixels');ctx.save();ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.clip();ctx.drawImage(shots[name],sx,sy,sw,sh,x,y,w,h);ctx.restore();}
 function foot(label='ORCA 1.4.255 · PUBLIC DEMO · NATIVE CAPTURES'){text(label,40,979,13,p.muted);ctx.textAlign='right';text('Claude Paper · Unofficial community theme',1560,979,13,p.muted);ctx.textAlign='left';}
 function heading(title,subtitle,mode){text('Claude Paper',40,66,40,p.ink,'Georgia,serif');text(title,350,65,28,p.ink);text(subtitle,40,103,18,p.muted);ctx.textAlign='right';text(mode||'',1560,66,18,p.muted);ctx.textAlign='left';}
 function tabstrip(name,x,y,w){crop(name,14,3,2560,62,x,y,w,62*w/2560);}

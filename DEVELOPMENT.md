@@ -2,8 +2,8 @@
 
 The plugin root is this repository. It is a data-only theme; do not patch Orca resources or add unsupported theme fields. Source files:
 
-- `icons/folders.json`: folder categories, bilingual labels and exact aliases. Expanded and closed mappings are generated together. All icon maps combined must stay at or below 512 entries (0.4.1 uses all 512).
-- `scripts/build-icons.py`: original SVGs and the icon map.
+- `icons/folders.json`: folder categories, bilingual labels and exact aliases. Expanded and closed mappings are generated together. All icon maps combined must stay at or below 512 entries (0.4.2 uses all 512).
+- `scripts/build-icons.py`: original SVGs and the icon map. Inspect changed file recognizers at 16 and 20 px in both modes, not only in the 32 px gallery.
 - `scripts/site-template.html` and `scripts/site-copy.json`: one page template and complete English/Chinese strings; `scripts/build-site.py` writes `docs/index.html` and `docs/zh-CN.html`.
 - `scripts/build-gallery.py`: English/Chinese SVG gallery sources. Rasterize them to `docs/assets/icons.png` and `docs/assets/icons-zh.png` using resvg; inspect both images before publishing.
 - `README.md`, `README.zh-CN.md`, `examples/README.md`, `examples/README.zh-CN.md`: keep content and commands equivalent.
@@ -18,6 +18,8 @@ node --check docs/app.js
 node --test examples/date-kit/format.test.mjs
 orca plugin validate . --json
 ```
+
+High-density chat exports use the optional `width=2560` compositor parameter. Keep the crop guard in output pixels, export into a private review directory first, and review the final pixels before adding PNGs to the repository.
 
 For browser verification, evaluate `scripts/check-browser.js` on each language page. It checks gallery modes, keyboard tabs, labels, language URLs, overflow, the lightbox and copy feedback (clipboard calls are stubbed and restored). Also click the actual language link and check desktop/mobile appearance; test responsive mode after each navigation. The script changes only the preview page's controls and theme preference.
 

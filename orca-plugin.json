@@ -2,7 +2,7 @@
   "manifestVersion": 2,
   "id": "claude-paper",
   "name": "Claude Paper",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Warm paper light and charcoal dark for Orca: chat, code, diffs and terminal, with original Paper Fold file icons. Unofficial, data-only.",
   "engines": {
     "orca": ">=1.4.255"

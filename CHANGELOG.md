@@ -1,3 +1,10 @@
+# 0.4.2
+
+- Redesigned 15 file-type icons with colored folded-paper silhouettes and larger centered recognizers, including Python, Notebook, C/C++, Fortran, JS/TS, Office, PDF, SVG, HTML, Docker and Markdown.
+- Grouped each palette swatch with its label and hex value on both language pages.
+- Added 2560×1600 chat previews from the existing native captures; responsive sources and the lightbox retain more native pixels without enlarging source crops.
+- Kept app/terminal colors, folder icons and all 512 matching entries unchanged. Updated both rendered icon galleries.
+
 # 0.4.1
 
 - English and Chinese READMEs, static website pages, SVG galleries and runnable public examples. Language links preserve the current scene and color mode.

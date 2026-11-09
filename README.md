@@ -11,7 +11,7 @@ A Claude-inspired palette for the places you work in Orca. Quiet paper surfaces,
 | 2 app themes, 73 color tokens | 77 original SVGs, 512 mappings | 2 palettes with 16 ANSI colors |
 | Chat, sidebars, editor and diffs | 16 folder categories, 118 exact names | Background, cursor, selection and text |
 
-**0.4.1 · Free · MIT · Data only.** An unofficial community theme, not affiliated with or endorsed by Anthropic or Stably.
+**0.4.2 · Free · MIT · Data only.** An unofficial community theme, not affiliated with or endorsed by Anthropic or Stably.
 
 ## Install
 
@@ -53,7 +53,7 @@ For Claude Code CLI, Orca also offers **Match Claude Code to Terminal Theme**. T
 
 ## Languages and files you can recognize
 
-Python, Notebook, C, C++, Fortran, JavaScript and TypeScript have distinct symbols within the same folded-page outline. Word, Excel, PowerPoint, PDF, SVG, HTML and Docker also have their own marks.
+Python, Notebook, C, C++, Fortran, JavaScript and TypeScript have distinct symbols on colored folded-paper silhouettes. Word, Excel, PowerPoint, PDF, SVG, HTML and Docker also have their own marks.
 
 ![Original SVG gallery of languages, file types and folder categories in both modes](docs/assets/icons.png)
 
@@ -118,7 +118,7 @@ In this comparison, ANSI colors follow the palette while the explicit `Truecolor
 
 ## Media, development and credits
 
-Native scene images use a public Chinese-language demo captured in Orca 1.4.255 / Claude Paper 0.3.0. App and terminal colors remain unchanged. English captions explain the scenes; screenshot text is preserved. The bilingual icon galleries show the current 0.4.1 assets. The origami orca identity was generated with GPT following an Opus 5.5 design consultation. [Media provenance](docs/MEDIA.md) · [Identity prompt](docs/IDENTITY.md)
+Native scene images use a public Chinese-language demo captured in Orca 1.4.255 / Claude Paper 0.3.0. App and terminal colors remain unchanged. English captions explain the scenes; screenshot text is preserved. The bilingual icon galleries show the current 0.4.2 assets. The origami orca identity was generated with GPT following an Opus 5.5 design consultation. [Media provenance](docs/MEDIA.md) · [Identity prompt](docs/IDENTITY.md)
 
 [Development](DEVELOPMENT.md) · [Design history](DESIGN.md) · [Changelog](CHANGELOG.md) · [Releases](https://github.com/GongXLiang/Claude-paper/releases)
 

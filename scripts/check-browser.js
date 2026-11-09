@@ -13,9 +13,21 @@
       check(shot.src.endsWith('/'+file),`${tab.dataset.scene}/${mode} asset`);
       check(document.documentElement.dataset.theme===mode,`${tab.dataset.scene}/${mode} theme`);
       check(shot.alt.includes(tab.dataset.caption),`${tab.dataset.scene}/${mode} translated caption`);
+      if(tab.dataset.scene==='chat') {
+        check(document.querySelector('#scene-link').href.endsWith(`chat-${mode}-large.png`),`${mode} full-resolution lightbox source`);
+        const raw=new Image();raw.src=shot.currentSrc;await raw.decode();
+        const needed=Math.min(2560,shot.getBoundingClientRect().width*devicePixelRatio);
+        check(raw.naturalWidth>=needed,`${mode} native pixels cover preview density`);
+      } else check(!shot.hasAttribute('srcset'),'scene switch clears chat sources');
     }
   }
-  const tab=document.querySelector('#tab-chat');tab.focus();tab.dispatchEvent(new KeyboardEvent('keydown',{key:'End',bubbles:true}));
+  for(const swatch of document.querySelectorAll('.palette>span')) {
+    const color=swatch.querySelector('i').getBoundingClientRect(),label=swatch.querySelector('.swatch-label').getBoundingClientRect();
+    check(label.left-color.right>=0&&label.left-color.right<=10,'swatch and label stay together');
+  }
+  const tab=document.querySelector('#tab-chat');tab.click();
+  check(!new URL(location.href).searchParams.has('scene')||new URL(location.href).searchParams.get('scene')==='chat','returning to chat updates URL');
+  tab.focus();tab.dispatchEvent(new KeyboardEvent('keydown',{key:'End',bubbles:true}));
   check(document.activeElement.id==='tab-cli'&&document.querySelector('#tab-cli').ariaSelected==='true','keyboard tabs');
   document.querySelector('#tab-icons').click();await document.querySelector('#scene-image').decode();
   const a=document.querySelector('[data-language-link]');const url=new URL(a.href);

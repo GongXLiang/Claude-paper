@@ -1,3 +1,13 @@
+# 0.4.2 · Native pixels and file recognizers / 原生像素与文件标记
+
+`chat-light-large.png` and `chat-dark-large.png` are 2560×1600 exports of the same privacy-reviewed public date-kit captures. The compositor maps the 2560-pixel-wide native crop to 2432 output pixels (95%), rather than 1520 pixels in the 1600×1000 edition. It checks output scale before drawing every crop, so no native UI region is enlarged. Titles and the external frame are rendered at the new output size. These are native captures, not generated or sharpened UI images.
+
+The site keeps 1600w fallback images and selects a 2560w chat source on denser displays; the chat lightbox links to the larger PNG. Other scene captures keep their existing size. The public store's six screenshots retain their 1600×1000 format. `icons.png` and `icons-zh.png` now render the 0.4.2 SVGs; those two galleries are rendered artwork, not app screenshots. The native scenes retain their historical file-tree icons, as documented below.
+
+重新导出的两张图先在私有目录逐张检查，再复制到公开素材目录：仅含公开 date-kit 示例、通用 Orca 控件与公开文档链接，没有个人聊天、账号、设备信息或绝对路径。原始整窗截图不分发。新版图标图鉴由当前插件 SVG 生成，中英文同步。
+
+To reproduce a large chat preview, open the compositor with `?scene=chat-light&width=2560&raw=file:///your-private-capture-directory/`, set a 2560×1600 viewport at scale 1, wait for `html[data-ready=true]`, and export. The default width remains 1600. An export that would enlarge any native crop is rejected.
+
 # 0.4.1 · Bilingual icon galleries / 双语图鉴
 
 `assets/icons.png` (English) and `assets/icons-zh.png` (中文) render the actual 0.4.1 SVGs, including distinct programming-language marks and general folder categories. Generate the source SVGs with `python scripts/build-gallery.py`, then rasterize with resvg. On this Windows build, Microsoft YaHei regular was supplied to the renderer to keep Chinese glyph weights consistent; no font file is distributed.

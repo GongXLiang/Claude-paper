@@ -35,6 +35,7 @@ for(const name of ['chat-light','chat-dark','diff-light','diff-dark','editor-lig
   const path=`docs/assets/${name}.png`;
   if(!checked.has(path))png(path,1600,1000,1536*1024);
 }
+for(const mode of ['light','dark'])png(`docs/assets/chat-${mode}-large.png`,2560,1600,1536*1024);
 png(manifest.icon,256,256,256*1024);
 for(const page of ['index.html','zh-CN.html']) {
 const html=readFileSync(resolve(root,'docs',page),'utf8');
@@ -54,6 +55,14 @@ for(const match of html.matchAll(/<img\b[^>]*>/g))assert.ok(/\balt="[^"]*"/.test
 assert.equal([...html.matchAll(/<script\b/g)].length,1);
 assert.ok(!/https?:\/\/[^"'\s]+\.(?:js|css|woff)/i.test(html),'Unexpected external resource');
 assert.ok(html.includes('<noscript>'),'Missing static navigation fallback');
+assert.ok(html.includes('assets/chat-light-large.png 2560w'),'Missing high-density chat source');
+for(const match of html.matchAll(/\bsrcset="([^"]+)"/g)){
+  for(const source of match[1].split(',')){
+    const [path,width]=source.trim().split(/\s+/);
+    assert.ok(existsSync(resolve(root,'docs',path)),path);
+    assert.ok(/^\d+w$/.test(width),width);
+  }
+}
 }
 
 const css=readFileSync(resolve(root,'docs/style.css'),'utf8');
@@ -72,4 +81,4 @@ const copy=JSON.parse(readFileSync(resolve(root,'scripts/site-copy.json'),'utf8'
 assert.deepEqual(Object.keys(copy.en).sort(),Object.keys(copy.zh).sort());
 assert.equal(new Set(Object.values(folders).flatMap(x=>x.names)).size,Object.keys(theme.folderNames).length);
 assert.ok(Object.keys(theme.folderNames).every(name=>!name.includes('/')));
-console.log(`Passed: bilingual pages, READMEs and examples; 12 scene/gallery PNGs + identity, asset sizes/metadata, links, alt text, unique IDs and static fallback; store gallery ${(total/1024).toFixed(0)} KiB.`);
+console.log(`Passed: bilingual pages, READMEs and examples; 12 scene/gallery PNGs + 2 native-resolution chat PNGs + identity, asset sizes/metadata, links, alt text, unique IDs and static fallback; store gallery ${(total/1024).toFixed(0)} KiB.`);

@@ -21,7 +21,7 @@
 <main id="main">
   <section class="wrap hero" aria-labelledby="title">
     <div><p class="eyebrow">CLAUDE-INSPIRED · ORCA 主题插件</p><h1 id="title">一张纸，<em>两种光。</em></h1><p class="lead">让 Orca 的对话、代码、终端与文件树，拥有连贯的暖色质感。</p><p class="english">暖纸 · 暖夜 · 纸折图标</p></div>
-    <div class="hero-action"><a class="button primary" href="#install">安装 Claude Paper <span aria-hidden="true">↓</span></a><p>0.4.1 · 非官方 · MIT · 纯数据</p></div>
+    <div class="hero-action"><a class="button primary" href="#install">安装 Claude Paper <span aria-hidden="true">↓</span></a><p>0.4.2 · 非官方 · MIT · 纯数据</p></div>
   </section>
   <section class="wrap showcase" id="gallery" aria-label="Orca 主题效果展示">
     <div class="stage-bar" data-enhanced hidden>
@@ -34,7 +34,7 @@
       <div class="mode" role="group" aria-label="网页与截图明暗模式"><button data-mode="light" aria-pressed="true">暖纸</button><button data-mode="dark" aria-pressed="false">暖夜</button></div>
     </div>
     <div class="stage" id="scene-panel" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
-      <a href="assets/chat-light.png" data-lightbox id="scene-link"><img id="scene-image" src="assets/chat-light.png" width="1600" height="1000" fetchpriority="high" alt="原生聊天：公开日期工具任务、完整回复与输入框"></a>
+      <a href="assets/chat-light-large.png" data-lightbox id="scene-link"><img id="scene-image" src="assets/chat-light.png" srcset="assets/chat-light.png 1600w, assets/chat-light-large.png 2560w" sizes="(max-width:600px) calc(100vw - 34px), (max-width:900px) calc(100vw - 42px), (max-width:1320px) calc(100vw - 82px), 1238px" width="1600" height="1000" fetchpriority="high" alt="原生聊天：公开日期工具任务、完整回复与输入框"></a>
     </div>
     <div class="stage-caption"><p id="scene-caption">暖纸 · 原生聊天：公开日期工具任务、完整回复与输入框</p><span>点击图片放大 ↗</span></div>
     <p class="provenance">Orca 1.4.255 原生场景使用公开中文演示；切换语言会翻译图注，保留截图原文。图标图鉴直接渲染自 SVG 资源。 <a href="MEDIA.md">素材记录</a></p>
@@ -65,7 +65,7 @@ formatDate(date, 'Asia/Shanghai');  // 10 Nov 2026</code></pre><p>同一时刻�
     <div class="install-card"><p class="step-label">01 / 在终端运行</p><div class="command"><code id="install-command">orca plugin install GongXLiang/Claude-paper --json</code><button data-copy-command data-copied="安装命令已复制。" data-copy-error="无法自动复制，请选中安装命令手动复制。" hidden>复制</button></div><p class="step-label">02 / 设置 → 外观</p><p>应用浅色主题选择「Claude Paper · 暖纸」，深色选择「Claude Paper · 暖夜」；终端选择同名配色，文件图标主题选择「Claude Paper · 纸折图标」。</p><p class="step-label">03 / 聊天跟随应用，或匹配终端</p><p>关闭「匹配终端外观」使用独立聊天细节色；开启时，聊天采用所选终端的颜色与字体。</p><p class="step-label">可选 / CLAUDE CODE CLI</p><p>Orca 的终端设置提供「Match Claude Code to Terminal Theme」，可将色板同步到 Claude Code 自身界面。安装插件不会自动开启这项宿主设置。</p><small>需要 Orca 1.4.255+。字体和布局由 Orca 与使用者设置决定。</small></div>
   </div></section>
   <section class="wrap scope" aria-labelledby="scope-title"><div><p class="eyebrow">WHAT CHANGES</p><h2 id="scope-title">熟悉的 Orca，更连贯的观感。</h2><p>通过公开主题接口提供颜色与图标。无运行入口，无额外能力权限。</p></div><div class="table-scroll"><table><caption class="sr-only">主题可控制的范围</caption><thead><tr><th>范围</th><th>Claude Paper</th></tr></thead><tbody><tr><td>应用、聊天、编辑器与差异</td><td>73 个色彩令牌与语法配色</td></tr><tr><td>文件与目录</td><td>纸折图标，精确目录名称与灰蓝色兜底</td></tr><tr><td>终端</td><td>背景、前景、光标、选区与 16 色 ANSI</td></tr><tr><td>CLI 的 24 位真彩色</td><td>由 CLI 程序控制</td></tr><tr><td>布局、字体、圆角、动效、按钮图标</td><td>由 Orca 及用户设置决定</td></tr></tbody></table></div></section>
-  <section class="wrap palette" aria-label="主题关键色"><span>暖纸 <i style="background:#F9F8F5"></i><code>#F9F8F5</code></span><span>暖夜 <i style="background:#2A2927"></i><code>#2A2927</code></span><span>陶土 <i style="background:#D97757"></i><code>#D97757</code></span><span>雾蓝 <i style="background:#8DB5E0"></i><code>#8DB5E0</code></span></section>
+  <section class="wrap palette" aria-label="主题关键色"><span><i aria-hidden="true" style="background:#F9F8F5"></i><span class="swatch-label">暖纸<code>#F9F8F5</code></span></span><span><i aria-hidden="true" style="background:#2A2927"></i><span class="swatch-label">暖夜<code>#2A2927</code></span></span><span><i aria-hidden="true" style="background:#D97757"></i><span class="swatch-label">陶土<code>#D97757</code></span></span><span><i aria-hidden="true" style="background:#8DB5E0"></i><span class="swatch-label">雾蓝<code>#8DB5E0</code></span></span></section>
 </main>
 <footer class="wrap footer"><a class="brand" href="#main"><img src="assets/icon.png" width="28" height="28" alt="">Claude Paper</a><p>非官方社区主题，与 Anthropic 或 Stably 无隶属或背书关系。</p><a href="https://github.com/GongXLiang/Claude-paper/releases">版本记录 ↗</a><a href="https://github.com/GongXLiang/Claude-paper/blob/main/LICENSE">MIT ↗</a></footer>
 <dialog id="lightbox" aria-label="放大查看主题效果"><button id="close-lightbox" aria-label="关闭大图">关闭 ×</button><img width="1600" height="1000" alt=""><p></p></dialog>
