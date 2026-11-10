@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Claude Paper native agent media compositor</title>
+<style>*{box-sizing:border-box}html,body{margin:0;width:1600px;height:1000px;overflow:hidden}canvas{display:block}</style>
+<canvas id="art" width="1600" height="1000"></canvas>
+<script>
+// Only crops and downscales private native captures. Export privately and inspect before publication.
+const params=new URLSearchParams(location.search),scene=params.get('scene')||'cover',raw=params.get('raw')||'./';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),shots={};
+const dark=scene.endsWith('-dark'),p=dark?{bg:'#201F1D',card:'#2A2927',ink:'#EDEBE6',muted:'#B5B2AB'}:{bg:'#F3F2EF',card:'#F9F8F5',ink:'#1F1E1C',muted:'#65625C'};
+function text(s,x,y,size=18,color=p.ink,font='"Segoe UI","Microsoft YaHei",sans-serif'){ctx.fillStyle=color;ctx.font=`${size}px ${font}`;ctx.fillText(s,x,y)}
+function plate(x,y,w,h,fill){ctx.save();ctx.shadowColor='#17161322';ctx.shadowBlur=25;ctx.shadowOffsetY=12;ctx.fillStyle=fill;ctx.beginPath();ctx.roundRect(x,y,w,h,10);ctx.fill();ctx.restore()}
+function crop(name,sx,sy,sw,sh,x,y,w,h){if(w>sw+.01||h>sh+.01)throw Error('Native pixels may only be reduced');if(Math.abs(w/sw-h/sh)>.001)throw Error('Crop aspect ratio changed');ctx.drawImage(shots[name],sx,sy,sw,sh,x,y,w,h)}
+function fit(name,sx,sy,sw,sh,x,y,w){crop(name,sx,sy,sw,sh,x,y,w,sh*w/sw)}
+function foot(label){text(label,40,980,13,p.muted);ctx.textAlign='right';text('Claude Paper · Unofficial community theme',1560,980,13,p.muted);ctx.textAlign='left'}
+function cover(){
+ text('Claude Paper',40,78,50,p.ink,'Georgia,serif');text('一张纸，两种光。',408,76,27,p.muted);
+ ctx.textAlign='right';text('ONE PAPER. TWO LIGHTS.',1560,56,16,p.ink);text('CHAT · AGENT CLI · PAPER FOLD',1560,88,13,p.muted);ctx.textAlign='left';
+ plate(40,136,880,816,'#F9F8F5');ctx.save();ctx.beginPath();ctx.roundRect(40,136,880,816,10);ctx.clip();fit('chat',14,3,1734,62,40,136,880);fit('chat',140,460,1460,1288,40,167.46,880);ctx.restore();
+ plate(952,136,608,480,'#2A2927');text('CLAUDE CODE  /  暖夜',978,180,18,'#B5B2AB');
+ fit('tree',17,555,935,380,972,206,568);fit('tree',17,966,935,54,972,518,568);
+ text('Orca theme sync · IBM Plex Mono',978,586,14,'#B5B2AB');
+ plate(952,648,608,304,'#201F1D');text('PAPER FOLD  /  原生文件树',978,688,18,'#B5B2AB');fit('tree',981,275,600,230,976,711,560);
+ foot('ORCA · PUBLIC DEMO · NATIVE CAPTURES');
+}
+function agent(){
+ const claude=scene.startsWith('claude-'),name=claude?'Claude Code':'Codex CLI';
+ text('Claude Paper',40,66,40,p.ink,'Georgia,serif');text(name,350,65,28);text(claude?'Orca theme sync · 原生终端中的公开 date-kit 任务':'Matching syntax theme · 公开 date-kit 任务与配套语法主题',40,105,18,p.muted);
+ ctx.textAlign='right';text(dark?'暖夜 / WARM NIGHT':'暖纸 / WARM PAPER',1560,66,18,p.muted);ctx.textAlign='left';
+ plate(64,144,1472,804,p.card);
+ if(claude){fit('agent',137,80,450,29,96,170,450);fit('agent',17,202,1560,505,96,226,1408);fit('agent',17,968,1465,50,96,836,1322);}
+ else{fit('agent',39,80,450,29,96,170,450);fit('agent',17,156,1560,665,96,216,1408);fit('agent',17,955,1465,75,96,852,1322);}
+ foot('ORCA 1.4.255 · IBM PLEX MONO · NATIVE CLI CAPTURE');
+}
+(async()=>{ctx.fillStyle=p.bg;ctx.fillRect(0,0,1600,1000);const files=scene==='cover'?{chat:'p03-chat-light-raw.png',tree:'p07-tree-dark-raw.png'}:{agent:'p07-'+scene+'-raw.png'};for(const [key,file]of Object.entries(files)){const img=new Image();img.src=raw+file;await img.decode();shots[key]=img;}scene==='cover'?cover():agent();document.documentElement.dataset.ready='true';})().catch(e=>{document.documentElement.dataset.error=e.message;throw e});
+</script></html>

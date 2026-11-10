@@ -1,0 +1,33 @@
+name: Refresh community install count
+on:
+  schedule:
+    - cron: '23 5,17 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: install-statistics
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Refresh dated snapshot and bilingual pages
+        run: |
+          python3 scripts/refresh-stats.py
+          python3 scripts/build-site.py
+          node scripts/check-site.mjs
+      - name: Publish only changed statistics
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- docs/install-stats.json docs/index.html docs/zh-CN.html; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/install-stats.json docs/index.html docs/zh-CN.html
+          git commit -m "docs: refresh official community install statistics"
+          git push origin HEAD:main
+          gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"

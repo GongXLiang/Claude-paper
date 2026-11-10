@@ -31,7 +31,7 @@ for(const asset of manifest.screenshots){
   total+=png(asset.path,1600,1000,1536*1024);checked.add(asset.path);
 }
 assert.ok(total<=8*1024*1024);
-for(const name of ['chat-light','chat-dark','diff-light','diff-dark','editor-light','editor-dark','terminal-light','terminal-dark','icons','icons-zh','cli-compare']){
+for(const name of ['chat-light','chat-dark','diff-light','diff-dark','editor-light','editor-dark','terminal-light','terminal-dark','icons','icons-zh','cli-compare','claude-light','claude-dark','codex-light','codex-dark']){
   const path=`docs/assets/${name}.png`;
   if(!checked.has(path))png(path,1600,1000,1536*1024);
 }
@@ -52,8 +52,8 @@ for(const match of html.matchAll(/\b(?:src|href)="([^"]+)"/g)){
   assert.ok(existsSync(resolve(root,'docs',link)),link);
 }
 for(const match of html.matchAll(/<img\b[^>]*>/g))assert.ok(/\balt="[^"]*"/.test(match[0]),'Image missing alt');
-assert.equal([...html.matchAll(/<script\b/g)].length,1);
-assert.ok(!/https?:\/\/[^"'\s]+\.(?:js|css|woff)/i.test(html),'Unexpected external resource');
+assert.equal([...html.matchAll(/<script\b/g)].length,3);
+assert.ok(!/https?:\/\/[^"'\s]+\.(?:js|css|woff)(?![a-z])/i.test(html),'Unexpected external resource');
 assert.ok(html.includes('<noscript>'),'Missing static navigation fallback');
 assert.ok(html.includes('assets/chat-light-large.png 2560w'),'Missing high-density chat source');
 for(const match of html.matchAll(/\bsrcset="([^"]+)"/g)){
@@ -81,4 +81,4 @@ const copy=JSON.parse(readFileSync(resolve(root,'scripts/site-copy.json'),'utf8'
 assert.deepEqual(Object.keys(copy.en).sort(),Object.keys(copy.zh).sort());
 assert.equal(new Set(Object.values(folders).flatMap(x=>x.names)).size,Object.keys(theme.folderNames).length);
 assert.ok(Object.keys(theme.folderNames).every(name=>!name.includes('/')));
-console.log(`Passed: bilingual pages, READMEs and examples; 12 scene/gallery PNGs + 2 native-resolution chat PNGs + identity, asset sizes/metadata, links, alt text, unique IDs and static fallback; store gallery ${(total/1024).toFixed(0)} KiB.`);
+console.log(`Passed: bilingual pages, READMEs and examples; 16 scene/gallery PNGs + 2 native-resolution chat PNGs + identity, asset sizes/metadata, links, alt text, unique IDs and static fallback; store gallery ${(total/1024).toFixed(0)} KiB.`);

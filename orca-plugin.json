@@ -2,8 +2,8 @@
   "manifestVersion": 2,
   "id": "claude-paper",
   "name": "Claude Paper",
-  "version": "0.4.2",
-  "description": "Warm paper light and charcoal dark for Orca: chat, code, diffs and terminal, with original Paper Fold file icons. Unofficial, data-only.",
+  "version": "0.5.0",
+  "description": "Claude-inspired warm light and dark themes for Orca: a calm, readable Chat, matching terminal colors for coding agents, and original Paper Fold file icons.",
   "engines": {
     "orca": ">=1.4.255"
   },
@@ -39,6 +39,33 @@
         "title": "Claude Paper · 纸折图标",
         "path": "icons/theme.json"
       }
+    ],
+    "fonts": [
+      {
+        "family": "IBM Plex Mono",
+        "faces": [
+          {
+            "path": "fonts/IBMPlexMono-Regular.woff2",
+            "weight": "400",
+            "style": "normal"
+          },
+          {
+            "path": "fonts/IBMPlexMono-Italic.woff2",
+            "weight": "400",
+            "style": "italic"
+          },
+          {
+            "path": "fonts/IBMPlexMono-Bold.woff2",
+            "weight": "700",
+            "style": "normal"
+          },
+          {
+            "path": "fonts/IBMPlexMono-BoldItalic.woff2",
+            "weight": "700",
+            "style": "italic"
+          }
+        ]
+      }
     ]
   },
   "license": "MIT",
@@ -50,13 +77,23 @@
   "homepage": "https://GongXLiang.github.io/Claude-paper/",
   "cover": {
     "path": "docs/assets/cover.png",
-    "alt": "Claude Paper for Orca: native light chat and composer, dark Paper Fold file icons and terminal output from a public demo."
+    "alt": "Claude Paper for Orca: a complete light Chat scene, genuine dark Claude Code CLI and current Paper Fold file icons from a public date-kit demo."
   },
   "screenshots": [
     {
       "path": "docs/assets/chat-light.png",
       "alt": "Native light Orca chat, complete public demo reply, composer and Paper Fold file tree.",
       "caption": "暖纸 · 原生对话与输入框 / Chat"
+    },
+    {
+      "path": "docs/assets/claude-dark.png",
+      "alt": "Genuine Claude Code CLI with Orca theme sync and IBM Plex Mono, reviewing the public date-kit example. Account, local path and usage are cropped out.",
+      "caption": "暖夜 · Claude Code CLI / Native agent terminal"
+    },
+    {
+      "path": "docs/assets/codex-light.png",
+      "alt": "Genuine Codex CLI in Warm Paper with the optional claude-paper-light syntax theme and IBM Plex Mono. Public date-kit demo.",
+      "caption": "暖纸 · Codex CLI / Matching syntax theme"
     },
     {
       "path": "docs/assets/diff-dark.png",
@@ -69,19 +106,9 @@
       "caption": "暖纸 · 代码与文件树 / Editor"
     },
     {
-      "path": "docs/assets/terminal-dark.png",
-      "alt": "Native dark terminal with real passing tests and normal/bright ANSI samples.",
-      "caption": "暖夜 · 原生终端 / Terminal"
-    },
-    {
       "path": "docs/assets/icons.png",
       "alt": "Original Paper Fold SVG gallery: file formats and folder categories in light and dark. Folder names match exactly; unknown names use slate.",
       "caption": "文件类型与通用目录 / Files & common folders"
-    },
-    {
-      "path": "docs/assets/cli-compare.png",
-      "alt": "Same native terminal output in Ghostty Default Style Dark and Claude Paper Dark: ANSI changes while explicit truecolor stays unchanged.",
-      "caption": "CLI 色板对照 · ANSI 与真彩色 / Comparison"
     }
   ],
   "icon": "docs/assets/icon.png"

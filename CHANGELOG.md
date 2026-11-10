@@ -1,25 +1,36 @@
-# 0.4.2
+# Changelog
+
+## 0.5.0 — Agent CLI companions and smoother presentation
+
+- Added optional Codex CLI light/dark syntax themes generated from the editor palette, with a dependency-free, conflict-safe installer and bilingual instructions.
+- Added optional IBM Plex Mono regular/italic/bold/bold-italic font contributions with the original OFL license and pinned source hashes. Existing font selections remain user-controlled.
+- Preserved the website palette and layout; added decode-gated scene/mode crossfades, sliding active indicators, restrained scroll reveals, inline copy feedback and keyboard-accessible lightbox paging. Reduced-motion and no-JS fallbacks remain available.
+- Added dated official store installation counts, a same-origin snapshot and scheduled refresh. Failures retain the last valid count.
+- Refined the store summary, refreshed the cover and added genuine Claude Code/Codex CLI captures from the public date-kit demo. No private chats, paths, accounts or usage are published.
+- Plugin execution remains data-only with no extra capability permissions. Folder matching remains exact-name based; the slate fallback is unchanged.
+
+新增 Codex 配套语法主题与可选 IBM Plex Mono 字体；改进网页切换、按钮和滚动动效；展示带来源日期的官方安装量；宣传图加入真实 Agent CLI。保留现有主题色调、网页布局与纯数据权限边界。
+
+## 0.4.2
 
 - Redesigned 15 file-type icons with colored folded-paper silhouettes and larger centered recognizers, including Python, Notebook, C/C++, Fortran, JS/TS, Office, PDF, SVG, HTML, Docker and Markdown.
 - Grouped each palette swatch with its label and hex value on both language pages.
 - Added 2560×1600 chat previews from the existing native captures; responsive sources and the lightbox retain more native pixels without enlarging source crops.
 - Kept app/terminal colors, folder icons and all 512 matching entries unchanged. Updated both rendered icon galleries.
 
-# 0.4.1
+## 0.4.1
 
 - English and Chinese READMEs, static website pages, SVG galleries and runnable public examples. Language links preserve the current scene and color mode.
 - 16 folder categories cover 118 exact names, including plugins and output; unlisted names retain the slate fallback. The website explains Orca's matching boundary.
 - Distinct Python, Notebook, C, C++, Fortran, JavaScript and TypeScript marks. 77 SVGs and 512 mappings; redundant `.lock` filename entries now use the identical suffix fallback.
 - 应用与终端配色不变。新增完整双语展示、通用目录规则和独立语言图标；保留未知目录的灰蓝色兜底。
 
-# 0.4.0
+## 0.4.0
 
 - New GPT-generated origami orca identity, following Opus 5.5 design consultation.
 - Slate default folders; skills, references, graph and data folder families.
 - Distinct Word, Excel, PowerPoint, PDF, vector, HTML, notebook, Docker and LaTeX glyphs.
 - Original SVG gallery; app and terminal colors unchanged.
-
-# Changelog
 
 ## 0.3.0
 

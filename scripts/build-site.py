@@ -1,6 +1,7 @@
 """Build the two static pages from one template and checked-in translations."""
 from pathlib import Path
 import html,json,re
+from datetime import datetime
 ROOT=Path(__file__).resolve().parents[1]
 copy=json.loads((ROOT/'scripts/site-copy.json').read_text(encoding='utf-8'))
 template=(ROOT/'scripts/site-template.html').read_text(encoding='utf-8')
@@ -15,13 +16,20 @@ def glyph(role):
 for lang,strings in copy.items():
     data={k:html.escape(v.format(**counts),quote=True) for k,v in strings.items() if isinstance(v,str)}
     data['version']=manifest['version']
+    stats_path=ROOT/'docs/install-stats.json'
+    stats=json.loads(stats_path.read_text(encoding='utf-8')) if stats_path.exists() else None
+    count=str(stats['installs']) if stats else ''
+    stamp=stats['generatedAt'] if stats else ''
+    date=datetime.fromisoformat(stamp.replace('Z','+00:00')).date().isoformat() if stats else ''
+    data['stats_html']='<p class="install-stats" data-install-stats'+('' if stats else ' hidden')+'><a href="https://onorca.dev/plugins/stats.json">'+data['installs_prefix']+'<span data-install-count>'+count+'</span>'+data['installs_unit']+'</a>'+data['installs_asof']+'<time datetime="'+html.escape(stamp,quote=True)+'">'+date+'</time></p>'
+
     data['icons_asset']='icons.png' if lang=='en' else 'icons-zh.png'
     tabs=[];links=[]
     for scene,(label,caption) in strings['scenes'].items():
-        file='cli-compare' if scene=='cli' else scene
+        file={'terminal':'claude','cli':'codex'}.get(scene,scene)
         if scene=='icons':file='icons' if lang=='en' else 'icons-zh'
-        paired=scene in ('icons','cli')
-        tabs.append(f'<button id="tab-{scene}" role="tab" aria-controls="scene-panel" aria-selected="{str(scene=="chat").lower()}" tabindex="{0 if scene=="chat" else -1}" data-scene="{scene}" data-file="{file}" data-paired="{str(paired).lower()}" data-caption="{html.escape(caption,quote=True)}">{html.escape(label)}</button>')
+        paired=scene=='icons'
+        tabs.append(f'<button id="tab-{scene}" role="tab" aria-controls="scene-panel" aria-selected="{str(scene=="chat").lower()}" tabindex="{0 if scene=="chat" else -1}" data-scene="{scene}" data-large="{str(scene=="chat").lower()}" data-file="{file}" data-paired="{str(paired).lower()}" data-caption="{html.escape(caption,quote=True)}">{html.escape(label)}</button>')
         links.append(f'<a href="assets/{file}{"" if paired else "-dark"}.png">{html.escape(label)}</a>')
     data['tabs_html']='\n'.join(tabs);data['static_links_html']=' · '.join(links)
     for scene in ('chat','diff','icons','terminal'):data[scene+'_alt']=html.escape(strings['scenes'][scene][1],quote=True)

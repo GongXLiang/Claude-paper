@@ -1,4 +1,4 @@
-<p align="center"><a href="https://gongxliang.github.io/Claude-paper/"><img src="docs/assets/cover.png" alt="Claude Paper: native Orca light chat, dark file tree and terminal" width="100%"></a></p>
+<p align="center"><a href="https://gongxliang.github.io/Claude-paper/"><img src="docs/assets/cover.png" alt="Claude Paper: native Orca light chat, genuine Claude Code CLI and current file tree" width="100%"></a></p>
 <p align="center"><img src="docs/assets/icon.png" width="80" height="80" alt="Claude Paper origami orca"></p>
 <h1 align="center">Claude Paper for Orca</h1>
 <p align="center"><b>One paper. Two lights.</b><br>Warm light and charcoal dark for chat, code, terminal and the file tree.</p>
@@ -8,10 +8,10 @@ A Claude-inspired palette for the places you work in Orca. Quiet paper surfaces,
 
 | Warm Paper & Warm Night | Paper Fold icons | Matching terminal palettes |
 | --- | --- | --- |
-| 2 app themes, 73 color tokens | 77 original SVGs, 512 mappings | 2 palettes with 16 ANSI colors |
-| Chat, sidebars, editor and diffs | 16 folder categories, 118 exact names | Background, cursor, selection and text |
+| Calm Chat and readable code/diffs | Distinct languages, documents and tools | Claude Code sync + optional Codex syntax themes |
+| 2 app themes, 73 color tokens | 77 SVGs, 16 folder categories, 512 mappings | 2 terminal palettes + optional IBM Plex Mono |
 
-**0.4.2 · Free · MIT · Data only.** An unofficial community theme, not affiliated with or endorsed by Anthropic or Stably.
+**0.5.0 · Free · MIT + OFL font · Data only.** An unofficial community theme, not affiliated with or endorsed by Anthropic or Stably.
 
 ## Install
 
@@ -29,7 +29,13 @@ In **Settings → Appearance**, select:
 
 Turn off **Match Terminal Appearance** in chat settings to use the independent chat colors; when enabled, chat follows the selected terminal colors and font.
 
-For Claude Code CLI, Orca also offers **Match Claude Code to Terminal Theme**. This optional host setting syncs colors to Claude Code's own interface; installing this plugin does not enable it. [Orca's implementation](https://github.com/stablyai/orca/blob/v1.4.255/src/main/claude/theme-sync/claude-code-theme.ts)
+For **Claude Code CLI**, search “Claude Code” in **Settings → Appearance** and enable **Match Claude Code to Terminal Theme**. It follows Orca's terminal palette, including outside Orca. Turning it off restores the previous Claude Code theme; choosing another theme inside Claude Code stops the sync. Installing this plugin does not enable this optional host setting. [Orca's implementation](https://github.com/stablyai/orca/blob/v1.4.255/src/main/claude/theme-sync/claude-code-theme.ts)
+
+For **Codex CLI**, install the [optional companion syntax themes](extras/codex/README.md), then use `/theme` to select `claude-paper-light` or `claude-paper-dark`. They affect code and diff syntax, and do not automatically switch with Orca. A running CLI may need to be restarted/resumed after the terminal background changes.
+
+For the font used in the new CLI captures, choose **IBM Plex Mono** in the terminal/editor font picker. It is optional; existing font settings stay yours. Chinese uses system fallback. [Font source and OFL license](fonts/README.md)
+
+Official installation counts, with their source date, are shown on the [website](https://gongxliang.github.io/Claude-paper/#install). They are periodically refreshed installation totals, not live users.
 
 ## Conversation, in context
 
@@ -41,6 +47,16 @@ For Claude Code CLI, Orca also offers **Match Claude Code to Terminal Theme**. T
 
 </details>
 
+## Real coding agents, in the same palette
+
+| Claude Code · Warm Night | Codex CLI · Warm Paper |
+| --- | --- |
+| [![Genuine Claude Code CLI with Orca theme sync](docs/assets/claude-dark.png)](docs/assets/claude-dark.png) | [![Genuine Codex CLI with the optional light syntax theme](docs/assets/codex-light.png)](docs/assets/codex-light.png) |
+
+[Claude Code in Warm Paper](docs/assets/claude-light.png) · [Codex in Warm Night](docs/assets/codex-dark.png)
+
+These are actual CLI sessions reviewing the public date-kit example, with optional IBM Plex Mono. Header, conversation and composer regions are cropped to omit private information. No CLI interface or response has been redrawn.
+
 ## Code, changes and terminal output
 
 | Warm Paper editor | Warm Night diff and tests |
@@ -49,7 +65,7 @@ For Claude Code CLI, Orca also offers **Match Claude Code to Terminal Theme**. T
 
 [Dark editor](docs/assets/editor-dark.png) · [Light diff](docs/assets/diff-light.png) · [Light terminal](docs/assets/terminal-light.png)
 
-![Native dark terminal with tests and ANSI color samples](docs/assets/terminal-dark.png)
+[Terminal tests and ANSI samples](docs/assets/terminal-dark.png)
 
 ## Languages and files you can recognize
 
@@ -110,7 +126,9 @@ formatDate(date, 'Asia/Shanghai');  // 10 Nov 2026
 | Files and folders | File types, exact folder names and fallback icons |
 | Terminal | Foreground, background, cursor, selection and 16 ANSI colors |
 | CLI 24-bit truecolor | Controlled by the CLI program; Orca's optional Claude Code sync is separate |
-| Layout, fonts, corners, motion and button icons | Controlled by Orca and user settings |
+| Codex CLI companion | Optional fenced-code and diff syntax themes; separate installation |
+| Font | Optional IBM Plex Mono family; manually selected in Orca |
+| Layout, corners, app motion and settings switches | Controlled by Orca and user settings |
 
 [![Native terminal color comparison](docs/assets/cli-compare.png)](docs/assets/cli-compare.png)
 
@@ -118,10 +136,10 @@ In this comparison, ANSI colors follow the palette while the explicit `Truecolor
 
 ## Media, development and credits
 
-Native scene images use a public Chinese-language demo captured in Orca 1.4.255 / Claude Paper 0.3.0. App and terminal colors remain unchanged. English captions explain the scenes; screenshot text is preserved. The bilingual icon galleries show the current 0.4.2 assets. The origami orca identity was generated with GPT following an Opus 5.5 design consultation. [Media provenance](docs/MEDIA.md) · [Identity prompt](docs/IDENTITY.md)
+Chat/editor/diff scenes retain their privacy-reviewed Orca 1.4.255 / Claude Paper 0.3.0 captures; their colors are unchanged. The 0.5.0 cover adds a current native file tree and a genuine Claude Code session. New CLI images were captured in Claude Code 2.1.319 and Codex CLI 0.167.0. The icon galleries show the unchanged 0.4.2 SVGs. The origami orca identity was generated with GPT following an Opus 5.5 design consultation. [Media provenance](docs/MEDIA.md) · [Identity prompt](docs/IDENTITY.md)
 
 [Development](DEVELOPMENT.md) · [Design history](DESIGN.md) · [Changelog](CHANGELOG.md) · [Releases](https://github.com/GongXLiang/Claude-paper/releases)
 
-Visual research and presentation references: [open-claude-ui](https://github.com/Caho1/open-claude-ui), [HwFee DSH CDS](https://github.com/HwFee/HwFee-dsh), [Claude Theme for Orca](https://github.com/jiangwanyutao/orca-claude-theme), and [Monospace Icons for Orca](https://github.com/faisalmuhammad/orca-monospace-icons). Theme code, icon SVGs and page design are independently implemented; no third-party screenshots, SVGs or fonts were copied.
+Visual research and presentation references: [open-claude-ui](https://github.com/Caho1/open-claude-ui), [HwFee DSH CDS](https://github.com/HwFee/HwFee-dsh), [Claude Theme for Orca](https://github.com/jiangwanyutao/orca-claude-theme), and [Monospace Icons for Orca](https://github.com/faisalmuhammad/orca-monospace-icons). Theme code, icon SVGs and page design are independently implemented; no third-party screenshots or SVGs were copied. IBM Plex Mono is redistributed unmodified under its original [OFL license](fonts/OFL.txt).
 
 The community store indexes version tags asynchronously and may lag behind GitHub. [Check the listing](https://www.onorca.dev/plugins/gongxliang/claude-paper).

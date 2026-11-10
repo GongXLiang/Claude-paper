@@ -1,34 +1,296 @@
 {
   "en": {
-    "lang":"en", "filename":"index.html", "other_page":"zh-CN.html", "other_lang":"zh-CN", "other_language":"中文", "switch_label":"切换为中文",
-    "page_title":"Claude Paper — One paper, two lights", "description":"Warm light and charcoal dark themes for Orca chat, code and terminal, with original Paper Fold file icons. Explore the real interface and install the theme.",
-    "skip":"Skip to content", "navigation":"Main navigation", "preview":"Preview", "install":"Install", "eyebrow":"CLAUDE-INSPIRED · A THEME FOR ORCA",
-    "title_one":"One paper. ", "title_two":"Two lights.", "lead":"A warm, coherent home for your conversations, code, terminal and file tree.", "subline":"Warm Paper · Warm Night · Paper Fold icons", "install_product":"Install Claude Paper", "version_note":"Unofficial · MIT · Data only",
-    "gallery_label":"Orca theme previews", "scenes_label":"Preview scenes", "mode_label":"Page and screenshot color mode", "light":"Warm Paper", "dark":"Warm Night", "enlarge":"Click to enlarge ↗", "provenance":"Native Orca 1.4.255 scenes use a public Chinese-language demo. Captions are translated; screenshot text is preserved. The icon gallery is rendered from SVG assets.", "media_record":"Media notes", "static_gallery":"More scenes:",
-    "details_title":"From the first question to the last line.", "details_intro":"One visual language for the places you move through every day.", "chat_title":"Clear content. Quiet surfaces.", "chat_body":"73 app color tokens cover chat, sidebars, tabs, code and diffs. Paper tones separate surfaces; terracotta marks actions; blue highlights links and chat selections.", "icons_title":"Give files a familiar shape.", "icons_body":"{icon_count} original SVGs and {mapping_count} mappings distinguish documents, code, tests and tools. {folder_count} folder categories include both closed and expanded states.", "terminal_title":"Keep the terminal in the picture.", "terminal_body":"Two terminal palettes cover the 16 ANSI colors, selection, cursor and text beneath it. Real test output and color samples show what changes.",
-    "folders_title":"Common names. Familiar colors.", "folders_intro":"{folder_name_count} common folder names are grouped by purpose, including skills, plugins, source code, data and output. Existing graphify aliases remain compatible; no particular project layout is required.", "folder_limit":"Orca matches each folder's own name exactly, ignoring case. It does not infer purpose from contents, match paths or inherit a parent's icon. Unlisted names keep the slate folder. Each name below is a separate alias: raw and data both match, and are not a two-level path.", "folder_details":"See every supported folder name", "folder_table_caption":"Folder categories and exact names", "category":"Category", "exact_names":"Matching names (case-insensitive)", "folder_source":"Orca's folder matching rules", "fallback":"Any unlisted name",
-    "example_title":"One task, in two languages.", "example_body":"The public date-kit example uses native Intl.DateTimeFormat, with no dependencies. English and Chinese guides explain the same behavior and commands.", "example_prompt":"Let formatDate use the local time zone by default, while keeping an explicit time-zone argument. Add tests around midnight.", "example_link":"Read the English example", "example_url":"https://github.com/GongXLiang/Claude-paper/blob/main/examples/README.md", "example_note":"The same instant can have a different calendar date in another time zone. Omitting the second argument uses the runtime's local zone.",
-    "install_title":"A fresh sheet for Orca.", "install_summary":"2 app themes · 2 terminal palettes · 1 file icon family", "store_install":"Install from the Orca community store", "step_one":"01 / RUN IN YOUR TERMINAL", "copy":"Copy", "copied":"Install command copied.", "copy_error":"Could not copy automatically. Select and copy the command manually.", "step_two":"02 / SETTINGS → APPEARANCE", "step_two_body":"Select Claude Paper · 暖纸 (Warm Paper) for the light app theme and Claude Paper · 暖夜 (Warm Night) for dark. Choose the matching terminal palettes and Claude Paper · 纸折图标 for file icons.", "step_three":"03 / CHAT: APP COLORS OR TERMINAL COLORS", "step_three_body":"Turn off Match Terminal Appearance to use the separate chat colors. When enabled, chat follows the selected terminal colors and font.", "step_optional":"OPTIONAL / CLAUDE CODE CLI", "step_optional_body":"Orca's terminal settings offer Match Claude Code to Terminal Theme to sync the palette to Claude Code's own interface. Installing this plugin does not turn that host setting on.", "requirements":"Requires Orca 1.4.255+. Fonts and layout come from Orca and your own settings.",
-    "scope_title":"Familiar Orca. A coherent finish.", "scope_intro":"Colors and icons through public theme interfaces. No runtime entry point or extra capability permissions.", "scope_caption":"What the theme can control", "scope":"Area", "palette_label":"Key theme colors", "clay":"Terracotta", "blue":"Mist blue", "unofficial":"Unofficial community theme. Not affiliated with or endorsed by Anthropic or Stably.", "releases":"Releases", "lightbox_label":"Enlarged theme preview", "close_label":"Close enlarged preview", "close":"Close",
+    "lang": "en",
+    "filename": "index.html",
+    "other_page": "zh-CN.html",
+    "other_lang": "zh-CN",
+    "other_language": "中文",
+    "switch_label": "切换为中文",
+    "page_title": "Claude Paper — One paper, two lights",
+    "description": "Claude-inspired warm light and dark themes for Orca: a calm, readable Chat, matching terminal colors for coding agents, and original Paper Fold file icons.",
+    "skip": "Skip to content",
+    "navigation": "Main navigation",
+    "preview": "Preview",
+    "install": "Install",
+    "eyebrow": "CLAUDE-INSPIRED · A THEME FOR ORCA",
+    "title_one": "One paper. ",
+    "title_two": "Two lights.",
+    "lead": "A warm, coherent home for your conversations, code, terminal and file tree.",
+    "subline": "Warm Paper · Warm Night · Paper Fold icons",
+    "install_product": "Install Claude Paper",
+    "version_note": "Unofficial · MIT + OFL font · Data only",
+    "gallery_label": "Orca theme previews",
+    "scenes_label": "Preview scenes",
+    "mode_label": "Page and screenshot color mode",
+    "light": "Warm Paper",
+    "dark": "Warm Night",
+    "enlarge": "Click to enlarge ↗",
+    "provenance": "Native Orca 1.4.255 captures use public Chinese Chat and English CLI demos. Captions are translated; original UI text is preserved. Icon galleries are rendered from the plugin SVGs.",
+    "media_record": "Media notes",
+    "static_gallery": "More scenes:",
+    "details_title": "From the first question to the last line.",
+    "details_intro": "One visual language for the places you move through every day.",
+    "chat_title": "Clear content. Quiet surfaces.",
+    "chat_body": "73 app color tokens cover chat, sidebars, tabs, code and diffs. Paper tones separate surfaces; terracotta marks actions; blue highlights links and chat selections.",
+    "icons_title": "Give files a familiar shape.",
+    "icons_body": "{icon_count} original SVGs and {mapping_count} mappings distinguish documents, code, tests and tools. {folder_count} folder categories include both closed and expanded states.",
+    "terminal_title": "Keep the terminal in the picture.",
+    "terminal_body": "Warm Paper and Warm Night for coding agents, with matching Codex syntax themes and an optional IBM Plex Mono font. Claude Code can also follow the palette through Orca’s theme sync.",
+    "folders_title": "Common names. Familiar colors.",
+    "folders_intro": "{folder_name_count} common folder names are grouped by purpose, including skills, plugins, source code, data and output. Existing graphify aliases remain compatible; no particular project layout is required.",
+    "folder_limit": "Orca matches each folder's own name exactly, ignoring case. It does not infer purpose from contents, match paths or inherit a parent's icon. Unlisted names keep the slate folder. Each name below is a separate alias: raw and data both match, and are not a two-level path.",
+    "folder_details": "See every supported folder name",
+    "folder_table_caption": "Folder categories and exact names",
+    "category": "Category",
+    "exact_names": "Matching names (case-insensitive)",
+    "folder_source": "Orca's folder matching rules",
+    "fallback": "Any unlisted name",
+    "example_title": "One task, in two languages.",
+    "example_body": "The public date-kit example uses native Intl.DateTimeFormat, with no dependencies. English and Chinese guides explain the same behavior and commands.",
+    "example_prompt": "Let formatDate use the local time zone by default, while keeping an explicit time-zone argument. Add tests around midnight.",
+    "example_link": "Read the English example",
+    "example_url": "https://github.com/GongXLiang/Claude-paper/blob/main/examples/README.md",
+    "example_note": "The same instant can have a different calendar date in another time zone. Omitting the second argument uses the runtime's local zone.",
+    "install_title": "A fresh sheet for Orca.",
+    "install_summary": "2 app themes · 2 terminal palettes · Paper Fold icons · Optional font",
+    "store_install": "Install from the Orca community store",
+    "step_one": "01 / RUN IN YOUR TERMINAL",
+    "copy": "Copy",
+    "copied": "Install command copied.",
+    "copy_error": "Could not copy automatically. Select and copy the command manually.",
+    "step_two": "02 / SETTINGS → APPEARANCE",
+    "step_two_body": "Select Claude Paper · 暖纸 (Warm Paper) for the light app theme and Claude Paper · 暖夜 (Warm Night) for dark. Choose the matching terminal palettes and Claude Paper · 纸折图标 for file icons.",
+    "step_three": "03 / CHAT: APP COLORS OR TERMINAL COLORS",
+    "step_three_body": "For the Chat colors shown here, keep Match Terminal Appearance off. Turn it on if you prefer chat in your terminal font; chat then uses Claude Paper’s terminal colors.",
+    "step_optional": "OPTIONAL / CLAUDE CODE CLI",
+    "step_optional_body": "In Settings → Appearance, search “Claude Code” and enable Match Claude Code to Terminal Theme. It follows the terminal palette, including outside Orca. Turning it off restores the previous Claude Code theme; choosing a theme inside Claude Code stops the sync. This plugin does not enable it automatically.",
+    "requirements": "Requires Orca 1.4.255+. IBM Plex Mono is optional; choose it in the terminal or editor font picker. Layout stays native.",
+    "scope_title": "Familiar Orca. A coherent finish.",
+    "scope_intro": "App colors, file icons and optional fonts through public interfaces. No runtime entry point or extra capability permissions.",
+    "scope_caption": "What the theme can control",
+    "scope": "Area",
+    "palette_label": "Key theme colors",
+    "clay": "Terracotta",
+    "blue": "Mist blue",
+    "unofficial": "Unofficial community theme. Not affiliated with or endorsed by Anthropic or Stably.",
+    "releases": "Releases",
+    "lightbox_label": "Enlarged theme preview",
+    "close_label": "Close enlarged preview",
+    "close": "Close",
     "scenes": {
-      "chat":["Chat","Native chat: a public date-kit task, complete reply and composer"], "diff":["Diff","Native code changes, word highlights and test output"], "editor":["Code","Native JavaScript editor and Paper Fold file icons"], "terminal":["Terminal","Native terminal: actual tests and ANSI color samples"], "icons":["File icons","Original SVG gallery: file formats and common folder categories"], "cli":["CLI colors","Native terminal comparison: ANSI changes; explicit truecolor stays the same"]
+      "chat": [
+        "Chat",
+        "Native chat: a public date-kit task, complete reply and composer"
+      ],
+      "diff": [
+        "Diff",
+        "Native code changes, word highlights and test output"
+      ],
+      "editor": [
+        "Code",
+        "Native JavaScript editor and Paper Fold file icons"
+      ],
+      "terminal": [
+        "Claude Code",
+        "Genuine Claude Code CLI with Orca theme sync and optional IBM Plex Mono, using the public date-kit task"
+      ],
+      "icons": [
+        "File icons",
+        "Original SVG gallery: file formats and common folder categories"
+      ],
+      "cli": [
+        "Codex CLI",
+        "Genuine Codex CLI with the matching optional syntax theme and IBM Plex Mono, using the public date-kit task"
+      ]
     },
-    "scope_rows":[["App, chat, editor and diffs","73 color tokens and syntax colors"],["Files and folders","Paper Fold icons; exact folder names and a slate fallback"],["Terminal","Background, foreground, cursor, selection and 16 ANSI colors"],["24-bit CLI truecolor","Controlled by the CLI program"],["Layout, fonts, corners, motion and button icons","Controlled by Orca and user settings"]]
+    "scope_rows": [
+      [
+        "App, chat, editor and diffs",
+        "73 color tokens and syntax colors"
+      ],
+      [
+        "Files and folders",
+        "Paper Fold icons; exact folder names and a slate fallback"
+      ],
+      [
+        "Terminal",
+        "Background, foreground, cursor, selection and 16 ANSI colors"
+      ],
+      [
+        "Codex CLI code & diff syntax",
+        "Optional .tmTheme companion files; select in Codex"
+      ],
+      [
+        "Fonts",
+        "Optional IBM Plex Mono; select in Orca’s font picker"
+      ],
+      [
+        "24-bit CLI truecolor",
+        "Controlled by the CLI program"
+      ],
+      [
+        "Layout, corners, app motion and button icons",
+        "Controlled by Orca and user settings"
+      ]
+    ],
+    "copied_short": "Copied",
+    "load_error": "The next preview could not load. Your current image is still here; try again.",
+    "previous_preview": "Previous scene",
+    "next_preview": "Next scene",
+    "installs_prefix": "Orca community store: ",
+    "installs_unit": " installs",
+    "installs_asof": " · as of ",
+    "integrations_title": "Codex CLI & optional typography",
+    "codex_body": "For matching code blocks and diff syntax, install the two companion themes, then choose claude-paper-light or claude-paper-dark with /theme in Codex CLI. This is a separate opt-in step.",
+    "codex_link": "Codex setup and theme files",
+    "font_body": "IBM Plex Mono adds a quiet, readable monospace option for code and terminals. It is bundled under the SIL Open Font License; Chinese characters use system fallback fonts.",
+    "ansi_comparison": "See ANSI colors versus program-controlled truecolor"
   },
   "zh": {
-    "lang":"zh-CN", "filename":"zh-CN.html", "other_page":"index.html", "other_lang":"en", "other_language":"English", "switch_label":"Switch to English",
-    "page_title":"Claude Paper — 一张纸，两种光", "description":"为 Orca 的聊天、代码、终端和文件树准备的暖纸与暖夜主题，配原创纸折图标。查看原生界面效果，安装主题。",
-    "skip":"跳转到内容", "navigation":"主导航", "preview":"看效果", "install":"安装", "eyebrow":"CLAUDE-INSPIRED · ORCA 主题插件",
-    "title_one":"一张纸，", "title_two":"两种光。", "lead":"让 Orca 的对话、代码、终端与文件树，拥有连贯的暖色质感。", "subline":"暖纸 · 暖夜 · 纸折图标", "install_product":"安装 Claude Paper", "version_note":"非官方 · MIT · 纯数据",
-    "gallery_label":"Orca 主题效果展示", "scenes_label":"展示场景", "mode_label":"网页与截图明暗模式", "light":"暖纸", "dark":"暖夜", "enlarge":"点击图片放大 ↗", "provenance":"Orca 1.4.255 原生场景使用公开中文演示；切换语言会翻译图注，保留截图原文。图标图鉴直接渲染自 SVG 资源。", "media_record":"素材记录", "static_gallery":"浏览更多场景：",
-    "details_title":"从提问，到最后一行输出。", "details_intro":"为日常编程里的每一处切换，准备同一份温度。", "chat_title":"内容清楚，表面安静。", "chat_body":"73 个应用色彩令牌，覆盖聊天、侧栏、标签、代码与差异。中性纸色区分层次，陶土强调动作，蓝色标记链接与聊天选区。", "icons_title":"文件，也有自己的形状。", "icons_body":"{icon_count} 个原创 SVG、{mapping_count} 条映射，区分文档、代码、测试与工具。{folder_count} 类常用目录均配有关闭与展开状态。", "terminal_title":"把终端放进同一幅画面。", "terminal_body":"两套终端色板，覆盖 16 色 ANSI、选区、光标及光标下文字。真实执行的测试与色样，让变化可以直接比较。",
-    "folders_title":"常用命名，熟悉的颜色。", "folders_intro":"按用途整理 {folder_name_count} 个常用目录名称，涵盖技能、插件、源码、数据和输出。保留 graphify 等既有别名兼容，不要求采用特定项目结构。", "folder_limit":"Orca 按文件夹自身名称精确匹配，不区分大小写；不会识别目录内容、匹配路径或继承父目录图标。未收录的名称使用灰蓝色默认图标。下面每个名称都是独立别名：raw 和 data 各自可匹配，并不是二级路径。", "folder_details":"查看全部支持的目录名称", "folder_table_caption":"目录用途与精确匹配名称", "category":"用途分类", "exact_names":"匹配名称（不区分大小写）", "folder_source":"Orca 文件夹匹配规范", "fallback":"任何未收录的名称",
-    "example_title":"同一个任务，中英两种表达。", "example_body":"公开 date-kit 示例使用原生 Intl.DateTimeFormat，无需额外依赖。中英文指南说明相同的行为和运行命令。", "example_prompt":"让 formatDate 默认使用本地时区，同时保留显式时区参数，并补充跨午夜的测试。", "example_link":"阅读中文示例", "example_url":"https://github.com/GongXLiang/Claude-paper/blob/main/examples/README.zh-CN.md", "example_note":"同一时刻在不同时区可能属于不同日期。省略第二个参数时，使用运行环境的本地时区。",
-    "install_title":"给 Orca，换张纸。", "install_summary":"2 套应用主题 · 2 套终端配色 · 1 套文件图标", "store_install":"从 Orca 社区商店安装", "step_one":"01 / 在终端运行", "copy":"复制", "copied":"安装命令已复制。", "copy_error":"无法自动复制，请选中安装命令手动复制。", "step_two":"02 / 设置 → 外观", "step_two_body":"应用浅色主题选择「Claude Paper · 暖纸」，深色选择「Claude Paper · 暖夜」；终端选择同名配色，文件图标主题选择「Claude Paper · 纸折图标」。", "step_three":"03 / 聊天跟随应用，或匹配终端", "step_three_body":"关闭「匹配终端外观」使用独立聊天细节色；开启时，聊天采用所选终端的颜色与字体。", "step_optional":"可选 / CLAUDE CODE CLI", "step_optional_body":"Orca 的终端设置提供「Match Claude Code to Terminal Theme」，可将色板同步到 Claude Code 自身界面。安装插件不会自动开启这项宿主设置。", "requirements":"需要 Orca 1.4.255+。字体和布局由 Orca 与使用者设置决定。",
-    "scope_title":"熟悉的 Orca，更连贯的观感。", "scope_intro":"通过公开主题接口提供颜色与图标。无运行入口，无额外能力权限。", "scope_caption":"主题可控制的范围", "scope":"范围", "palette_label":"主题关键色", "clay":"陶土", "blue":"雾蓝", "unofficial":"非官方社区主题，与 Anthropic 或 Stably 无隶属或背书关系。", "releases":"版本记录", "lightbox_label":"放大查看主题效果", "close_label":"关闭大图", "close":"关闭",
+    "lang": "zh-CN",
+    "filename": "zh-CN.html",
+    "other_page": "index.html",
+    "other_lang": "en",
+    "other_language": "English",
+    "switch_label": "Switch to English",
+    "page_title": "Claude Paper — 一张纸，两种光",
+    "description": "受 Claude 启发的 Orca 暖纸与暖夜主题：对话安静易读，编码智能体终端配色连贯，搭配原创纸折文件图标。",
+    "skip": "跳转到内容",
+    "navigation": "主导航",
+    "preview": "看效果",
+    "install": "安装",
+    "eyebrow": "CLAUDE-INSPIRED · ORCA 主题插件",
+    "title_one": "一张纸，",
+    "title_two": "两种光。",
+    "lead": "让 Orca 的对话、代码、终端与文件树，拥有连贯的暖色质感。",
+    "subline": "暖纸 · 暖夜 · 纸折图标",
+    "install_product": "安装 Claude Paper",
+    "version_note": "非官方 · MIT + OFL 字体 · 纯数据",
+    "gallery_label": "Orca 主题效果展示",
+    "scenes_label": "展示场景",
+    "mode_label": "网页与截图明暗模式",
+    "light": "暖纸",
+    "dark": "暖夜",
+    "enlarge": "点击图片放大 ↗",
+    "provenance": "实机图来自 Orca 1.4.255 的公开中文 Chat 与英文 CLI 演示。图注提供中英说明，界面文字保持原样；图标图鉴直接渲染插件 SVG。",
+    "media_record": "素材记录",
+    "static_gallery": "浏览更多场景：",
+    "details_title": "从提问，到最后一行输出。",
+    "details_intro": "为日常编程里的每一处切换，准备同一份温度。",
+    "chat_title": "内容清楚，表面安静。",
+    "chat_body": "73 个应用色彩令牌，覆盖聊天、侧栏、标签、代码与差异。中性纸色区分层次，陶土强调动作，蓝色标记链接与聊天选区。",
+    "icons_title": "文件，也有自己的形状。",
+    "icons_body": "{icon_count} 个原创 SVG、{mapping_count} 条映射，区分文档、代码、测试与工具。{folder_count} 类常用目录均配有关闭与展开状态。",
+    "terminal_title": "把终端放进同一幅画面。",
+    "terminal_body": "为编码智能体准备暖纸与暖夜色板，附 Codex 语法主题与可选 IBM Plex Mono 字体。Claude Code 还可通过 Orca 的主题同步采用同一套配色。",
+    "folders_title": "常用命名，熟悉的颜色。",
+    "folders_intro": "按用途整理 {folder_name_count} 个常用目录名称，涵盖技能、插件、源码、数据和输出。保留 graphify 等既有别名兼容，不要求采用特定项目结构。",
+    "folder_limit": "Orca 按文件夹自身名称精确匹配，不区分大小写；不会识别目录内容、匹配路径或继承父目录图标。未收录的名称使用灰蓝色默认图标。下面每个名称都是独立别名：raw 和 data 各自可匹配，并不是二级路径。",
+    "folder_details": "查看全部支持的目录名称",
+    "folder_table_caption": "目录用途与精确匹配名称",
+    "category": "用途分类",
+    "exact_names": "匹配名称（不区分大小写）",
+    "folder_source": "Orca 文件夹匹配规范",
+    "fallback": "任何未收录的名称",
+    "example_title": "同一个任务，中英两种表达。",
+    "example_body": "公开 date-kit 示例使用原生 Intl.DateTimeFormat，无需额外依赖。中英文指南说明相同的行为和运行命令。",
+    "example_prompt": "让 formatDate 默认使用本地时区，同时保留显式时区参数，并补充跨午夜的测试。",
+    "example_link": "阅读中文示例",
+    "example_url": "https://github.com/GongXLiang/Claude-paper/blob/main/examples/README.zh-CN.md",
+    "example_note": "同一时刻在不同时区可能属于不同日期。省略第二个参数时，使用运行环境的本地时区。",
+    "install_title": "给 Orca，换张纸。",
+    "install_summary": "2 款应用主题 · 2 套终端色板 · 纸折图标 · 可选字体",
+    "store_install": "从 Orca 社区商店安装",
+    "step_one": "01 / 在终端运行",
+    "copy": "复制",
+    "copied": "安装命令已复制。",
+    "copy_error": "无法自动复制，请选中安装命令手动复制。",
+    "step_two": "02 / 设置 → 外观",
+    "step_two_body": "应用浅色主题选择「Claude Paper · 暖纸」，深色选择「Claude Paper · 暖夜」；终端选择同名配色，文件图标主题选择「Claude Paper · 纸折图标」。",
+    "step_three": "03 / 聊天跟随应用，或匹配终端",
+    "step_three_body": "想要本页展示的对话配色，请关闭「匹配终端外观」；如果更希望对话使用终端字体，可以打开，此时对话采用 Claude Paper 终端配色。",
+    "step_optional": "可选 / CLAUDE CODE CLI",
+    "step_optional_body": "在「设置 → 外观」搜索 Claude Code，开启 Match Claude Code to Terminal Theme。Claude Code 会跟随终端色板，在 Orca 外也生效。关闭后恢复原主题；在 Claude Code 内选其他主题会停止同步。插件不会自动开启此选项。",
+    "requirements": "需要 Orca 1.4.255+。IBM Plex Mono 为可选字体，可在终端或编辑器字体列表中选择；保留原生布局。",
+    "scope_title": "熟悉的 Orca，更连贯的观感。",
+    "scope_intro": "通过公开接口提供应用颜色、文件图标与可选字体。无运行入口，无额外能力权限。",
+    "scope_caption": "主题可控制的范围",
+    "scope": "范围",
+    "palette_label": "主题关键色",
+    "clay": "陶土",
+    "blue": "雾蓝",
+    "unofficial": "非官方社区主题，与 Anthropic 或 Stably 无隶属或背书关系。",
+    "releases": "版本记录",
+    "lightbox_label": "放大查看主题效果",
+    "close_label": "关闭大图",
+    "close": "关闭",
     "scenes": {
-      "chat":["对话","原生聊天：公开日期工具任务、完整回复与输入框"], "diff":["改动","原生代码差异、行内高亮与测试输出"], "editor":["代码","原生 JavaScript 编辑器与纸折文件图标"], "terminal":["终端","原生终端：实际测试与 ANSI 色样"], "icons":["纸折图标","原始 SVG 图鉴：文件类型与通用目录分类"], "cli":["CLI 对照","原生终端对照：ANSI 随色板变化，显式真彩色保持不变"]
+      "chat": [
+        "对话",
+        "原生聊天：公开日期工具任务、完整回复与输入框"
+      ],
+      "diff": [
+        "改动",
+        "原生代码差异、行内高亮与测试输出"
+      ],
+      "editor": [
+        "代码",
+        "原生 JavaScript 编辑器与纸折文件图标"
+      ],
+      "terminal": [
+        "Claude Code",
+        "真实 Claude Code CLI：Orca 主题同步、可选 IBM Plex Mono 与公开 date-kit 任务"
+      ],
+      "icons": [
+        "纸折图标",
+        "原始 SVG 图鉴：文件类型与通用目录分类"
+      ],
+      "cli": [
+        "Codex CLI",
+        "真实 Codex CLI：同色配套语法主题、IBM Plex Mono 与公开 date-kit 任务"
+      ]
     },
-    "scope_rows":[["应用、聊天、编辑器与差异","73 个色彩令牌与语法配色"],["文件与目录","纸折图标，精确目录名称与灰蓝色兜底"],["终端","背景、前景、光标、选区与 16 色 ANSI"],["CLI 的 24 位真彩色","由 CLI 程序控制"],["布局、字体、圆角、动效、按钮图标","由 Orca 及用户设置决定"]]
+    "scope_rows": [
+      [
+        "应用、聊天、编辑器与差异",
+        "73 个色彩令牌与语法配色"
+      ],
+      [
+        "文件与目录",
+        "纸折图标，精确目录名称与灰蓝色兜底"
+      ],
+      [
+        "终端",
+        "背景、前景、光标、选区与 16 色 ANSI"
+      ],
+      [
+        "Codex CLI 代码与差异语法",
+        "可选 .tmTheme 配套文件，在 Codex 中选择"
+      ],
+      [
+        "字体",
+        "可选 IBM Plex Mono，在 Orca 字体列表中选择"
+      ],
+      [
+        "CLI 的 24 位真彩色",
+        "由 CLI 程序控制"
+      ],
+      [
+        "布局、圆角、应用动效、按钮图标",
+        "由 Orca 及用户设置决定"
+      ]
+    ],
+    "copied_short": "已复制",
+    "load_error": "下一张预览暂时无法加载，当前图片已保留，请重试。",
+    "previous_preview": "上一场景",
+    "next_preview": "下一场景",
+    "installs_prefix": "Orca 社区商店安装 ",
+    "installs_unit": " 次",
+    "installs_asof": " · 截至 ",
+    "integrations_title": "Codex CLI 与可选字体",
+    "codex_body": "安装两份配套主题后，在 Codex CLI 中用 /theme 选择 claude-paper-light 或 claude-paper-dark，让代码块与差异语法配色保持一致。这是单独的可选安装步骤。",
+    "codex_link": "Codex 配置说明与主题文件",
+    "font_body": "IBM Plex Mono 为代码与终端提供安静易读的等宽字体，随插件提供，采用 SIL 开源字体许可；中文字符使用系统后备字体。",
+    "ansi_comparison": "查看 ANSI 色板与程序真彩色的区别"
   }
 }

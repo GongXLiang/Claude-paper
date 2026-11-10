@@ -1,9 +1,12 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="为 Orca 的聊天、代码、终端和文件树准备的暖纸与暖夜主题，配原创纸折图标。查看原生界面效果，安装主题。"><meta name="theme-color" content="#F9F8F5">
-  <meta property="og:title" content="Claude Paper — 一张纸，两种光"><meta property="og:description" content="为 Orca 的聊天、代码、终端和文件树准备的暖纸与暖夜主题，配原创纸折图标。查看原生界面效果，安装主题。">
+  <meta name="description" content="受 Claude 启发的 Orca 暖纸与暖夜主题：对话安静易读，编码智能体终端配色连贯，搭配原创纸折文件图标。"><meta name="theme-color" content="#F9F8F5">
+  <script>
+  (() => {let saved;try{saved=localStorage.getItem('claude-paper-theme')}catch{}const query=new URLSearchParams(location.search).get('theme');const choice=[query,saved].find(v=>v==='light'||v==='dark');const mode=choice||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=mode;if(choice)document.documentElement.dataset.preference=choice;document.querySelector('meta[name="theme-color"]').content=mode==='dark'?'#2A2927':'#F9F8F5'})();
+  </script>
+  <meta property="og:title" content="Claude Paper — 一张纸，两种光"><meta property="og:description" content="受 Claude 启发的 Orca 暖纸与暖夜主题：对话安静易读，编码智能体终端配色连贯，搭配原创纸折文件图标。">
   <meta property="og:image" content="https://gongxliang.github.io/Claude-paper/assets/cover.png">
   <meta property="og:url" content="https://gongxliang.github.io/Claude-paper/zh-CN.html">
   <meta name="twitter:card" content="summary_large_image">
@@ -21,31 +24,31 @@
 <main id="main">
   <section class="wrap hero" aria-labelledby="title">
     <div><p class="eyebrow">CLAUDE-INSPIRED · ORCA 主题插件</p><h1 id="title">一张纸，<em>两种光。</em></h1><p class="lead">让 Orca 的对话、代码、终端与文件树，拥有连贯的暖色质感。</p><p class="english">暖纸 · 暖夜 · 纸折图标</p></div>
-    <div class="hero-action"><a class="button primary" href="#install">安装 Claude Paper <span aria-hidden="true">↓</span></a><p>0.4.2 · 非官方 · MIT · 纯数据</p></div>
+    <div class="hero-action"><a class="button primary" href="#install">安装 Claude Paper <span aria-hidden="true">↓</span></a><p>0.5.0 · 非官方 · MIT + OFL 字体 · 纯数据</p></div>
   </section>
   <section class="wrap showcase" id="gallery" aria-label="Orca 主题效果展示">
     <div class="stage-bar" data-enhanced hidden>
-      <div class="scene-tabs" role="tablist" aria-label="展示场景"><button id="tab-chat" role="tab" aria-controls="scene-panel" aria-selected="true" tabindex="0" data-scene="chat" data-file="chat" data-paired="false" data-caption="原生聊天：公开日期工具任务、完整回复与输入框">对话</button>
-<button id="tab-diff" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="diff" data-file="diff" data-paired="false" data-caption="原生代码差异、行内高亮与测试输出">改动</button>
-<button id="tab-editor" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="editor" data-file="editor" data-paired="false" data-caption="原生 JavaScript 编辑器与纸折文件图标">代码</button>
-<button id="tab-terminal" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="terminal" data-file="terminal" data-paired="false" data-caption="原生终端：实际测试与 ANSI 色样">终端</button>
-<button id="tab-icons" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="icons" data-file="icons-zh" data-paired="true" data-caption="原始 SVG 图鉴：文件类型与通用目录分类">纸折图标</button>
-<button id="tab-cli" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="cli" data-file="cli-compare" data-paired="true" data-caption="原生终端对照：ANSI 随色板变化，显式真彩色保持不变">CLI 对照</button></div>
+      <div class="scene-tabs" role="tablist" aria-label="展示场景"><button id="tab-chat" role="tab" aria-controls="scene-panel" aria-selected="true" tabindex="0" data-scene="chat" data-large="true" data-file="chat" data-paired="false" data-caption="原生聊天：公开日期工具任务、完整回复与输入框">对话</button>
+<button id="tab-diff" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="diff" data-large="false" data-file="diff" data-paired="false" data-caption="原生代码差异、行内高亮与测试输出">改动</button>
+<button id="tab-editor" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="editor" data-large="false" data-file="editor" data-paired="false" data-caption="原生 JavaScript 编辑器与纸折文件图标">代码</button>
+<button id="tab-terminal" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="terminal" data-large="false" data-file="claude" data-paired="false" data-caption="真实 Claude Code CLI：Orca 主题同步、可选 IBM Plex Mono 与公开 date-kit 任务">Claude Code</button>
+<button id="tab-icons" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="icons" data-large="false" data-file="icons-zh" data-paired="true" data-caption="原始 SVG 图鉴：文件类型与通用目录分类">纸折图标</button>
+<button id="tab-cli" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="cli" data-large="false" data-file="codex" data-paired="false" data-caption="真实 Codex CLI：同色配套语法主题、IBM Plex Mono 与公开 date-kit 任务">Codex CLI</button></div>
       <div class="mode" role="group" aria-label="网页与截图明暗模式"><button data-mode="light" aria-pressed="true">暖纸</button><button data-mode="dark" aria-pressed="false">暖夜</button></div>
     </div>
-    <div class="stage" id="scene-panel" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
-      <a href="assets/chat-light-large.png" data-lightbox id="scene-link"><img id="scene-image" src="assets/chat-light.png" srcset="assets/chat-light.png 1600w, assets/chat-light-large.png 2560w" sizes="(max-width:600px) calc(100vw - 34px), (max-width:900px) calc(100vw - 42px), (max-width:1320px) calc(100vw - 82px), 1238px" width="1600" height="1000" fetchpriority="high" alt="原生聊天：公开日期工具任务、完整回复与输入框"></a>
+    <div class="stage" id="scene-panel" data-load-error="下一张预览暂时无法加载，当前图片已保留，请重试。" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
+      <a href="assets/chat-light-large.png" data-lightbox id="scene-link"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/chat-dark.png 1600w, assets/chat-dark-large.png 2560w" sizes="(max-width:600px) calc(100vw - 34px), (max-width:900px) calc(100vw - 42px), (max-width:1320px) calc(100vw - 82px), 1238px"><img id="scene-image" src="assets/chat-light.png" srcset="assets/chat-light.png 1600w, assets/chat-light-large.png 2560w" sizes="(max-width:600px) calc(100vw - 34px), (max-width:900px) calc(100vw - 42px), (max-width:1320px) calc(100vw - 82px), 1238px" width="1600" height="1000" fetchpriority="high" alt="原生聊天：公开日期工具任务、完整回复与输入框"></picture><script>document.currentScript.previousElementSibling.querySelector('source').media=document.documentElement.dataset.theme==='dark'?'all':'not all';</script></a>
     </div>
-    <div class="stage-caption"><p id="scene-caption">暖纸 · 原生聊天：公开日期工具任务、完整回复与输入框</p><span>点击图片放大 ↗</span></div>
-    <p class="provenance">Orca 1.4.255 原生场景使用公开中文演示；切换语言会翻译图注，保留截图原文。图标图鉴直接渲染自 SVG 资源。 <a href="MEDIA.md">素材记录</a></p>
-    <noscript><p>浏览更多场景： <a href="assets/chat-dark.png">对话</a> · <a href="assets/diff-dark.png">改动</a> · <a href="assets/editor-dark.png">代码</a> · <a href="assets/terminal-dark.png">终端</a> · <a href="assets/icons-zh.png">纸折图标</a> · <a href="assets/cli-compare.png">CLI 对照</a></p></noscript>
+    <div class="stage-caption"><p id="scene-caption">原生聊天：公开日期工具任务、完整回复与输入框</p><span>点击图片放大 ↗</span></div>
+    <p class="provenance">实机图来自 Orca 1.4.255 的公开中文 Chat 与英文 CLI 演示。图注提供中英说明，界面文字保持原样；图标图鉴直接渲染插件 SVG。 <a href="MEDIA.md">素材记录</a></p>
+    <noscript><p>浏览更多场景： <a href="assets/chat-dark.png">对话</a> · <a href="assets/diff-dark.png">改动</a> · <a href="assets/editor-dark.png">代码</a> · <a href="assets/claude-dark.png">Claude Code</a> · <a href="assets/icons-zh.png">纸折图标</a> · <a href="assets/codex-dark.png">Codex CLI</a></p></noscript>
   </section>
   <section class="wrap details" aria-labelledby="details-title">
     <div class="section-head"><p class="eyebrow">ONE WORKSPACE, ONE VISUAL LANGUAGE</p><h2 id="details-title">从提问，到最后一行输出。</h2><p>为日常编程里的每一处切换，准备同一份温度。</p></div>
     <div class="features">
-      <article><span class="number">01 / CHAT & CODE</span><h3>内容清楚，表面安静。</h3><p>73 个应用色彩令牌，覆盖聊天、侧栏、标签、代码与差异。中性纸色区分层次，陶土强调动作，蓝色标记链接与聊天选区。</p><a href="assets/diff-dark.png" data-lightbox><img src="assets/diff-dark.png" width="1600" height="1000" loading="lazy" alt="原生代码差异、行内高亮与测试输出"></a></article>
-      <article><span class="number">02 / PAPER FOLD ICONS</span><h3>文件，也有自己的形状。</h3><p>77 个原创 SVG、512 条映射，区分文档、代码、测试与工具。16 类常用目录均配有关闭与展开状态。</p><a href="assets/icons-zh.png" data-lightbox><img src="assets/icons-zh.png" width="1600" height="1000" loading="lazy" alt="原始 SVG 图鉴：文件类型与通用目录分类"></a></article>
-      <article><span class="number">03 / TERMINAL</span><h3>把终端放进同一幅画面。</h3><p>两套终端色板，覆盖 16 色 ANSI、选区、光标及光标下文字。真实执行的测试与色样，让变化可以直接比较。</p><a href="assets/terminal-dark.png" data-lightbox><img src="assets/terminal-dark.png" width="1600" height="1000" loading="lazy" alt="原生终端：实际测试与 ANSI 色样"></a></article>
+      <article><span class="number">01 / CHAT & CODE</span><h3>内容清楚，表面安静。</h3><p>73 个应用色彩令牌，覆盖聊天、侧栏、标签、代码与差异。中性纸色区分层次，陶土强调动作，蓝色标记链接与聊天选区。</p><a href="assets/diff-dark.png" data-lightbox><img src="assets/diff-dark.png" width="1600" height="1000" loading="lazy" decoding="async" alt="原生代码差异、行内高亮与测试输出"></a></article>
+      <article><span class="number">02 / PAPER FOLD ICONS</span><h3>文件，也有自己的形状。</h3><p>77 个原创 SVG、512 条映射，区分文档、代码、测试与工具。16 类常用目录均配有关闭与展开状态。</p><a href="assets/icons-zh.png" data-lightbox><img src="assets/icons-zh.png" width="1600" height="1000" loading="lazy" decoding="async" alt="原始 SVG 图鉴：文件类型与通用目录分类"></a></article>
+      <article><span class="number">03 / TERMINAL</span><h3>把终端放进同一幅画面。</h3><p>为编码智能体准备暖纸与暖夜色板，附 Codex 语法主题与可选 IBM Plex Mono 字体。Claude Code 还可通过 Orca 的主题同步采用同一套配色。</p><a href="assets/claude-dark.png" data-lightbox><img src="assets/claude-dark.png" width="1600" height="1000" loading="lazy" decoding="async" alt="真实 Claude Code CLI：Orca 主题同步、可选 IBM Plex Mono 与公开 date-kit 任务"></a></article>
     </div>
   </section>
   <section class="wrap folder-rules" id="folders" aria-labelledby="folders-title">
@@ -61,13 +64,13 @@ const date = new Date('2026-11-09T23:30:00Z');
 formatDate(date, 'UTC');            // 09 Nov 2026
 formatDate(date, 'Asia/Shanghai');  // 10 Nov 2026</code></pre><p>同一时刻在不同时区可能属于不同日期。省略第二个参数时，使用运行环境的本地时区。</p></div></section>
   <section class="install-band" id="install" aria-labelledby="install-title"><div class="wrap install-layout">
-    <div><p class="eyebrow">MAKE IT YOURS</p><h2 id="install-title">给 Orca，换张纸。</h2><p>2 套应用主题 · 2 套终端配色 · 1 套文件图标</p><a href="https://www.onorca.dev/plugins/gongxliang/claude-paper">从 Orca 社区商店安装 ↗</a></div>
-    <div class="install-card"><p class="step-label">01 / 在终端运行</p><div class="command"><code id="install-command">orca plugin install GongXLiang/Claude-paper --json</code><button data-copy-command data-copied="安装命令已复制。" data-copy-error="无法自动复制，请选中安装命令手动复制。" hidden>复制</button></div><p class="step-label">02 / 设置 → 外观</p><p>应用浅色主题选择「Claude Paper · 暖纸」，深色选择「Claude Paper · 暖夜」；终端选择同名配色，文件图标主题选择「Claude Paper · 纸折图标」。</p><p class="step-label">03 / 聊天跟随应用，或匹配终端</p><p>关闭「匹配终端外观」使用独立聊天细节色；开启时，聊天采用所选终端的颜色与字体。</p><p class="step-label">可选 / CLAUDE CODE CLI</p><p>Orca 的终端设置提供「Match Claude Code to Terminal Theme」，可将色板同步到 Claude Code 自身界面。安装插件不会自动开启这项宿主设置。</p><small>需要 Orca 1.4.255+。字体和布局由 Orca 与使用者设置决定。</small></div>
+    <div><p class="eyebrow">MAKE IT YOURS</p><h2 id="install-title">给 Orca，换张纸。</h2><p>2 款应用主题 · 2 套终端色板 · 纸折图标 · 可选字体</p><a href="https://www.onorca.dev/plugins/gongxliang/claude-paper">从 Orca 社区商店安装 ↗</a><p class="install-stats" data-install-stats><a href="https://onorca.dev/plugins/stats.json">Orca 社区商店安装 <span data-install-count>33</span> 次</a> · 截至 <time datetime="2026-11-10T04:17:44.188Z">2026-11-10</time></p></div>
+    <div class="install-card"><p class="step-label">01 / 在终端运行</p><div class="command"><code id="install-command">orca plugin install GongXLiang/Claude-paper --json</code><button data-copy-command data-copied="安装命令已复制。" data-copied-short="已复制" data-copy-error="无法自动复制，请选中安装命令手动复制。" hidden>复制</button></div><p class="step-label">02 / 设置 → 外观</p><p>应用浅色主题选择「Claude Paper · 暖纸」，深色选择「Claude Paper · 暖夜」；终端选择同名配色，文件图标主题选择「Claude Paper · 纸折图标」。</p><p class="step-label">03 / 聊天跟随应用，或匹配终端</p><p>想要本页展示的对话配色，请关闭「匹配终端外观」；如果更希望对话使用终端字体，可以打开，此时对话采用 Claude Paper 终端配色。</p><p class="step-label">可选 / CLAUDE CODE CLI</p><p>在「设置 → 外观」搜索 Claude Code，开启 Match Claude Code to Terminal Theme。Claude Code 会跟随终端色板，在 Orca 外也生效。关闭后恢复原主题；在 Claude Code 内选其他主题会停止同步。插件不会自动开启此选项。</p><details class="integration-notes"><summary>Codex CLI 与可选字体</summary><p>安装两份配套主题后，在 Codex CLI 中用 /theme 选择 claude-paper-light 或 claude-paper-dark，让代码块与差异语法配色保持一致。这是单独的可选安装步骤。 <a href="https://github.com/GongXLiang/Claude-paper/tree/main/extras/codex">Codex 配置说明与主题文件 ↗</a></p><p>IBM Plex Mono 为代码与终端提供安静易读的等宽字体，随插件提供，采用 SIL 开源字体许可；中文字符使用系统后备字体。</p></details><small>需要 Orca 1.4.255+。IBM Plex Mono 为可选字体，可在终端或编辑器字体列表中选择；保留原生布局。</small></div>
   </div></section>
-  <section class="wrap scope" aria-labelledby="scope-title"><div><p class="eyebrow">WHAT CHANGES</p><h2 id="scope-title">熟悉的 Orca，更连贯的观感。</h2><p>通过公开主题接口提供颜色与图标。无运行入口，无额外能力权限。</p></div><div class="table-scroll"><table><caption class="sr-only">主题可控制的范围</caption><thead><tr><th>范围</th><th>Claude Paper</th></tr></thead><tbody><tr><td>应用、聊天、编辑器与差异</td><td>73 个色彩令牌与语法配色</td></tr><tr><td>文件与目录</td><td>纸折图标，精确目录名称与灰蓝色兜底</td></tr><tr><td>终端</td><td>背景、前景、光标、选区与 16 色 ANSI</td></tr><tr><td>CLI 的 24 位真彩色</td><td>由 CLI 程序控制</td></tr><tr><td>布局、字体、圆角、动效、按钮图标</td><td>由 Orca 及用户设置决定</td></tr></tbody></table></div></section>
+  <section class="wrap scope" aria-labelledby="scope-title"><div><p class="eyebrow">WHAT CHANGES</p><h2 id="scope-title">熟悉的 Orca，更连贯的观感。</h2><p>通过公开接口提供应用颜色、文件图标与可选字体。无运行入口，无额外能力权限。</p><p><a href="assets/cli-compare.png">查看 ANSI 色板与程序真彩色的区别 ↗</a></p></div><div class="table-scroll"><table><caption class="sr-only">主题可控制的范围</caption><thead><tr><th>范围</th><th>Claude Paper</th></tr></thead><tbody><tr><td>应用、聊天、编辑器与差异</td><td>73 个色彩令牌与语法配色</td></tr><tr><td>文件与目录</td><td>纸折图标，精确目录名称与灰蓝色兜底</td></tr><tr><td>终端</td><td>背景、前景、光标、选区与 16 色 ANSI</td></tr><tr><td>Codex CLI 代码与差异语法</td><td>可选 .tmTheme 配套文件，在 Codex 中选择</td></tr><tr><td>字体</td><td>可选 IBM Plex Mono，在 Orca 字体列表中选择</td></tr><tr><td>CLI 的 24 位真彩色</td><td>由 CLI 程序控制</td></tr><tr><td>布局、圆角、应用动效、按钮图标</td><td>由 Orca 及用户设置决定</td></tr></tbody></table></div></section>
   <section class="wrap palette" aria-label="主题关键色"><span><i aria-hidden="true" style="background:#F9F8F5"></i><span class="swatch-label">暖纸<code>#F9F8F5</code></span></span><span><i aria-hidden="true" style="background:#2A2927"></i><span class="swatch-label">暖夜<code>#2A2927</code></span></span><span><i aria-hidden="true" style="background:#D97757"></i><span class="swatch-label">陶土<code>#D97757</code></span></span><span><i aria-hidden="true" style="background:#8DB5E0"></i><span class="swatch-label">雾蓝<code>#8DB5E0</code></span></span></section>
 </main>
 <footer class="wrap footer"><a class="brand" href="#main"><img src="assets/icon.png" width="28" height="28" alt="">Claude Paper</a><p>非官方社区主题，与 Anthropic 或 Stably 无隶属或背书关系。</p><a href="https://github.com/GongXLiang/Claude-paper/releases">版本记录 ↗</a><a href="https://github.com/GongXLiang/Claude-paper/blob/main/LICENSE">MIT ↗</a></footer>
-<dialog id="lightbox" aria-label="放大查看主题效果"><button id="close-lightbox" aria-label="关闭大图">关闭 ×</button><img width="1600" height="1000" alt=""><p></p></dialog>
+<dialog id="lightbox" aria-label="放大查看主题效果"><button id="close-lightbox" aria-label="关闭大图">关闭 ×</button><button id="previous-preview" class="preview-arrow" aria-label="上一场景" hidden>‹</button><button id="next-preview" class="preview-arrow" aria-label="下一场景" hidden>›</button><img width="1600" height="1000" alt=""><p></p></dialog>
 <p id="status" role="status" aria-live="polite"></p>
 </body></html>

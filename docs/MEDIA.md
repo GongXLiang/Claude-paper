@@ -1,3 +1,26 @@
+# 0.5.0 · Genuine Agent CLI / 真实 Agent CLI
+
+The five new PNGs were exported into a private review folder and visually inspected individually before publication. No private conversation, username, account, usage, device detail or absolute path is present in the final pixels. PNG exports contain no text/EXIF metadata. Native content is only cropped and reduced, never enlarged, recolored, regenerated or rewritten.
+
+- `cover.png`: the existing public light Chat is the primary scene. Genuine Claude Code with Orca theme sync and the current native Paper Fold file tree appear beside it. These are separate native regions, not a new Orca layout.
+- `claude-light.png` / `claude-dark.png`: Claude Code **2.1.319**, custom theme **Orca**, public date-kit read-only review. The host's Match Claude Code to Terminal Theme option was enabled; switching Orca's mode updated the custom palette. Header identity line, conversation and composer are separate crops; account/path, update notice, recap and usage areas are omitted.
+- `codex-light.png` / `codex-dark.png`: Codex CLI **0.167.0**, companion `claude-paper-light` / `claude-paper-dark` selected via `/theme`. The same completed public session is resumed to re-detect the terminal background. Syntax and terminal palette changes are distinct. The public review reads source/tests; it does not run the tests again.
+- New native captures are **1600×1150 pixels**, with the host's existing UI zoom. CLI font: optional **IBM Plex Mono**. Final gallery canvases: **1600×1000**. These CLI images are not advertised as 2× captures. Existing Chat retains its separate 2560×1600 native-pixel export.
+
+Reproduction source: `scripts/media-agents.html`. Serve it with the privately held source captures and select `?scene=cover|claude-light|claude-dark|codex-light|codex-dark`. `raw=` accepts a private source base URL. Export the canvas only after `html[data-ready=true]`; keep the no-enlargement and aspect-ratio guards. Raw captures never belong in the repository.
+
+新封面与四张 CLI 图均先私下导出、逐张查看，再加入仓库。当前商店六图依次为：暖纸 Chat、暖夜 Claude Code、暖纸 Codex、暖夜差异、暖纸编辑器、图标图鉴。网页保留六个场景标签，将原测试终端与色样标签换成真实 Agent CLI；ANSI/真彩色对照保留在能力说明中。历史 Chat、编辑器、差异素材的配色未变，文件树仍是历史截图中的图标；当前图标请看新封面和图鉴。
+
+Final reviewed PNG hashes:
+
+| Asset | SHA-256 |
+| --- | --- |
+| `cover.png` | `b48ed14518ed8088beaf973f830cc02b8351ba074b43cedf00f15618127968c8` |
+| `claude-light.png` | `510dc486f3077b4fd1d115788303c120d07d60a6c24acc7fdb428b4baf0bd61e` |
+| `claude-dark.png` | `3650167d726b4dcd02499bb6490eee59d1c82f096ba7b8409a1c43d80fafd798` |
+| `codex-light.png` | `9180067c024417179ed3c86e739db9f21314bb6e16816d74cea8badb8045fd0d` |
+| `codex-dark.png` | `6ca39198ff5986156992323c334c3ea1b8bc1364cc58b63f8afa0f607a954627` |
+
 # 0.4.2 · Native pixels and file recognizers / 原生像素与文件标记
 
 `chat-light-large.png` and `chat-dark-large.png` are 2560×1600 exports of the same privacy-reviewed public date-kit captures. The compositor maps the 2560-pixel-wide native crop to 2432 output pixels (95%), rather than 1520 pixels in the 1600×1000 edition. It checks output scale before drawing every crop, so no native UI region is enlarged. Titles and the external frame are rendered at the new output size. These are native captures, not generated or sharpened UI images.

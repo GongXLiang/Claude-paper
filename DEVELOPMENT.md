@@ -2,7 +2,7 @@
 
 The plugin root is this repository. It is a data-only theme; do not patch Orca resources or add unsupported theme fields. Source files:
 
-- `icons/folders.json`: folder categories, bilingual labels and exact aliases. Expanded and closed mappings are generated together. All icon maps combined must stay at or below 512 entries (0.4.2 uses all 512).
+- `icons/folders.json`: folder categories, bilingual labels and exact aliases. Expanded and closed mappings are generated together. All icon maps combined must stay at or below 512 entries (0.5.0 uses all 512).
 - `scripts/build-icons.py`: original SVGs and the icon map. Inspect changed file recognizers at 16 and 20 px in both modes, not only in the 32 px gallery.
 - `scripts/site-template.html` and `scripts/site-copy.json`: one page template and complete English/Chinese strings; `scripts/build-site.py` writes `docs/index.html` and `docs/zh-CN.html`.
 - `scripts/build-gallery.py`: English/Chinese SVG gallery sources. Rasterize them to `docs/assets/icons.png` and `docs/assets/icons-zh.png` using resvg; inspect both images before publishing.
@@ -12,7 +12,9 @@ The plugin root is this repository. It is a data-only theme; do not patch Orca r
 python scripts/build-icons.py
 python scripts/build-gallery.py
 python scripts/build-site.py
+python scripts/build-codex.py
 python scripts/check-theme.py
+python scripts/check-extras.py
 node scripts/check-site.mjs
 node --check docs/app.js
 node --test examples/date-kit/format.test.mjs
@@ -88,3 +90,16 @@ git push origin vX.Y.Z
 网站位于 `docs/`，由 GitHub Pages 从 `main:/docs` 发布。图片位于 `docs/assets/`，由 README 和商店清单共同引用。网页交互脚本仅在访问网站时执行，不属于主题插件运行代码。
 
 发布前运行 `python scripts/check-theme.py`、`node scripts/check-site.mjs` 和 `node --check docs/app.js`，然后检查手机/桌面效果与所有公开图片。更新版本标签后再检查商店索引结果。
+
+
+## 0.5.0 additions / 配套主题与安装统计
+
+- `scripts/build-codex.py` exports both `.tmTheme` files from the app's existing syntax tokens. `scripts/install-codex.mjs` is explicit opt-in; it never changes Codex configuration. `scripts/check-extras.py` checks palette parity, font signatures/license, statistics validation and installer conflict handling.
+- `fonts/` contains unmodified OFL-licensed IBM Plex Mono faces and source hashes. Keep their license separate from the project's MIT license.
+- `scripts/refresh-stats.py` reads the official public store stats, validates them and updates `docs/install-stats.json`. It retains the last valid snapshot if fetching fails, and rejects invalid or older data. Run `python scripts/build-site.py` after refreshing to update the no-JS fallback in both pages.
+- `.github/workflows/install-stats.yml` refreshes twice daily and can be run manually. The source timestamp stays visible: counts are installations, not unique users or a live measurement. The workflow explicitly requests a Pages build after its own commit because a `GITHUB_TOKEN` push alone does not trigger a legacy Pages build.
+- Page switches decode the next image before changing colors; controls respond immediately. Test rapid changes, failed/slow images, reduced motion, deep URLs, no-JS content, keyboard focus and 360 px layouts. `scripts/check-browser.js` covers both languages with 75 browser assertions; visual motion and native screenshots still need separate review.
+
+中文：先运行最小有效校验，再做实机与网页验收。原生 CLI 演示不能用模拟输出替代。字体与 Codex 配套主题是本版新增能力；Claude Code 同步是 Orca 的既有可选功能，不应写成插件新增的宿主接口。
+
+Evaluate scripts/check-motion.js in a visible Chromium page to check actual color/opacity frames, delayed decoding and Escape focus restoration. The 0.5.0 run sampled 80 frames and 27 intermediate background colors in isolated Edge; embedded automation views can throttle animation clocks. Also verified explicit dark first paint, no-JS dark/mobile fallback and reduced motion. These browser test helpers are development-only; the website remains dependency-free.
