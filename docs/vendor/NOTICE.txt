@@ -1,0 +1,5 @@
+GSAP and ScrollTrigger 3.15.1
+Copyright 2008-2026 GreenSock / Webflow, Inc.
+Source: https://github.com/greensock/GSAP/tree/3.15.1/dist
+License: GSAP Standard No Charge License, https://gsap.com/standard-license/
+These vendored files retain their upstream license headers. They are not covered by this repository's MIT license.

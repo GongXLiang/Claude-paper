@@ -31,11 +31,12 @@ for(const asset of manifest.screenshots){
   total+=png(asset.path,1600,1000,1536*1024);checked.add(asset.path);
 }
 assert.ok(total<=8*1024*1024);
-for(const name of ['chat-light','chat-dark','diff-light','diff-dark','editor-light','editor-dark','terminal-light','terminal-dark','icons','icons-zh','cli-compare','claude-light','claude-dark','codex-light','codex-dark']){
-  const path=`docs/assets/${name}.png`;
-  if(!checked.has(path))png(path,1600,1000,1536*1024);
+for(const scene of ['chat','agents','diff','editor','files'])for(const mode of ['light','dark']){
+  const name=`${scene}-${mode}`;
+  if(!checked.has(`docs/assets/${name}.png`))png(`docs/assets/${name}.png`,1600,1000,1536*1024);
+  png(`docs/assets/${name}-large.png`,2880,1800,4*1024*1024);
 }
-for(const mode of ['light','dark'])png(`docs/assets/chat-${mode}-large.png`,2560,1600,1536*1024);
+for(const name of ['icons','icons-zh'])png(`docs/assets/${name}.png`,1600,1000,1536*1024);
 png(manifest.icon,256,256,256*1024);
 for(const page of ['index.html','zh-CN.html']) {
 const html=readFileSync(resolve(root,'docs',page),'utf8');
@@ -52,10 +53,10 @@ for(const match of html.matchAll(/\b(?:src|href)="([^"]+)"/g)){
   assert.ok(existsSync(resolve(root,'docs',link)),link);
 }
 for(const match of html.matchAll(/<img\b[^>]*>/g))assert.ok(/\balt="[^"]*"/.test(match[0]),'Image missing alt');
-assert.equal([...html.matchAll(/<script\b/g)].length,3);
+assert.equal([...html.matchAll(/<script\b/g)].length,5);
 assert.ok(!/https?:\/\/[^"'\s]+\.(?:js|css|woff)(?![a-z])/i.test(html),'Unexpected external resource');
 assert.ok(html.includes('<noscript>'),'Missing static navigation fallback');
-assert.ok(html.includes('assets/chat-light-large.png 2560w'),'Missing high-density chat source');
+assert.ok(html.includes('assets/chat-light-large.png 2880w'),'Missing high-density chat source');
 for(const match of html.matchAll(/\bsrcset="([^"]+)"/g)){
   for(const source of match[1].split(',')){
     const [path,width]=source.trim().split(/\s+/);
@@ -75,10 +76,14 @@ for(const page of ['README.md','README.zh-CN.md','examples/README.md','examples/
     assert.ok(existsSync(resolve(root,dirname(page),path.split('#')[0])),`${page}: ${path}`);
   }
 }
-const folders=JSON.parse(readFileSync(resolve(root,'icons/folders.json'),'utf8'));
 const theme=JSON.parse(readFileSync(resolve(root,'icons/theme.json'),'utf8'));
+const catalogue=JSON.parse(readFileSync(resolve(root,'icons/catalogue.json'),'utf8'));
 const copy=JSON.parse(readFileSync(resolve(root,'scripts/site-copy.json'),'utf8'));
 assert.deepEqual(Object.keys(copy.en).sort(),Object.keys(copy.zh).sort());
-assert.equal(new Set(Object.values(folders).flatMap(x=>x.names)).size,Object.keys(theme.folderNames).length);
-assert.ok(Object.keys(theme.folderNames).every(name=>!name.includes('/')));
-console.log(`Passed: bilingual pages, READMEs and examples; 16 scene/gallery PNGs + 2 native-resolution chat PNGs + identity, asset sizes/metadata, links, alt text, unique IDs and static fallback; store gallery ${(total/1024).toFixed(0)} KiB.`);
+assert.deepEqual(Object.keys(theme.folderNames),[]);
+assert.deepEqual(Object.keys(theme.folderNamesExpanded),[]);
+assert.equal(catalogue.length,Object.keys(theme.fileExtensions).length+Object.keys(theme.fileNames).length);
+assert.equal(new Set(catalogue.map(row=>row.path)).size,catalogue.length);
+for(const lang of ['en','zh'])assert.deepEqual(Object.keys(copy[lang].scenes),['chat','agents','diff','editor','files']);
+assert.ok(existsSync(resolve(root,'docs/vendor/NOTICE.txt')));
+console.log(`Passed: bilingual pages/READMEs/examples, ten whole-window previews + ten 2880px masters, cover, specimens and identity; metadata, sizes, links, alt text, unique IDs and no-JS fallbacks. Store gallery ${(total/1024).toFixed(0)} KiB.`);

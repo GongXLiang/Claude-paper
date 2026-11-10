@@ -18,7 +18,7 @@
       if(tab.dataset.large==='true') {
         check(document.querySelector('#scene-link').href.endsWith('-large.png'),`${mode} native lightbox source`);
         const raw=new Image();raw.src=shot.currentSrc;await raw.decode();
-        check(raw.naturalWidth>=Math.min(2560,shot.getBoundingClientRect().width*devicePixelRatio),`${mode} native pixel density`);
+        check(raw.naturalWidth>=Math.min(2880,shot.getBoundingClientRect().width*devicePixelRatio),`${mode} native pixel density`);
       } else check(!shot.hasAttribute('srcset'),'nonlarge scene clears high-density sources');
     }
   }
@@ -37,23 +37,22 @@
   document.querySelector('#tab-chat').click();await ready('chat','light');
   check(new URL(location.href).searchParams.get('scene')==='chat','returning to chat updates URL');
   const tab=document.querySelector('#tab-chat');tab.focus();tab.dispatchEvent(new KeyboardEvent('keydown',{key:'End',bubbles:true}));
-  await ready('cli','light');check(document.activeElement.id==='tab-cli','keyboard tabs');
-  document.querySelector('[data-mode=dark]').click();document.querySelector('#tab-icons').click();await ready('icons','dark');
+  await ready('files','light');check(document.activeElement.id==='tab-files','keyboard tabs');
+  document.querySelector('[data-mode=dark]').click();document.querySelector('#tab-files').click();await ready('files','dark');
   const url=new URL(document.querySelector('[data-language-link]').href);
-  check(url.searchParams.get('scene')==='icons'&&url.searchParams.get('theme')==='dark','language link preserves state');
+  check(url.searchParams.get('scene')==='files'&&url.searchParams.get('theme')==='dark','language link preserves state');
   check(url.pathname.endsWith(zh?'index.html':'zh-CN.html'),'language destination');
-  const details=document.querySelector('#folders details');details.open=true;
-  check(details.querySelectorAll('tbody tr').length===16,'all folder groups');
+  const details=document.querySelector('#scope');details.open=true;
+  check(details.querySelectorAll('tbody tr').length===7,'theme scope table');
   check(document.documentElement.scrollWidth<=innerWidth,'no horizontal page overflow');details.open=false;
   const imageLink=document.querySelector('#scene-link');imageLink.focus();imageLink.click();
   const dialog=document.querySelector('#lightbox');check(dialog.open,'lightbox opens');
   check(dialog.querySelector('img').alt===document.querySelector('#scene-image').alt,'lightbox localized alt');
-  dialog.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));await ready('cli','dark');
-  await waitFor(()=>dialog.querySelector('p').textContent.includes(document.querySelector('#tab-cli').dataset.caption),'lightbox page label');
+  dialog.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));await ready('chat','dark');
+  await waitFor(()=>dialog.querySelector('p').textContent.includes(document.querySelector('#tab-chat').dataset.caption),'lightbox page label');
   check(!document.querySelector('#previous-preview').hidden,'stage lightbox supports paging');
   document.querySelector('#close-lightbox').click();await waitFor(()=>!dialog.open,'lightbox exit');
   check(document.activeElement===imageLink,'lightbox restores focus');
-  document.querySelector('.features a').click();check(document.querySelector('#next-preview').hidden,'single-image lightbox has no paging');dialog.close();
   const button=document.querySelector('[data-copy-command]'),original=navigator.clipboard.writeText;
   try {
     navigator.clipboard.writeText=async()=>{};button.click();await new Promise(r=>setTimeout(r,25));

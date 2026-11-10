@@ -1,95 +1,36 @@
-# 0.5.0 · Genuine Agent CLI / 真实 Agent CLI
+# 0.6.0 · Whole Orca, public workspaces / 完整原生工作区
 
-The five new PNGs were exported into a private review folder and visually inspected individually before publication. No private conversation, username, account, usage, device detail or absolute path is present in the final pixels. PNG exports contain no text/EXIF metadata. Native content is only cropped and reduced, never enlarged, recolored, regenerated or rewritten.
+All ten current scene images were recaptured on 2026-11-10 in an isolated Orca profile with a purpose-built `date-kit` repository. They use Orca 1.4.255, the unchanged Claude Paper app/terminal palettes and the new Paper Fold 2 icons.
 
-- `cover.png`: the existing public light Chat is the primary scene. Genuine Claude Code with Orca theme sync and the current native Paper Fold file tree appear beside it. These are separate native regions, not a new Orca layout.
-- `claude-light.png` / `claude-dark.png`: Claude Code **2.1.319**, custom theme **Orca**, public date-kit read-only review. The host's Match Claude Code to Terminal Theme option was enabled; switching Orca's mode updated the custom palette. Header identity line, conversation and composer are separate crops; account/path, update notice, recap and usage areas are omitted.
-- `codex-light.png` / `codex-dark.png`: Codex CLI **0.167.0**, companion `claude-paper-light` / `claude-paper-dark` selected via `/theme`. The same completed public session is resumed to re-detect the terminal background. Syntax and terminal palette changes are distinct. The public review reads source/tests; it does not run the tests again.
-- New native captures are **1600×1150 pixels**, with the host's existing UI zoom. CLI font: optional **IBM Plex Mono**. Final gallery canvases: **1600×1000**. These CLI images are not advertised as 2× captures. Existing Chat retains its separate 2560×1600 native-pixel export.
+## Capture and exports
 
-Reproduction source: `scripts/media-agents.html`. Serve it with the privately held source captures and select `?scene=cover|claude-light|claude-dark|codex-light|codex-dark`. `raw=` accepts a private source base URL. Export the canvas only after `html[data-ready=true]`; keep the no-enlargement and aspect-ratio guards. Raw captures never belong in the repository.
+- A real Electron window: **1440 × 900 logical pixels, DPR 2**. PNG masters are **2880 × 1800**; previews are **1600 × 1000**. No source crop is enlarged.
+- The complete native renderer is preserved, including navigation, title/tab bars, content panes, right sidebar and status bar. No CLI panels are pasted together or redrawn. A public path such as `D:/paper-demo/date-kit` is intentional.
+- `chat-{light,dark}`: genuine native Chat beside code, using Orca's native split. This layout also keeps the machine-name footer hidden through Orca's normal responsive UI. Messages use 16 px; code uses 13 px. The public reply accurately says that it read the files without running tests.
+- `agents-{light,dark}`: actual Claude Code 2.1.322 and Codex CLI 0.167.0, simultaneously visible in native left/right terminal panes. IBM Plex Mono, 13 px; each pane has at least 60 columns. Claude Code used a user-configured provider alias; the client branding does not claim a particular underlying model. Codex used GPT-6-Astra. The original four tests passed; their result was passed back to Claude Code. No screenshots imply autonomous inter-agent messages.
+- Claude Code used its terminal-aware Auto theme for these captures. Codex used the optional companion syntax theme for each mode and a temporary status-line override that omits account quotas. Running clients were resumed after a palette change.
+- `editor-{light,dark}`: the original JavaScript test source in the native editor.
+- `diff-{light,dark}`: a separate, public input-validation example and two added tests. All six tests were run successfully after that change. It is not the unchanged four-test state shown in the earlier agent transcript.
+- `files-{light,dark}`: native Markdown preview and the public repository tree. Office filenames are explicitly icon fixtures, not claims of working Office previews.
 
-新封面与四张 CLI 图均先私下导出、逐张查看，再加入仓库。当前商店六图依次为：暖纸 Chat、暖夜 Claude Code、暖纸 Codex、暖夜差异、暖纸编辑器、图标图鉴。网页保留六个场景标签，将原测试终端与色样标签换成真实 Agent CLI；ANSI/真彩色对照保留在能力说明中。历史 Chat、编辑器、差异素材的配色未变，文件树仍是历史截图中的图标；当前图标请看新封面和图鉴。
+`*-large.png` files are lossless native-resolution exports. Preview PNGs only undergo proportional downsampling and metadata-free encoding. No text replacement, recoloring, generative retouching, blur or fake application controls are used.
 
-Final reviewed PNG hashes:
+## Cover and specimen sheets
 
-| Asset | SHA-256 |
-| --- | --- |
-| `cover.png` | `b48ed14518ed8088beaf973f830cc02b8351ba074b43cedf00f15618127968c8` |
-| `claude-light.png` | `510dc486f3077b4fd1d115788303c120d07d60a6c24acc7fdb428b4baf0bd61e` |
-| `claude-dark.png` | `3650167d726b4dcd02499bb6490eee59d1c82f096ba7b8409a1c43d80fafd798` |
-| `codex-light.png` | `9180067c024417179ed3c86e739db9f21314bb6e16816d74cea8badb8045fd0d` |
-| `codex-dark.png` | `6ca39198ff5986156992323c334c3ea1b8bc1364cc58b63f8afa0f607a954627` |
+`cover.png` places one intact native agent-workspace image inside a branded paper margin. Only the outside title, caption, frame and shadow are presentation design. Reproduce it with `scripts/media-cover.html` at 1600 × 1000.
 
-# 0.4.2 · Native pixels and file recognizers / 原生像素与文件标记
+`icons.png` and `icons-zh.png` are clearly labeled SVG specimen sheets, not Orca screenshots. `scripts/build-gallery.py` uses the shipped SVGs; render `docs/icons-gallery.svg` and `docs/icons-gallery-zh.svg` at 1600 × 1000. The website additionally displays true 16/20 px specimens.
 
-`chat-light-large.png` and `chat-dark-large.png` are 2560×1600 exports of the same privacy-reviewed public date-kit captures. The compositor maps the 2560-pixel-wide native crop to 2432 output pixels (95%), rather than 1520 pixels in the 1600×1000 edition. It checks output scale before drawing every crop, so no native UI region is enlarged. Titles and the external frame are rendered at the new output size. These are native captures, not generated or sharpened UI images.
+The store uses six full-window scenes: light Chat, dark agents, light agents, dark diff, light editor, dark files. The website offers all five scenes in both modes. Older terminal/individual-CLI image files and old composition scripts remain historical assets and are no longer linked from the current website or READMEs.
 
-The site keeps 1600w fallback images and selects a 2560w chat source on denser displays; the chat lightbox links to the larger PNG. Other scene captures keep their existing size. The public store's six screenshots retain their 1600×1000 format. `icons.png` and `icons-zh.png` now render the 0.4.2 SVGs; those two galleries are rendered artwork, not app screenshots. The native scenes retain their historical file-tree icons, as documented below.
+## Privacy and honest presentation
 
-重新导出的两张图先在私有目录逐张检查，再复制到公开素材目录：仅含公开 date-kit 示例、通用 Orca 控件与公开文档链接，没有个人聊天、账号、设备信息或绝对路径。原始整窗截图不分发。新版图标图鉴由当前插件 SVG 生成，中英文同步。
+Never publish personal chats, real project names, account information, email addresses, device names, quota data or private filesystem paths. Use a disposable public workspace and review the final pixels before copying assets into Git. Public fixture paths are allowed. Do not publish a private screenshot and rely on CSS to hide part of it.
 
-To reproduce a large chat preview, open the compositor with `?scene=chat-light&width=2560&raw=file:///your-private-capture-directory/`, set a 2560×1600 viewport at scale 1, wait for `html[data-ready=true]`, and export. The default width remains 1600. An export that would enlarge any native crop is rejected.
+本版在独立配置中真实拍摄完整 Orca 窗口；Chat、同屏双 Agent、差异、编辑器、文件浏览均有明暗两套。禁止公开个人聊天、真实项目、设备名、账户和额度；演示路径属于专门创建的公开内容。网页里的纸张动效不会改变插件本身的应用布局。
 
-# 0.4.1 · Bilingual icon galleries / 双语图鉴
+The identity asset is unchanged; see [IDENTITY.md](IDENTITY.md). App palette, ANSI palette, CLI syntax theme and each program's explicit truecolor are separate layers. A screenshot is evidence of its pictured configuration, not universal control over every CLI.
 
-`assets/icons.png` (English) and `assets/icons-zh.png` (中文) render the actual 0.4.1 SVGs, including distinct programming-language marks and general folder categories. Generate the source SVGs with `python scripts/build-gallery.py`, then rasterize with resvg. On this Windows build, Microsoft YaHei regular was supplied to the renderer to keep Chinese glyph weights consistent; no font file is distributed.
+## Verification
 
-文件夹标签表示用途分类；匹配仍由 Orca 按自身名称执行。`raw` 与 `data` 是独立别名，宣传图不再将其写为路径。新图鉴不是实机截图；原生场景保持原图与原文，中英文网页分别提供说明和图注。所有新增素材只含公开示例。
-
-# 0.4.0 asset update
-
-`assets/icon.png` is the GPT-generated Paper Orca mark, downsampled to 256 px. `assets/identity-master.png` preserves the generated master. The built-in tool does not expose a model version selector. See `IDENTITY.md` for the exact prompt.
-
-`assets/icons.png` replaces the older native file-tree image with a labeled gallery rendered directly from original plugin SVGs; source: `icons-gallery.svg`. It is not a screenshot. All other scene images remain the documented 0.3.0 native captures; their app/terminal colors are unchanged in 0.4.0. No private images were added.
-
-# 宣传素材与网页维护
-
-展示页为 `index.html`、`style.css` 与 `app.js`，零依赖，无远程字体、分析脚本或构建步骤。GitHub Pages 从 `main:/docs` 发布。主题运行时不执行网页脚本。
-
-## 0.3.0 素材
-
-共 **11 张 1600×1000 场景 PNG**，另有一张 **256×256 插件图标**。场景来自 Orca 1.4.255 / Claude Paper 0.3.0 的原生界面；原始整窗捕获为 2586×1880 像素，沿用本机 91% UI 缩放。没有宣称按逻辑 1280×800 / 200% 采集。
-
-| 文件 | 内容与处理 |
-| --- | --- |
-| `cover.png` | 浅色聊天为主，深色原生文件树及终端为辅的三区域拼版 |
-| `chat-light.png` / `chat-dark.png` | 同一公开回复与输入框；裁去上方更早回复和下方设备信息，保留原生标签栏；文件树分别裁切后按列拼版 |
-| `editor-light.png` / `editor-dark.png` | 原生 JavaScript 测试代码与文件树；去除绝对路径栏，保留标签栏 |
-| `diff-light.png` / `diff-dark.png` | 原生 format.js 差异、同任务真实测试输出和文件树三部分拼版，不代表新增的固定布局 |
-| `terminal-light.png` / `terminal-dark.png` | 原生终端标签与实际输出，裁去外围栏和无关留白 |
-| `icons.png` | 同一文件树的两种模式并排展示 |
-| `cli-compare.png` | 相同输出在 Ghostty Default Style Dark 与 Claude Paper 暖夜色板中的原生捕获；不是 Claude Code CLI 界面 |
-| `icon.png` | 原创纸页与陶土折角的插件标识，源文件为 `icon.svg` |
-
-商店使用封面与六图：暖纸聊天、暖夜差异、暖纸编辑器、暖夜终端、双模式图标、CLI 色板对照。网页另提供另外四张明暗场景。
-
-图片内的界面文字、图标和颜色均来自真实捕获。每个区域只做裁切与等比缩小，没有放大、生成式重绘、替换文字、补画按钮或调色。外部标题、说明、底板与阴影是宣传排版。聊天代码块与编辑器使用各自宿主渲染器，不能把两者的高亮差别当成截图错误。字体与字号由本机设置决定，不随主题分发。
-
-## 公开演示
-
-独立 `date-kit` 项目，任务是让日期格式化默认使用本地时区，并保留显式时区参数。截图中的 `npm test` 已实际执行，4 项测试通过；Git 状态反映真实的三个文件修改。
-
-终端色样使用 SGR 30–37、90–97 以及 `38;2;217;119;87`。两张 CLI 对照从同一段终端输出切换色板采集，没有重新运行以改变时长。光标闪烁时相可能不同。图中提示文字不等于已逐项验证所有光标样式；`cursorAccent` 的检查是颜色对比度计算。
-
-## 隐私与复现
-
-公开图片不得包含私人聊天、项目列表、用户名、邮箱、设备名、账户、用量、绝对路径或任务标识。必须使用独立公开演示内容；原始整窗截图与咨询记录仅留在本地，不能提交到 Git。
-
-`scripts/media-studio.html` 保存本版的区域坐标与排版源码。将原生截图放在仓库外的私有目录，文件名为 `p03-chat-light-raw.png` 等；以本地浏览器打开模板，使用 `?scene=cover&raw=file:///your-private-capture-directory/`。页面加载完成时 `html[data-ready=true]`；固定视口 1600×1000 后导出整个页面。不要把含本机路径的 URL 写入仓库。新版宿主、窗口尺寸或缩放改变后必须重新检查坐标。
-
-只有最终独立 PNG 能进入 `assets/`；不得发布原始截图，再依靠网页 CSS 隐藏私人区域。逐张查看最终图片的像素和边缘，检查 PNG 元数据。
-
-## 检查
-
-```sh
-python scripts/check-theme.py
-node scripts/check-site.mjs
-node --check docs/app.js
-orca plugin validate . --json
-orca plugin check . --json
-```
-
-另用浏览器查看 360px 与桌面宽度、两种模式、全部场景、键盘标签切换、灯箱 Escape 与焦点返回、复制成功／失败提示、减少动态效果，以及不执行 JavaScript 时的图片和安装链接。
-
-商店限额：封面至少 800×500、≤1 MiB；截图最多六张、每张至少 1280×800、≤1.5 MiB，合计≤8 MiB。插件标识至少128×128、≤256 KiB。页面默认静态展示，不自动播放；仅有 180ms hover 过渡，尊重减少动态效果设置。
+Check actual image dimensions and PNG metadata with `node scripts/check-site.mjs`, validate the plugin, review light/dark captures, and exercise desktop/mobile, all scenes, keyboard paging, lightbox zoom, fast/slow image switching, no-JS and reduced-motion fallbacks. Store cover ≤1 MiB; each of up to six screenshots ≤1.5 MiB; gallery total ≤8 MiB.

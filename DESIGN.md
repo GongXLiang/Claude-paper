@@ -1,3 +1,15 @@
+# Current direction · 0.6.0
+
+The whole real Orca workspace is the top sheet of a paper stack. Chat leads; native Claude Code + Codex split panes, diff, editor and files follow. Screenshots remain transform/filter-free at rest. The page retains the warm-paper and charcoal palette, with stronger entrances and a short desktop scroll sequence; manual input, reduced motion, mobile and no-JS take precedence.
+
+Paper Fold 2 uses one slate folder, independent of its name. Files use family silhouettes, luminance-balanced color and individual suffix/name marks. Common formats are visually checked at 16/20 px. The active source is `scripts/build-icons.py`; old colored-folder aliases below are historical.
+
+This version uses one bounded Opus 5.5 Medium consultation for visual direction and an independent implementation review. All product screenshots are genuine public native app captures. See [MEDIA.md](docs/MEDIA.md) for exact provenance and limits.
+
+---
+
+The sections below document previous versions, not current folder matching or page composition.
+
 # 0.4.2 · Small-file recognizers / 小尺寸文件标记
 
 15 个常用文件类型由角落叠加符号改为完整彩色纸页，纸页保留折角，识别符号居中。Python 使用清楚的 Py 与琥珀色折角，C++ 保留双加号；Word / Excel / PowerPoint 使用 W / X / P，PDF 使用字样，Notebook 使用叠放单元格，Docker 使用集装箱与船身。所有字形为原创路径，不依赖字体。文件夹和配色不变。

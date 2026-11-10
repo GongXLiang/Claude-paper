@@ -12,18 +12,24 @@
   const caption = document.querySelector('#scene-caption');
   const languageLink = document.querySelector('[data-language-link]');
   const params = new URLSearchParams(location.search);
+  const aliases = {terminal:'agents',cli:'agents',icons:'files'};
+  if (aliases[params.get('scene')]) params.set('scene', aliases[params.get('scene')]);
   let chosen = root.dataset.preference || null;
   let rendered = {mode: root.dataset.theme, scene: 'chat'};
   let wanted = {...rendered, scene: Object.hasOwn(scenes, params.get('scene')) ? params.get('scene') : 'chat'};
   let sequence = 0, cleanup, loading, statusTimer;
+  let manualScene = false, resumeAllowed = false, scrollTrigger;
+  const showcase = document.querySelector('.showcase');
+  const manual = () => {manualScene = true; resumeAllowed = false; showcase.classList.add('is-manual'); document.querySelector('.paper-stack').classList.remove('paper-enter');};
   const duration = ms => reducedMotion.matches ? 0 : ms;
   const same = (a, b) => a.mode === b.mode && a.scene === b.scene;
+  const savePreference = () => {if (chosen) {try {localStorage.setItem('claude-paper-theme', chosen);} catch {}}};
   function specFor(state) {
     const entry = scenes[state.scene], paired = entry.paired === 'true';
     const src = `assets/${entry.file}${paired ? '' : '-' + state.mode}.png`;
     const full = entry.large === 'true' ? src.replace('.png', '-large.png') : src;
     const modeName = modes.find(button => button.dataset.mode === state.mode).textContent;
-    return {src, full, srcset: full === src ? '' : `${src} 1600w, ${full} 2560w`,
+    return {src, full, srcset: full === src ? '' : `${src} 1600w, ${full} 2880w`,
       label: (paired ? '' : modeName + ' · ') + entry.caption};
   }
   function decode(spec, full = false) {
@@ -102,22 +108,24 @@
     }, ms + 40);
   }
   async function go(next, {initial = false, instant = false} = {}) {
-    if (!initial && same(next, wanted)) return same(next, rendered);
+    if (!initial && same(next, wanted)) {if (same(next, rendered)) savePreference(); return same(next, rendered);}
     wanted = {...next}; const id = ++sequence;
     controls(next, true); settled();
-    if (!initial && same(next, rendered)) return true;
+    if (!initial && same(next, rendered)) {savePreference(); updateLinks(); return true;}
     panel.setAttribute('aria-busy', 'true');
     loading = setTimeout(() => {if (id === sequence) panel.classList.add('loading');}, 300);
     const spec = specFor(next);
     try {
       const image = await decode(spec);
       if (id !== sequence) return false;
-      const ms = instant ? 0 : duration(initial ? 160 : next.mode !== rendered.mode ? 240 : 200);
+      const ms = instant ? 0 : duration(initial ? 160 : next.mode !== rendered.mode ? 240 : 320);
       root.dataset.theme = next.mode;
       document.querySelector('meta[name=theme-color]').content = next.mode === 'light' ? '#F9F8F5' : '#2A2927';
       rendered = {...next};
       if (chosen) {try {localStorage.setItem('claude-paper-theme', chosen);} catch {}}
       caption.textContent = spec.label; link.href = spec.full;
+      document.querySelector('[data-enlarge]').href = spec.full;
+      document.querySelector('.plate-number').textContent = String(tabs.findIndex(t => t.dataset.scene === next.scene) + 1).padStart(2, '0') + ' / 05';
       panel.setAttribute('aria-labelledby', 'tab-' + next.scene);
       panel.dataset.scene = next.scene; panel.dataset.mode = next.mode;
       layerIn(image, ms); settled(); updateLinks(); return true;
@@ -131,14 +139,14 @@
   const ink = document.createElement('span'); ink.className = 'tab-ink'; ink.ariaHidden = 'true';
   document.querySelector('.scene-tabs').append(ink);
   for (const tab of tabs) {
-    tab.addEventListener('click', () => go({...wanted, scene: tab.dataset.scene}));
+    tab.addEventListener('click', () => {manual(); go({...wanted, scene: tab.dataset.scene});});
     tab.addEventListener('focus', () => preload({...wanted, scene: tab.dataset.scene}));
     tab.addEventListener('pointerenter', () => preload({...wanted, scene: tab.dataset.scene}));
     tab.addEventListener('keydown', event => {
       const index = tabs.indexOf(tab);
       const next = {ArrowRight:(index + 1) % tabs.length, ArrowLeft:(index + tabs.length - 1) % tabs.length, Home:0, End:tabs.length - 1}[event.key];
       if (next === undefined) return;
-      event.preventDefault(); go({...wanted, scene: tabs[next].dataset.scene}); tabs[next].focus({preventScroll:true});
+      event.preventDefault(); manual(); go({...wanted, scene: tabs[next].dataset.scene}); tabs[next].focus({preventScroll:true});
     });
   }
   for (const button of modes) {
@@ -152,7 +160,13 @@
   window.addEventListener('resize', moveInk);
   window.addEventListener('hashchange', updateLinks);
   go(wanted, {initial:true});
-  const motionReady = () => {requestAnimationFrame(() => root.classList.add('motion-ready')); preload({...wanted, mode:wanted.mode === 'light' ? 'dark' : 'light'});};
+  const motionReady = () => {requestAnimationFrame(() => {
+    root.classList.add('motion-ready');
+    if (!reducedMotion.matches && performance.now() < 600 && scrollY < 10) {
+      document.querySelector('.hero').classList.add('hero-enter');
+      document.querySelector('.paper-stack').classList.add('paper-enter');
+    }
+  }); preload({...wanted, mode:wanted.mode === 'light' ? 'dark' : 'light'});};
   if (document.readyState === 'complete') motionReady(); else window.addEventListener('load', motionReady, {once:true});
 
   const copy = document.querySelector('[data-copy-command]'); copy.hidden = false;
@@ -167,26 +181,51 @@
   });
 
   let observer;
-  const reveal = el => {el.classList.remove('reveal-pending'); observer?.unobserve(el);};
+  const reveal = el => {el.classList.remove('pending'); el.classList.add('visible'); observer?.unobserve(el);};
   if ('IntersectionObserver' in window && !reducedMotion.matches && (!location.hash || location.hash === '#main') && scrollY === 0) {
     observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) reveal(entry.target);
-    }), {threshold:0.08, rootMargin:'0px 0px -4% 0px'});
-    document.querySelectorAll('.section-head,.features article,.folder-rules,.demo>div,.install-layout>div,.scope>div,.palette').forEach((el, index) => {
+    }), {threshold:0.08, rootMargin:'0px 0px -5% 0px'});
+    document.querySelectorAll('.section-heading,.specimen-sheet,.install-layout>div,.appendix details,.palette').forEach(el => {
       if (el.getBoundingClientRect().top < innerHeight) return;
-      el.classList.add('reveal-in', 'reveal-pending');
-      el.style.setProperty('--delay', el.matches('.features article') ? (index % 3) * 60 + 'ms' : '0ms');
-      observer.observe(el);
+      el.classList.add('reveal', 'pending'); observer.observe(el);
     });
   }
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => anchor.addEventListener('click', () => {
+  const stopSequence = () => {scrollTrigger?.kill(true); scrollTrigger = null; showcase.classList.remove('scroll-enabled');};
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => anchor.addEventListener('click', event => {
     const target = document.getElementById(anchor.hash.slice(1));
     if (!target) return;
-    reveal(target); target.querySelectorAll('.reveal-pending').forEach(reveal);
+    reveal(target); target.querySelectorAll('.pending').forEach(reveal);
+    if (anchor.hash === '#install' && scrollTrigger) {
+      event.preventDefault(); stopSequence();
+      requestAnimationFrame(() => {target.scrollIntoView({behavior:reducedMotion.matches?'instant':'smooth'}); const url=new URL(location.href);url.hash='install';history.replaceState(null,'',url);updateLinks();target.tabIndex=-1;target.focus({preventScroll:true});});
+    }
   }));
   reducedMotion.addEventListener('change', event => {
-    if (event.matches) {document.querySelectorAll('.reveal-pending').forEach(reveal); observer?.disconnect();}
+    if (event.matches) {document.querySelectorAll('.pending').forEach(reveal); observer?.disconnect(); document.querySelector('.paper-stack').classList.remove('paper-enter');}
   });
+  if (window.gsap && window.ScrollTrigger && (!location.hash || ['#main','#gallery'].includes(location.hash))) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.matchMedia().add('(min-width: 1024px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)', () => {
+      if (navigator.connection?.saveData) return;
+      showcase.classList.add('scroll-enabled');
+      let scrollIndex = 0;
+      const resume = self => {if (manualScene && !resumeAllowed) return; manualScene = false; resumeAllowed = false; scrollIndex = Math.max(0,Math.min(4,Math.round(self.progress*4))); showcase.classList.remove('is-manual'); go({...wanted,scene:tabs[scrollIndex].dataset.scene});};
+      scrollTrigger = ScrollTrigger.create({trigger:'.proof-pin',start:'top 18px',end:()=>'+='+Math.min(innerHeight*2.1,2200),pin:true,pinSpacing:true,anticipatePin:1,invalidateOnRefresh:true,
+        onEnter:resume,onEnterBack:resume,onLeave:()=>{resumeAllowed=true;},onLeaveBack:()=>{resumeAllowed=true;},
+        onUpdate:self => {
+          document.querySelector('.paper-stack').style.setProperty('--drift',self.progress.toFixed(3));
+          if (manualScene || document.querySelector('#lightbox').open) return;
+          const step = self.progress*4;
+          let next = scrollIndex;
+          if (step > scrollIndex+.58) next = Math.min(4,Math.floor(step+.42));
+          if (step < scrollIndex-.58) next = Math.max(0,Math.ceil(step-.42));
+          if (next !== scrollIndex) {scrollIndex=next; go({...wanted,scene:tabs[next].dataset.scene});}
+        }
+      });
+      return () => {scrollTrigger?.kill(true); scrollTrigger=null; showcase.classList.remove('scroll-enabled'); document.querySelector('.paper-stack').style.removeProperty('--drift');};
+    });
+  }
 
   const stats = document.querySelector('[data-install-stats]');
   if (stats) fetch('install-stats.json').then(response => {
@@ -204,32 +243,39 @@
   if (typeof dialog.showModal !== 'function') return;
   let opener, fromStage = false, lightboxSequence = 0, closingTimer;
   const dialogImage = dialog.querySelector('img');
+  const zoom = document.querySelector('#zoom-preview');
+  zoom.addEventListener('click', () => {const detail=dialog.classList.toggle('detail'); zoom.textContent=detail?zoom.dataset.fit:'100%';});
+  document.querySelector('[data-enlarge]').addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault(); link.click();
+  });
   const previous = document.querySelector('#previous-preview'), next = document.querySelector('#next-preview');
   async function showLarge(spec) {
     const id = ++lightboxSequence;
     try {
       const large = await decode(spec, true);
       if (id !== lightboxSequence || !dialog.open) return;
-      dialogImage.src = large.src; dialogImage.alt = spec.label;
+      dialogImage.src = large.src; dialogImage.alt = spec.label; document.querySelector('#original-preview').href = spec.full;
     } catch { /* Keep the already decoded preview if the larger asset fails. */ }
   }
   function closeDialog() {
-    if (!dialog.open || dialog.classList.contains('closing')) return;
-    dialog.classList.add('closing');
+    if (!dialog.open || dialog.classList.contains('is-closing')) return;
+    dialog.classList.add('is-closing');
     closingTimer = setTimeout(() => dialog.close(), duration(140));
   }
   for (const anchor of document.querySelectorAll('[data-lightbox]')) anchor.addEventListener('click', event => {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-    event.preventDefault(); opener = anchor; fromStage = anchor === link;
+    event.preventDefault(); manual(); opener = anchor; fromStage = anchor === link;
     const source = anchor.querySelector('#scene-image') || anchor.querySelector('img');
     dialogImage.src = source.currentSrc || source.src; dialogImage.alt = source.alt;
     dialog.querySelector('p').textContent = source.alt;
     previous.hidden = next.hidden = !fromStage;
-    clearTimeout(closingTimer); dialog.classList.remove('closing'); dialog.showModal();
+    clearTimeout(closingTimer); dialog.classList.remove('is-closing'); dialog.classList.remove('detail'); zoom.textContent='100%'; dialog.showModal(); requestAnimationFrame(()=>dialog.classList.add('is-open'));
     showLarge({src:source.src, full:anchor.href, label:source.alt});
   });
   async function pageImage(direction) {
     if (!dialog.open || !fromStage) return;
+    manual();
     const index = tabs.findIndex(tab => tab.dataset.scene === wanted.scene);
     const target = {...wanted, scene:tabs[(index + direction + tabs.length) % tabs.length].dataset.scene};
     const id = ++lightboxSequence;
@@ -248,7 +294,7 @@
   document.querySelector('#close-lightbox').addEventListener('click', closeDialog);
   dialog.addEventListener('cancel', event => {event.preventDefault(); closeDialog();});
   dialog.addEventListener('close', () => {
-    ++lightboxSequence; clearTimeout(closingTimer); dialog.classList.remove('closing'); opener?.focus({preventScroll:true});
+    ++lightboxSequence; clearTimeout(closingTimer); dialog.classList.remove('is-closing','is-open'); opener?.focus({preventScroll:true});
   });
   dialog.addEventListener('click', event => {
     if (event.target !== dialog) return;

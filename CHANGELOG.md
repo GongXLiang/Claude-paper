@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.0 — Whole Orca, Paper Fold 2
+
+- Replaced folder-name colors with one slate folder design, including closed/open states for every name.
+- Redrew file icons around distinct silhouettes and format marks: 340 suffixes and 115 exact filenames, each with a dedicated original SVG; 458 mappings including defaults. Added a generated full coverage catalogue.
+- Recaptured five whole native Orca scenes in both modes at 2880 × 1800. Claude Code and Codex share one real left/right workspace; Chat remains the website default. Refreshed the cover, six store screenshots and bilingual READMEs.
+- Rebuilt the website around a paper stack, a short desktop scroll sequence, stronger entrance motion and restrained page/mode crossfades. Manual choices pause automatic scene changes. Mobile, reduced-motion and no-JS fallbacks remain ordinary document flow.
+- Kept application and terminal color palettes, optional Codex syntax themes and IBM Plex Mono unchanged. Data-only plugin; no new application permissions.
+
+文件夹统一灰蓝，文件类型以不同轮廓和颜色区分；455 枚独立文件 SVG。宣传图改为完整 Orca 原生工作区，双 Agent 同屏协作；网页升级纸叠展示与滚动动效，保留暖纸/暖夜色调、中英文、键盘操作和官方安装量。
+
 ## 0.5.0 — Agent CLI companions and smoother presentation
 
 - Added optional Codex CLI light/dark syntax themes generated from the editor palette, with a dependency-free, conflict-safe installer and bilingual instructions.

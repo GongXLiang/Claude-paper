@@ -1,145 +1,97 @@
-<p align="center"><a href="https://gongxliang.github.io/Claude-paper/zh-CN.html"><img src="docs/assets/cover.png" alt="Claude Paper：Orca 原生浅色聊天、真实 Claude Code CLI 与当前文件树" width="100%"></a></p>
-<p align="center"><img src="docs/assets/icon.png" width="80" height="80" alt="Claude Paper 折纸虎鲸标识"></p>
-<h1 align="center">Claude Paper for Orca</h1>
-<p align="center"><b>一张纸，两种光。</b><br>为对话、代码、终端与文件树准备的暖纸与暖夜。</p>
-<p align="center"><a href="README.md">English</a> · <b>简体中文</b><br><a href="https://gongxliang.github.io/Claude-paper/zh-CN.html">查看主题效果</a> · <a href="https://www.onorca.dev/plugins/gongxliang/claude-paper">社区商店</a> · <a href="#安装">安装</a></p>
+# Claude Paper for Orca
 
-让 Orca 更接近你喜欢的 Claude 质感。安静的纸色底面、克制的陶土强调与清楚的蓝色链接，搭配用于文档、编程语言和常见目录的原创纸折图标。
+白天是暖纸，夜晚是柔和的炭灰。让 Chat、智能体终端和文件树拥有协调的视觉感受。
 
-| 暖纸与暖夜 | 纸折图标 | 配套终端 |
-| --- | --- | --- |
-| 安静的 Chat、清晰的代码与差异 | 辨认语言、文档与工具 | Claude Code 同步 + 可选 Codex 语法主题 |
-| 2 套应用主题，73 个色彩令牌 | 77 个 SVG、16 类目录、512 条映射 | 2 套终端色板 + 可选 IBM Plex Mono |
+[English](README.md) · **简体中文** · [在线预览](https://gongxliang.github.io/Claude-paper/zh-CN.html) · [Orca 社区商店](https://www.onorca.dev/plugins/gongxliang/claude-paper)
 
-**0.5.0 · 免费 · MIT + OFL 字体 · 纯数据。** 非官方社区作品，与 Anthropic 或 Stably 无隶属或背书关系。
+![Claude Paper：完整 Orca 工作区中的 Claude Code 与 Codex 同屏协作](docs/assets/cover.png)
+
+两套应用主题、配套终端色板、**455 枚原创文件图标**、统一的灰蓝文件夹，以及可选 IBM Plex Mono 字体。非官方社区主题，纯数据插件，无需额外能力权限。
 
 ## 安装
 
-需要 **Orca 1.4.255+**。可从[社区商店](https://www.onorca.dev/plugins/gongxliang/claude-paper)安装，或运行：
+需要 **Orca 1.4.255 或更新版本**。从[社区商店](https://www.onorca.dev/plugins/gongxliang/claude-paper)安装，或运行：
 
 ```sh
 orca plugin install GongXLiang/Claude-paper --json
 ```
 
-在 **设置 → 外观** 中选择：
+在**设置 → 外观**选择浅色 **Claude Paper · 暖纸**、深色 **Claude Paper · 暖夜**、对应终端色板，以及 **Claude Paper · 纸折图标**。IBM Plex Mono 可在终端或编辑器字体选择器中手动选择；已有字体设置不会被插件覆盖。
 
-1. 应用浅色主题为 **Claude Paper · 暖纸**，深色主题为 **Claude Paper · 暖夜**。
-2. 终端主题选择同名配色，或使用应用主题下的「使用其终端配色」。
-3. 文件图标主题为 **Claude Paper · 纸折图标**。
+若要使用图中的独立 Chat 配色，请关闭 **Match Terminal Appearance / 匹配终端外观**；喜欢对话跟随终端颜色和字体时也可以开启。
 
-在聊天设置中关闭 **匹配终端外观**，可使用独立聊天细节色；开启时，聊天采用所选终端的颜色与字体。
+[展示网页](https://gongxliang.github.io/Claude-paper/zh-CN.html#install)提供官方安装量和来源日期。数据定期刷新，表示安装次数，不是实时活跃用户或独立人数。
 
-使用 **Claude Code CLI** 时，在 **设置 → 外观** 搜索 Claude Code，开启 **Match Claude Code to Terminal Theme**。它会跟随 Orca 终端色板，在 Orca 外也生效；关闭后恢复原主题，在 Claude Code 内选择其他主题会停止同步。插件不会自动开启这项宿主功能。[Orca 实现说明](https://github.com/stablyai/orca/blob/v1.4.255/src/main/claude/theme-sync/claude-code-theme.ts)
+## 对话，始终在工作区之中
 
-使用 **Codex CLI** 时，可安装[配套语法主题](extras/codex/README.zh-CN.md)，再用 `/theme` 选择 `claude-paper-light` 或 `claude-paper-dark`。它们影响代码和差异语法，不会自动跟随 Orca 切换。终端换色后，运行中的 CLI 可能需要退出并恢复会话，才能重新识别底色。
+[![暖纸：完整 Orca 原生对话、代码区与文件树](docs/assets/chat-light.png)](docs/assets/chat-light-large.png)
 
-新 CLI 截图使用可选的 **IBM Plex Mono**，可在终端或编辑器字体选择器手动选用。已有字体设置不会被自动替换；中文使用系统回退字体。[字体来源与 OFL 许可](fonts/README.md)
+[查看暖夜](docs/assets/chat-dark-large.png)。每个场景都保留完整 Orca 窗口；点击图片可打开 **2880 × 1800** 原始分辨率大图。
 
-[宣传网页](https://gongxliang.github.io/Claude-paper/zh-CN.html#install)展示带来源日期的官方安装量，定期刷新；它表示安装次数，不是实时在线人数。
+## 两个智能体，一个 Orca 窗口
 
-## 对话，保留完整场景
+[![Claude Code 与 Codex 在 Orca 原生左右分屏中处理同一公开任务](docs/assets/agents-dark.png)](docs/assets/agents-dark-large.png)
 
-![暖纸模式下的原生 Orca 聊天、完整公开示例回复与输入框](docs/assets/chat-light.png)
+[同一工作区的暖纸效果](docs/assets/agents-light-large.png)。
 
-<details><summary>查看同一段暖夜对话</summary>
+这是实际运行的 Claude Code 和 Codex CLI：前者审阅日期工具，后者检查跨日边界并运行测试，再将验证结果交回 Claude Code。截图展示真实公开任务的完成状态，没有重绘终端。编排能力来自 Orca 和智能体；主题负责让它们的视觉环境更加协调。
 
-![暖夜模式下的同一个公开任务](docs/assets/chat-dark.png)
+- **Claude Code：**可在 Orca 外观设置开启 **Match Claude Code to Terminal Theme**。这是宿主的可选同步功能，会跟随 Orca 终端色板，也可能影响 Orca 外运行的 Claude Code；在 Claude Code 中另选主题会停止同步。安装本插件不会自动开启它。[宿主实现](https://github.com/stablyai/orca/blob/v1.4.255/src/main/claude/theme-sync/claude-code-theme.ts)
+- **Codex CLI：**另提供[可选配套语法主题](extras/codex/README.md)，通过 `/theme` 选择 `claude-paper-light` 或 `claude-paper-dark`，影响代码和差异高亮，不会自动随 Orca 明暗切换。终端背景变化后，运行中的 CLI 可能需要重新启动或恢复会话。
+- **字体：**可选 IBM Plex Mono，中文使用系统后备字体。[来源与 OFL 许可](fonts/README.md)
 
-</details>
+## 文件夹安静，文件有个性
 
-## 真实 Agent CLI，同一套色调
+所有文件夹统一使用**灰蓝色**，仅区分折叠与展开。无论叫 `skills`、`src`，还是 `my-notes`，效果都一致，不再用大量目录颜色干扰文件识别。
 
-| Claude Code · 暖夜 | Codex CLI · 暖纸 |
+![Paper Fold 2：两种模式下的精选文件图标与统一文件夹](docs/assets/icons-zh.png)
+
+上图直接渲染插件的 SVG。**340 个后缀 + 115 个固定文件名**各有独立 SVG；用轮廓识别类别，再用色彩和小标记区分格式、变体。Python 双蛇、Notebook 单元格、C/C++ 六边形、Office、Markdown、JSON 花括号、YAML 缩进线、TOML 方括号、Git、Docker、Shell、数据库和媒体文件均已覆盖。常见配置文件包括 `.gitignore`、`.env`、`package.json`、`Dockerfile`、`Cargo.toml` 和 `pyproject.toml`。
+
+[查看全部 455 条对应关系](icons/COVERAGE.md) · [机器可读清单](icons/catalogue.json) · [原生 Orca 文件树](docs/assets/files-dark-large.png)
+
+Orca **先匹配完整文件名，再匹配最长后缀**，不区分大小写。因此 `format.test.js` 使用测试图标，`types.d.ts` 使用声明图标，普通 `.js`、`.ts` 使用对应语言图标。`.yaml` / `.yml` 等近似格式保留共同轮廓，但小标记不同。未列出的类型仍有中性文件图标；这是一套广泛覆盖的精选分类，并不宣称识别所有可能存在的后缀。含义有歧义的后缀选择见覆盖说明。
+
+## 代码与改动，保留完整上下文
+
+| 暖纸 · 编辑器 | 暖夜 · 差异审阅 |
 | --- | --- |
-| [![开启 Orca 主题同步的真实 Claude Code CLI](docs/assets/claude-dark.png)](docs/assets/claude-dark.png) | [![使用配套浅色语法主题的真实 Codex CLI](docs/assets/codex-light.png)](docs/assets/codex-light.png) |
+| [![Orca 原生 JavaScript 编辑器](docs/assets/editor-light.png)](docs/assets/editor-light-large.png) | [![Orca 原生差异审阅](docs/assets/diff-dark.png)](docs/assets/diff-dark-large.png) |
 
-[暖纸 Claude Code](docs/assets/claude-light.png) · [暖夜 Codex](docs/assets/codex-dark.png)
+[深色编辑器](docs/assets/editor-dark-large.png) · [浅色差异](docs/assets/diff-light-large.png) · [暖纸文件浏览](docs/assets/files-light-large.png)
 
-画面来自读取公开 date-kit 示例的真实 CLI 会话，使用可选 IBM Plex Mono。标头、对话与输入框分别裁切以移除私人信息，没有重绘 CLI 界面或回复。
+## 主题能改变什么
 
-## 代码、改动与终端输出
-
-| 暖纸编辑器 | 暖夜差异与测试 |
+| 区域 | 范围 |
 | --- | --- |
-| [![浅色 JavaScript 编辑器](docs/assets/editor-light.png)](docs/assets/editor-light.png) | [![深色代码差异及实际测试输出](docs/assets/diff-dark.png)](docs/assets/diff-dark.png) |
+| 应用、Chat、编辑器、差异 | 73 个受支持颜色令牌及编辑器语法色 |
+| 文件与文件夹 | 455 枚文件图标、中性兜底、统一文件夹状态；共 458 条映射 |
+| 终端 | 前景、背景、光标、选区、16 色 ANSI 色板 |
+| CLI 真彩色 | CLI 显式输出的 24 位颜色仍由程序决定；宿主同步和 CLI 配套主题是独立选项 |
+| 字体 | 可选 IBM Plex Mono，手动选择 |
+| 布局、应用动效、设置开关、智能体编排 | 由 Orca 和用户设置决定 |
 
-[深色编辑器](docs/assets/editor-dark.png) · [浅色差异](docs/assets/diff-light.png) · [浅色终端](docs/assets/terminal-light.png)
+网页中的纸张动效用于产品展示，不会加入 Orca 应用界面。网页尊重“减少动态效果”；触屏设备使用普通滚动，同时保留场景按钮和键盘翻页。
 
-[终端测试与 ANSI 色样](docs/assets/terminal-dark.png)
+## 一个公开任务，中英两种表达
 
-## 一眼辨认语言与文件
+[English walkthrough](examples/README.md) · [中文示例](examples/README.zh-CN.md)
 
-Python、Notebook、C、C++、Fortran、JavaScript 和 TypeScript 使用居中的独立符号与彩色折纸轮廓。Word、Excel、PPT、PDF、SVG、HTML、Docker 也各有自己的标记。
-
-![语言、文件类型与目录用途的明暗 SVG 图鉴](docs/assets/icons-zh.png)
-
-图鉴直接渲染插件 SVG，并非 Orca 窗口截图。具体文件名优先于最长后缀匹配，例如 `format.test.js` 使用测试图标，`types.d.ts` 使用类型声明图标；普通 `.py`、`.ipynb`、`.c`、`.cpp`、`.f90`、`.js` 文件使用各自的语言或类型图标。[完整映射](icons/theme.json)
-
-| 语言或类型 | 后缀 |
-| --- | --- |
-| Python | `.py`、`.pyi` |
-| Notebook | `.ipynb`、`.qmd`、`.rmd` |
-| C | `.c`、`.h` |
-| C++ | `.cc`、`.cpp`、`.hpp`、`.cxx`、`.hxx` |
-| Fortran | `.f`、`.for`、`.ftn`、`.f90`、`.f95`、`.f03`、`.f08`、`.f18` |
-| JavaScript | `.js`、`.jsx`、`.mjs`、`.cjs` |
-| TypeScript | `.ts`、`.tsx`、`.mts`、`.cts` |
-
-## 通用目录，明确的匹配规则
-
-目录分类说明用途；实际分配遵循 [Orca 图标接口](https://github.com/stablyai/orca/blob/v1.4.255/docs/reference/plugin-themes.md#icon-themes)，按**名称精确匹配，不区分大小写**。
-
-| 用途分类 | 名称示例，每一项都是独立别名 |
-| --- | --- |
-| 源代码 | `src`、`source`、`code`、`modules`、`services` |
-| 技能与智能体 | `skills`、`skill`、`.skills`、`agents`、`.codex`、`.claude` |
-| 插件 | `plugins`、`plugin`、`extensions`、`extension`、`addons` |
-| 数据 | `data`、`raw`、`dataset`、`datasets`、`database`、`db` |
-| 输出与报告 | `output`、`outputs`、`result`、`results`、`reports`、`exports` |
-| 文档与参考资料 | `docs`、`documentation`、`examples`、`references`、`reference`、`bibliography` |
-| 图谱与知识 | `graph`、`graphs`、`knowledge`、`knowledge-base` |
-| 素材与工具 | `assets`、`images`、`resources`、`scripts`、`tools` |
-
-`raw` 和 `data` 可分别匹配，不表示二级目录。宿主不识别目录内容、不按路径或部分名称匹配，也不继承父目录图标。`my-project-notes` 等未收录名称使用**灰蓝色默认文件夹**，并有展开状态。`graphify` 只是保留的兼容别名，不是要求所有人遵循的项目规范。
-
-完整分类还包括测试、配置、依赖、构建缓存和版本控制。[全部 118 个名称](icons/folders.json) · [可视化匹配说明](https://gongxliang.github.io/Claude-paper/zh-CN.html#folders)
-
-## 公开示例，中英双语
-
-同一个日期格式化任务提供[中文指南](examples/README.zh-CN.md)与 [English](examples/README.md)，包含可运行代码和四项测试，不包含私人聊天或项目文件。
-
-> 让 formatDate 默认使用本地时区，同时保留显式时区参数，并补充跨午夜的测试。
+> 默认使用本地时区，并保留显式时区参数。 / Use the local time zone by default; retain an explicit time-zone argument.
 
 ```js
 import { formatDate } from './examples/date-kit/format.mjs';
-
 const date = new Date('2026-11-09T23:30:00Z');
 formatDate(date, 'UTC');            // 09 Nov 2026
 formatDate(date, 'Asia/Shanghai');  // 10 Nov 2026
 ```
 
-## 主题能改变什么
+本版全部场景在 Orca 1.4.255 的独立公开演示配置中重新拍摄。不包含个人聊天、账户、设备名称、额度或私人项目。图中 `D:/paper-demo/date-kit` 是专门创建的公开演示路径。[拍摄记录](docs/MEDIA.md)
 
-| 范围 | 主题作用 |
-| --- | --- |
-| 应用、聊天、编辑器与差异 | 73 个色彩令牌与语法配色 |
-| 文件与目录 | 文件类型、精确目录名称和兜底图标 |
-| 终端 | 前景、背景、光标、选区与 16 色 ANSI |
-| CLI 的 24 位真彩色 | 由 CLI 程序控制；Orca 可选的 Claude Code 同步是另一项宿主功能 |
-| Codex CLI 配套主题 | 可选代码块与差异语法配色，需要单独安装 |
-| 字体 | 提供可选 IBM Plex Mono，由用户在 Orca 中选择 |
-| 布局、圆角、应用动效与设置开关 | 由 Orca 与用户设置决定 |
+## 开发与致谢
 
-[![原生终端色板对照](docs/assets/cli-compare.png)](docs/assets/cli-compare.png)
+[维护说明](DEVELOPMENT.md) · [设计历史](DESIGN.md) · [更新日志](CHANGELOG.md) · [版本下载](https://github.com/GongXLiang/Claude-paper/releases)
 
-对照中 ANSI 颜色跟随色板，显式指定的 `Truecolor #D97757` 保持不变。这些是终端色样，并非 Claude Code CLI 的界面截图。
+主题代码与文件 SVG 独立制作。研究参考：[open-claude-ui](https://github.com/Caho1/open-claude-ui)、[HwFee DSH CDS](https://github.com/HwFee/HwFee-dsh)、[Claude Theme for Orca](https://github.com/jiangwanyutao/orca-claude-theme)、[Monospace Icons](https://github.com/faisalmuhammad/orca-monospace-icons)、[Orca Material Icons](https://github.com/stablyai/orca-plugins/tree/main/plugins/material-icons)、[ThreeUI](https://github.com/MengTo/threeui)、[oil-ui](https://github.com/oil-oil/oil-ui)。没有复制其截图或 SVG。折纸虎鲸标识使用 GPT 生成图片，见[标识来源](docs/IDENTITY.md)。
 
-## 素材、开发与致谢
-
-聊天、编辑器与差异沿用已经过隐私审阅的 Orca 1.4.255 / Claude Paper 0.3.0 实机图，配色未改变。0.5.0 封面加入当前文件树与真实 Claude Code；新 CLI 图片分别来自 Claude Code 2.1.319、Codex CLI 0.167.0。图标图鉴继续使用未改变的 0.4.2 SVG；折纸虎鲸标识由 Opus 5.5 提供设计咨询，再经 GPT 生图生成。[素材记录](docs/MEDIA.md) · [标识提示词](docs/IDENTITY.md)
-
-[开发说明](DEVELOPMENT.md) · [设计历史](DESIGN.md) · [更新记录](CHANGELOG.md) · [版本下载](https://github.com/GongXLiang/Claude-paper/releases)
-
-视觉研究与展示参考：[open-claude-ui](https://github.com/Caho1/open-claude-ui)、[HwFee DSH CDS](https://github.com/HwFee/HwFee-dsh)、[Claude Theme for Orca](https://github.com/jiangwanyutao/orca-claude-theme)、[Monospace Icons for Orca](https://github.com/faisalmuhammad/orca-monospace-icons)。主题代码、SVG 图标和页面独立实现，未复制第三方截图或 SVG。IBM Plex Mono 保持原文件，按原始 [OFL 许可](fonts/OFL.txt)分发。
-
-社区商店按版本标签异步索引，可能晚于 GitHub。[查看收录状态](https://www.onorca.dev/plugins/gongxliang/claude-paper)。
+插件代码使用 MIT 许可；IBM Plex Mono 保留 OFL 许可；网页的 GSAP/ScrollTrigger 使用[独立许可说明](docs/vendor/NOTICE.txt)。本项目与 Anthropic、Stably 无隶属或官方背书关系。社区目录异步扫描版本标签，更新可能晚于 GitHub。

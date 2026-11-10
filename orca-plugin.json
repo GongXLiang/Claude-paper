@@ -2,8 +2,8 @@
   "manifestVersion": 2,
   "id": "claude-paper",
   "name": "Claude Paper",
-  "version": "0.5.0",
-  "description": "Claude-inspired warm light and dark themes for Orca: a calm, readable Chat, matching terminal colors for coding agents, and original Paper Fold file icons.",
+  "version": "0.6.0",
+  "description": "Claude-inspired light and dark colors for Orca Chat and agent terminals, with 455 distinct file icons, calm slate folders and optional IBM Plex Mono.",
   "engines": {
     "orca": ">=1.4.255"
   },
@@ -77,38 +77,38 @@
   "homepage": "https://GongXLiang.github.io/Claude-paper/",
   "cover": {
     "path": "docs/assets/cover.png",
-    "alt": "Claude Paper for Orca: a complete light Chat scene, genuine dark Claude Code CLI and current Paper Fold file icons from a public date-kit demo."
+    "alt": "Claude Paper: a complete Orca workspace with Claude Code and Codex side by side, original file icons and warm charcoal colors."
   },
   "screenshots": [
     {
       "path": "docs/assets/chat-light.png",
-      "alt": "Native light Orca chat, complete public demo reply, composer and Paper Fold file tree.",
-      "caption": "暖纸 · 原生对话与输入框 / Chat"
+      "alt": "Complete native Orca: public Chat response, composer, code and file tree in Warm Paper.",
+      "caption": "暖纸 · Chat 与代码 / Chat & code"
     },
     {
-      "path": "docs/assets/claude-dark.png",
-      "alt": "Genuine Claude Code CLI with Orca theme sync and IBM Plex Mono, reviewing the public date-kit example. Account, local path and usage are cropped out.",
-      "caption": "暖夜 · Claude Code CLI / Native agent terminal"
+      "path": "docs/assets/agents-dark.png",
+      "alt": "Complete native Orca: real Claude Code and Codex sessions reviewing the same public task side by side.",
+      "caption": "暖夜 · 双智能体同屏 / Agents together"
     },
     {
-      "path": "docs/assets/codex-light.png",
-      "alt": "Genuine Codex CLI in Warm Paper with the optional claude-paper-light syntax theme and IBM Plex Mono. Public date-kit demo.",
-      "caption": "暖纸 · Codex CLI / Matching syntax theme"
+      "path": "docs/assets/agents-light.png",
+      "alt": "The same complete Orca workspace and two genuine CLI panes in Warm Paper.",
+      "caption": "暖纸 · 双智能体同屏 / Agents together"
     },
     {
       "path": "docs/assets/diff-dark.png",
-      "alt": "Native dark code diff, actual test output and file tree composed from the same public demo.",
-      "caption": "暖夜 · 改动与测试拼版 / Diff & tests"
+      "alt": "Complete native Orca: a public input-validation change and its tests in the native diff view.",
+      "caption": "暖夜 · 原生差异审阅 / Diff review"
     },
     {
       "path": "docs/assets/editor-light.png",
-      "alt": "Native light JavaScript editor with syntax colors and Paper Fold icons; local path bar removed.",
-      "caption": "暖纸 · 代码与文件树 / Editor"
+      "alt": "Complete native Orca: JavaScript tests in the editor and current file icons.",
+      "caption": "暖纸 · 原生编辑器 / Editor"
     },
     {
-      "path": "docs/assets/icons.png",
-      "alt": "Original Paper Fold SVG gallery: file formats and folder categories in light and dark. Folder names match exactly; unknown names use slate.",
-      "caption": "文件类型与通用目录 / Files & common folders"
+      "path": "docs/assets/files-dark.png",
+      "alt": "Complete native Orca: Markdown preview and a file tree with uniform slate folders and distinct file types.",
+      "caption": "暖夜 · 文件与文档 / Files & documents"
     }
   ],
   "icon": "docs/assets/icon.png"
