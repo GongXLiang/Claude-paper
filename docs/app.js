@@ -227,16 +227,20 @@
     });
   }
 
-  const stats = document.querySelector('[data-install-stats]');
-  if (stats) fetch('install-stats.json').then(response => {
+  const statsBlocks = document.querySelectorAll('[data-install-stats]');
+  if (statsBlocks.length) fetch('install-stats.json', {cache:'no-cache'}).then(response => {
     if (!response.ok) throw new Error('Stats unavailable'); return response.json();
   }).then(data => {
     const date = new Date(data.generatedAt);
     if (data.schemaVersion !== 1 || data.plugin !== 'gongxliang.claude-paper' || !Number.isSafeInteger(data.installs) || data.installs < 0 || !Number.isFinite(+date) || +date > Date.now() + 86400000) return;
-    stats.querySelector('[data-install-count]').textContent = data.installs.toLocaleString(document.documentElement.lang);
-    const time = stats.querySelector('time'); time.dateTime = date.toISOString();
-    time.textContent = date.toLocaleDateString(document.documentElement.lang, {timeZone:'UTC',year:'numeric',month:'short',day:'numeric'});
-    stats.hidden = false;
+    statsBlocks.forEach(stats => {
+      const time = stats.querySelector('time');
+      if (+date < Date.parse(time.dateTime)) return;
+      stats.querySelector('[data-install-count]').textContent = data.installs.toLocaleString(document.documentElement.lang);
+      time.dateTime = date.toISOString();
+      time.textContent = date.toLocaleDateString(document.documentElement.lang, {timeZone:'UTC',year:'numeric',month:'short',day:'numeric'});
+      stats.hidden = false;
+    });
   }).catch(() => {}); // The dated build-time snapshot remains useful offline.
 
   const dialog = document.querySelector('#lightbox');

@@ -1,8 +1,8 @@
 {
   "manifestVersion": 2,
   "id": "claude-paper",
-  "name": "Claude Paper",
-  "version": "0.6.0",
+  "name": "Claude Paper theme",
+  "version": "0.6.1",
   "description": "Claude-inspired light and dark colors for Orca Chat and agent terminals, with 455 distinct file icons, calm slate folders and optional IBM Plex Mono.",
   "engines": {
     "orca": ">=1.4.255"

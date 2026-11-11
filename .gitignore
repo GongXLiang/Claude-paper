@@ -1,7 +1,38 @@
+# Local dependencies and reproducible tool caches
 node_modules/
+/.venv/
+/venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+
+# Disposable work: scripts, captures, browser profiles and test outputs
+/tmp/
+/TMP/
+/playwright-report/
+/test-results/
+/coverage/
+.coverage
+coverage.xml
+
+# Personal Agent instructions/configuration stay local in this public repository
 .orca/
+.agents/
+.claude/
+.codex/
+[Aa][Gg][Ee][Nn][Tt][Ss]*.[Mm][Dd]
+[Cc][Ll][Aa][Uu][Dd][Ee]*.[Mm][Dd]
+
+# Secrets stay local; sanitized example templates may be shared
 .env
 .env.*
+!.env.example
+!.env.*.example
+
+# Local release archives
 *.zip
 *.tgz
 
@@ -10,6 +41,9 @@ media-source/
 .media-source/
 *-raw.png
 
-# Regenerable Python caches
-__pycache__/
-*.py[cod]
+# OS/editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo

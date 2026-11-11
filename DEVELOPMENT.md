@@ -2,6 +2,48 @@
 
 This repository root is the data-only Orca plugin. Keep app and terminal palettes native; do not patch Orca resources or add unsupported tokens.
 
+## Working directory and Agent setup / 工作目录与 Agent
+
+Open this repository itself in Orca, then start a new Chat or CLI session in its checkout.
+The Git root contains `orca-plugin.json`. Changing directory inside an existing agent
+session does not restart its instruction loading or change its configured sandbox.
+
+Personal `AGENTS.md` / `CLAUDE.md` instructions and Agent configuration directories
+stay local and are ignored by Git. They are optional and are not shipped with a clone.
+Shared build and contribution guidance belongs in this document.
+
+中文：在仓库根目录启动会话；个人规则文件及 Agent 配置仅保留在本地，不上传。
+公开的构建与维护说明以本文为准，更新历史见 CHANGELOG，宣传素材来源见
+[MEDIA.md](docs/MEDIA.md)。
+
+### Prerequisites and quick check / 环境与检查
+
+- Use Python 3.11+ and Node.js 22+. The scripts use their standard libraries; no
+  `pip install`, `npm install`, package lock or project virtual environment is needed.
+- Git is needed for contribution. GitHub CLI is optional for release work.
+- Orca is needed for host validation, local installation and genuine UI review.
+  Select the executable exported as `ORCA_CLI_COMMAND` when the session provides it;
+  otherwise follow the installed Orca CLI guide.
+
+Run from the repository root:
+
+```sh
+python scripts/check.py
+python -m http.server 8767 --bind 127.0.0.1 --directory docs
+```
+
+The first command runs five offline check groups and stops on failure. It does not
+build assets or contact the network. Installer tests only use disposable fixtures.
+The second command starts a local preview; stop it with Ctrl+C when finished.
+On systems where Python is named `python3`, use that executable.
+
+Put disposable captures, browser profiles, trial scripts and test reports in `tmp/`.
+Keep reusable scripts in `scripts/` and reviewed public media in `docs/assets/`.
+The ignore rules also cover virtual environments, test caches and local Agent
+credentials/settings and personal instruction/skill directories. Sanitized
+`.env.example` templates remain trackable. Never store secrets in those example files. Ignoring a path does
+not remove files already tracked by Git.
+
 ## Sources
 
 - `scripts/build-icons.py` generates the active SVGs in `icons/files/`, three defaults, `icons/theme.json`, `icons/catalogue.json` and `icons/COVERAGE.md`. There are 340 suffixes + 115 exact filenames + 3 defaults = **458 mappings**, below Orca's 512 limit. Every active file mapping owns a distinct SVG. Closed/open folders are uniform slate; folder-name maps must stay empty. `icons/folders.json` and old root SVGs are historical, unused by the generator.
@@ -13,22 +55,54 @@ This repository root is the data-only Orca plugin. Keep app and terminal palette
 
 ## Checks
 
+Regenerate only the outputs whose sources changed:
+
+| Source changed / 源文件 | Regenerate / 生成命令 |
+|---|---|
+| File icon definitions | `python scripts/build-icons.py`, then gallery and pages |
+| Bilingual specimen selection | `python scripts/build-gallery.py`; render PNGs only if visuals changed |
+| HTML template, bilingual copy, manifest or dated statistics | `python scripts/build-site.py` |
+| App syntax palette | `python scripts/build-codex.py` |
+
+For ordinary code changes, use `python scripts/check.py`. Individual existing checks
+remain available for narrow tasks: `check-theme.py` for theme/icons,
+`check-extras.py` for companion themes/fonts/installer/statistics, and
+`check-site.mjs` for pages/media/bilingual links. Text-only changes need the relevant
+link/format checks, not recaptures or a new release.
+
+For plugin-content changes or a release, also validate against the installed host:
+
 ```sh
-python scripts/build-icons.py
-python scripts/build-gallery.py
-python scripts/build-site.py
-python scripts/check-theme.py
-python scripts/check-extras.py
-node scripts/check-site.mjs
-node --check docs/app.js
-node --test examples/date-kit/format.test.mjs
 orca plugin validate . --json
 orca plugin check . --json
 ```
 
+`.github/workflows/check.yml` runs the offline suite on Windows and Linux for pushes
+to main and pull requests, using Python 3.13 / Node.js 22. It also regenerates icons,
+galleries, CLI companion themes and pages and fails if the committed outputs differ.
+The workflow has read-only repository permissions; it neither installs Orca nor
+changes releases. Browser/native visual acceptance remains a separate check.
+
 Evaluate `scripts/check-browser.js` in a real browser on both language pages; evaluate `scripts/check-motion.js` in a normal-motion desktop browser. Also verify native captures, 360 px layout, no-JS, reduced motion, actual keyboard input, image-load failure, slow decode, manual scene selection during pinned scroll, and lightbox zoom. Observe icon recognizability at 16/20 px; geometry uniqueness is not proof of perceptual distinction.
 
 中文：文件夹全部同色，不再维护名称别名。文件后缀和固定文件名写入图标生成器；改动后检查实际小尺寸。网页中英文共享模板，运行生成器同步输出。截图必须来自独立公开工作区，保留完整原生窗口，逐张检查隐私。维护步骤和许可适用于本版；旧拼版脚本仅保留作历史记录。
+
+## Git maintenance / 普通维护
+
+Inspect status and the intended diff once, then stage explicit task files. Do not
+bundle unrelated changes. Reuse still-valid check results instead of repeating them
+in wrappers, hooks and manual commands. An authorized ordinary maintenance push uses
+the current branch's existing upstream; it does not create or move version tags.
+The current check command and CI do not generate commit messages or create commits.
+CI runs after a push or pull-request event; it cannot prevent that upload. Review
+the staged files locally before committing. Use a public GitHub username and a
+GitHub noreply email for public commits; ignore rules do not hide commit metadata.
+
+A `git -C <repo>` invocation uses that repository correctly. Starting the agent in a
+different project can still load unrelated rules, select the wrong Orca workspace and
+require extra filesystem approval. Start a new session in this project rather than
+widening another project's access. A failed push should be retried after resolving
+the cause, preserving its existing local commit.
 
 ## Install and release
 

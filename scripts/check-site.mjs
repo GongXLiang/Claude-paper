@@ -41,6 +41,9 @@ png(manifest.icon,256,256,256*1024);
 for(const page of ['index.html','zh-CN.html']) {
 const html=readFileSync(resolve(root,'docs',page),'utf8');
 assert.ok(html.includes('data-language-link'));
+assert.equal((html.match(/data-install-stats/g)||[]).length,2,'Count must appear in hero and install section');
+assert.ok(/class="hero-action"[\s\S]*?data-install-count[\s\S]*?<\/section>/.test(html),'Missing first-screen count');
+
 assert.ok(html.includes(page==='index.html' ? '<html lang="en"' : '<html lang="zh-CN"'));
 assert.ok(!html.includes('{{'),'Unresolved template placeholder');
 const allIds=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]),ids=new Set(allIds);

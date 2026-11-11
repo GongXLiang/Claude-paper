@@ -1,0 +1,49 @@
+name: Check theme and site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Run offline checks
+        run: python scripts/check.py
+      - name: Verify generated assets match their sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -I -S -B -X utf8 scripts/build-icons.py
+          python -I -S -B -X utf8 scripts/build-gallery.py
+          python -I -S -B -X utf8 scripts/build-codex.py
+          python -I -S -B -X utf8 scripts/build-site.py
+          git diff --exit-code -- icons docs extras/codex
+          if [ -n "$(git ls-files --others --exclude-standard -- icons docs extras/codex)" ]; then
+            echo "A generator produced untracked assets; regenerate and commit its outputs."
+            exit 1
+          fi

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 — Store name and visible installation count
+
+- Renamed the plugin to Claude Paper theme; plugin and contribution IDs remain stable.
+- Added dated official installation counts beside the first-screen install button in both languages, retaining the installation-section count and offline snapshot.
+- Refresh both count locations together without replacing a newer snapshot with older data.
+
+插件名称改为 Claude Paper theme；中英文首页首屏显示官方安装次数和统计日期。
+
 ## 0.6.0 — Whole Orca, Paper Fold 2
 
 - Replaced folder-name colors with one slate folder design, including closed/open states for every name.
