@@ -53,7 +53,7 @@ for(const match of html.matchAll(/\b(?:src|href)="([^"]+)"/g)){
   if(link.startsWith('https://')) continue;
   if(link.startsWith('#')){if(link.length>1)assert.ok(ids.has(link.slice(1)),link);continue;}
   assert.ok(!link.includes('..')&&!link.includes(':'),link);
-  assert.ok(existsSync(resolve(root,'docs',link)),link);
+  assert.ok(existsSync(resolve(root,'docs',link.split('?')[0])),link);
 }
 for(const match of html.matchAll(/<img\b[^>]*>/g))assert.ok(/\balt="[^"]*"/.test(match[0]),'Image missing alt');
 assert.equal([...html.matchAll(/<script\b/g)].length,5);

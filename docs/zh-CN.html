@@ -6,8 +6,8 @@
 <script>(()=>{let saved;try{saved=localStorage.getItem('claude-paper-theme')}catch{}const query=new URLSearchParams(location.search).get('theme');const choice=[query,saved].find(v=>v==='light'||v==='dark');const mode=choice||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=mode;if(choice)document.documentElement.dataset.preference=choice;document.querySelector('meta[name="theme-color"]').content=mode==='dark'?'#2A2927':'#F9F8F5'})();</script>
 <title>Claude Paper — 一张纸，两种光</title><meta property="og:title" content="Claude Paper — 一张纸，两种光"><meta property="og:description" content="为 Orca 添一层纸感：暖纸浅色、炭灰深色，协调的对话与智能体终端，以及 455 个原创文件图标。"><meta property="og:image" content="https://gongxliang.github.io/Claude-paper/assets/cover.png"><meta property="og:url" content="https://gongxliang.github.io/Claude-paper/zh-CN.html"><meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" hreflang="en" href="https://gongxliang.github.io/Claude-paper/"><link rel="alternate" hreflang="zh-CN" href="https://gongxliang.github.io/Claude-paper/zh-CN.html">
-<link rel="icon" href="assets/icon.png" type="image/png"><link rel="stylesheet" href="style.css">
-<script src="vendor/gsap.min.js" defer></script><script src="vendor/ScrollTrigger.min.js" defer></script><script src="app.js" defer></script>
+<link rel="icon" href="assets/icon.png" type="image/png"><link rel="stylesheet" href="style.css?v=0.6.1">
+<script src="vendor/gsap.min.js" defer></script><script src="vendor/ScrollTrigger.min.js" defer></script><script src="app.js?v=0.6.1" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">跳转到内容</a>
