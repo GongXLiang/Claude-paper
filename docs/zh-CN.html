@@ -6,8 +6,8 @@
 <script>(()=>{let saved;try{saved=localStorage.getItem('claude-paper-theme')}catch{}const query=new URLSearchParams(location.search).get('theme');const choice=[query,saved].find(v=>v==='light'||v==='dark');const mode=choice||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=mode;if(choice)document.documentElement.dataset.preference=choice;document.querySelector('meta[name="theme-color"]').content=mode==='dark'?'#2A2927':'#F9F8F5'})();</script>
 <title>Claude Paper — 一张纸，两种光</title><meta property="og:title" content="Claude Paper — 一张纸，两种光"><meta property="og:description" content="为 Orca 添一层纸质感：暖纸浅色、炭灰深色，协调的对话与智能体终端，以及 455 个原创文件图标。"><meta property="og:image" content="https://gongxliang.github.io/Claude-paper/assets/cover.png"><meta property="og:url" content="https://gongxliang.github.io/Claude-paper/zh-CN.html"><meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" hreflang="en" href="https://gongxliang.github.io/Claude-paper/"><link rel="alternate" hreflang="zh-CN" href="https://gongxliang.github.io/Claude-paper/zh-CN.html">
-<link rel="icon" href="assets/icon.png" type="image/png"><link rel="stylesheet" href="style.css?v=0.6.1">
-<script src="vendor/gsap.min.js" defer></script><script src="vendor/ScrollTrigger.min.js" defer></script><script src="app.js?v=0.6.1" defer></script>
+<link rel="icon" href="assets/icon.png" type="image/png"><link rel="stylesheet" href="style.css?v=5024ed0e9340">
+<script src="vendor/gsap.min.js" defer></script><script src="vendor/ScrollTrigger.min.js" defer></script><script src="app.js?v=5024ed0e9340" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">跳转到内容</a>
@@ -21,9 +21,9 @@
 <button id="tab-diff" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="diff" data-large="true" data-file="diff" data-paired="false" data-caption="在原生差异视图中审查一个小改动">差异</button>
 <button id="tab-editor" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="editor" data-large="true" data-file="editor" data-paired="false" data-caption="协调的代码编辑器与文件树">代码</button>
 <button id="tab-files" role="tab" aria-controls="scene-panel" aria-selected="false" tabindex="-1" data-scene="files" data-large="true" data-file="files" data-paired="false" data-caption="统一灰蓝文件夹 · 在原生文件树中辨认不同文件类型">文件</button></div><div class="mode" role="group" aria-label="网页与截图明暗模式"><button data-mode="light" aria-pressed="true">暖纸</button><button data-mode="dark" aria-pressed="false">暖夜</button></div></div>
-  <div class="paper-stack"><span class="lamp" aria-hidden="true"></span><div class="stage" id="scene-panel" data-load-error="下一张预览暂时无法加载，当前图片已保留，请重试。" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
+  <div class="paper-stack"><span class="lamp" aria-hidden="true"></span><div class="sheet"><div class="stage" id="scene-panel" data-load-error="下一张预览暂时无法加载，当前图片已保留，请重试。" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
    <a href="assets/chat-light-large.png" data-lightbox id="scene-link"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/chat-dark.png 1600w, assets/chat-dark-large.png 2880w" sizes="(max-width:1023px) calc(100vw - 40px), 1184px"><img id="scene-image" src="assets/chat-light.png" srcset="assets/chat-light.png 1600w, assets/chat-light-large.png 2880w" sizes="(max-width:1023px) calc(100vw - 40px), 1184px" width="1600" height="1000" fetchpriority="high" alt="原生对话 · 完整回复、输入框与文件树"></picture><script>document.currentScript.previousElementSibling.querySelector('source').media=document.documentElement.dataset.theme==='dark'?'all':'not all';document.currentScript.remove()</script></a>
-  </div><a class="enlarge" href="assets/chat-light-large.png" data-enlarge>点击图片放大 ↗ <span aria-hidden="true">↗</span></a></div>
+  </div></div><a class="enlarge" href="assets/chat-light-large.png" data-enlarge>点击图片放大 ↗ <span aria-hidden="true">↗</span></a></div>
   <div class="stage-foot"><p><span class="plate-number" aria-hidden="true">01 / 05</span><span id="scene-caption">暖纸 · 原生对话 · 完整回复、输入框与文件树</span></p><a href="#install" class="skip-sequence">跳至安装 ↓</a></div>
   <p class="scroll-cue" data-enhanced hidden><span aria-hidden="true">↓</span> 向下滚动，看看不同工作模式；也可以直接选择上方场景。</p>
  </div>

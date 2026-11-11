@@ -6,8 +6,8 @@
 <script>(()=>{let saved;try{saved=localStorage.getItem('claude-paper-theme')}catch{}const query=new URLSearchParams(location.search).get('theme');const choice=[query,saved].find(v=>v==='light'||v==='dark');const mode=choice||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=mode;if(choice)document.documentElement.dataset.preference=choice;document.querySelector('meta[name="theme-color"]').content=mode==='dark'?'#2A2927':'#F9F8F5'})();</script>
 <title>{{page_title}}</title><meta property="og:title" content="{{page_title}}"><meta property="og:description" content="{{description}}"><meta property="og:image" content="https://gongxliang.github.io/Claude-paper/assets/cover.png"><meta property="og:url" content="https://gongxliang.github.io/Claude-paper/{{filename}}"><meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" hreflang="en" href="https://gongxliang.github.io/Claude-paper/"><link rel="alternate" hreflang="zh-CN" href="https://gongxliang.github.io/Claude-paper/zh-CN.html">
-<link rel="icon" href="assets/icon.png" type="image/png"><link rel="stylesheet" href="style.css?v={{version}}">
-<script src="vendor/gsap.min.js" defer></script><script src="vendor/ScrollTrigger.min.js" defer></script><script src="app.js?v={{version}}" defer></script>
+<link rel="icon" href="assets/icon.png" type="image/png"><link rel="stylesheet" href="style.css?v={{asset_version}}">
+<script src="vendor/gsap.min.js" defer></script><script src="vendor/ScrollTrigger.min.js" defer></script><script src="app.js?v={{asset_version}}" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">{{skip}}</a>
@@ -17,9 +17,9 @@
 <section class="showcase" id="gallery" aria-label="{{gallery_label}}">
  <div class="proof-pin">
   <div class="stage-bar" data-enhanced hidden><div class="scene-tabs" role="tablist" aria-label="{{scenes_label}}">{{tabs_html}}</div><div class="mode" role="group" aria-label="{{mode_label}}"><button data-mode="light" aria-pressed="true">{{light}}</button><button data-mode="dark" aria-pressed="false">{{dark}}</button></div></div>
-  <div class="paper-stack"><span class="lamp" aria-hidden="true"></span><div class="stage" id="scene-panel" data-load-error="{{load_error}}" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
+  <div class="paper-stack"><span class="lamp" aria-hidden="true"></span><div class="sheet"><div class="stage" id="scene-panel" data-load-error="{{load_error}}" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
    <a href="assets/chat-light-large.png" data-lightbox id="scene-link"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/chat-dark.png 1600w, assets/chat-dark-large.png 2880w" sizes="(max-width:1023px) calc(100vw - 40px), 1184px"><img id="scene-image" src="assets/chat-light.png" srcset="assets/chat-light.png 1600w, assets/chat-light-large.png 2880w" sizes="(max-width:1023px) calc(100vw - 40px), 1184px" width="1600" height="1000" fetchpriority="high" alt="{{chat_alt}}"></picture><script>document.currentScript.previousElementSibling.querySelector('source').media=document.documentElement.dataset.theme==='dark'?'all':'not all';document.currentScript.remove()</script></a>
-  </div><a class="enlarge" href="assets/chat-light-large.png" data-enlarge>{{enlarge}} <span aria-hidden="true">↗</span></a></div>
+  </div></div><a class="enlarge" href="assets/chat-light-large.png" data-enlarge>{{enlarge}} <span aria-hidden="true">↗</span></a></div>
   <div class="stage-foot"><p><span class="plate-number" aria-hidden="true">01 / 05</span><span id="scene-caption">{{chat_caption}}</span></p><a href="#install" class="skip-sequence">{{skip_sequence}} ↓</a></div>
   <p class="scroll-cue" data-enhanced hidden><span aria-hidden="true">↓</span> {{scroll_hint}}</p>
  </div>

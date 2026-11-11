@@ -1,6 +1,6 @@
 """Build the bilingual static pages from shared copy, template and icon catalogue."""
 from pathlib import Path
-import html,json,re
+import html,json,re,hashlib
 from datetime import datetime
 ROOT=Path(__file__).resolve().parents[1]
 copy=json.loads((ROOT/'scripts/site-copy.json').read_text(encoding='utf-8'))
@@ -17,6 +17,7 @@ def glyph(path):return (ROOT/path).read_text(encoding='utf-8').replace('<svg ','
 for lang,strings in copy.items():
     data={k:html.escape(v.format(**counts),quote=True) for k,v in strings.items() if isinstance(v,str)}
     data['version']=manifest['version']
+    data['asset_version']=hashlib.sha256(((ROOT/'docs/style.css').read_text(encoding='utf-8')+(ROOT/'docs/app.js').read_text(encoding='utf-8')).encode('utf-8')).hexdigest()[:12]
     stats=json.loads((ROOT/'docs/install-stats.json').read_text(encoding='utf-8')) if (ROOT/'docs/install-stats.json').exists() else None
     count=str(stats['installs']) if stats else '';stamp=stats['generatedAt'] if stats else ''
     date=datetime.fromisoformat(stamp.replace('Z','+00:00')).date().isoformat() if stats else ''

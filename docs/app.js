@@ -8,6 +8,13 @@
   const scenes = Object.fromEntries(tabs.map(tab => [tab.dataset.scene, tab.dataset]));
   const panel = document.querySelector('#scene-panel');
   const link = document.querySelector('#scene-link');
+  const sheet = panel.parentElement;
+  let cardAnimations = [], lastSwap = -Infinity;
+  function settleCards() {
+    for (const animation of cardAnimations) animation.cancel();
+    cardAnimations = [];
+    document.querySelectorAll('.sheet.ghost').forEach(ghost => ghost.remove());
+  }
   const sizes = document.querySelector('#scene-image').sizes;
   const caption = document.querySelector('#scene-caption');
   const languageLink = document.querySelector('[data-language-link]');
@@ -87,7 +94,7 @@
     clearTimeout(loading); panel.classList.remove('loading'); panel.setAttribute('aria-busy', 'false');
   }
   function layerIn(image, ms) {
-    clearTimeout(cleanup);
+    settleCards(); clearTimeout(cleanup);
     // Keep an opaque base during rapid changes; never expose an empty stage.
     const layers = [...link.children];
     if (layers.length >= 3) {
@@ -107,7 +114,46 @@
       [...link.children].filter(el => el !== image).forEach(el => el.remove());
     }, ms + 40);
   }
-  async function go(next, {initial = false, instant = false} = {}) {
+  function swapCard(image, direction) {
+    settleCards(); clearTimeout(cleanup);
+    const now = performance.now(), rapid = now - lastSwap < 200;
+    lastSwap = now;
+    const style = getComputedStyle(sheet.parentElement);
+    const value = name => parseFloat(style.getPropertyValue(name));
+    const back = amount => `translate(${(value('--back-x') + value('--drift') * 3) * amount}px,${value('--back-y') * amount}px) rotate(${value('--back-r') * amount}deg) scale(${1 + (value('--back-s') - 1) * amount})`;
+    const lift = amount => `translateY(${value('--lift-y') * amount}px) scale(${1 + (value('--lift-s') - 1) * amount})`;
+    const easing = 'cubic-bezier(.2,.7,.25,1)';
+    const timing = ms => duration(ms * (matchMedia('(max-width:700px)').matches ? .85 : 1));
+    let ghost;
+    if (!rapid) {
+      ghost = document.createElement('div'); ghost.className = 'sheet ghost';
+      ghost.setAttribute('aria-hidden', 'true'); ghost.inert = true;
+      ghost.style.zIndex = direction > 0 ? '3' : '0';
+      const plate = document.createElement('div'); plate.className = 'plate';
+      const old = link.querySelector('#scene-image');
+      old.removeAttribute('id'); old.removeAttribute('style'); old.className = ''; old.alt = '';
+      plate.append(old); ghost.append(plate); sheet.after(ghost);
+    }
+    image.id = 'scene-image'; image.className = 'shot-layer'; link.replaceChildren(image);
+    // The sheet returns to untransformed CSS after every animation (no fill).
+    cardAnimations = [sheet.animate(rapid
+      ? [{transform: direction > 0 ? back(.4) : lift(.4)}, {transform:'none'}]
+      : [{transform:direction > 0 ? back(1) : lift(1),opacity:0},
+         {opacity:1,offset:direction > 0 ? .22 : .6}, {transform:'none',opacity:1}],
+      {duration:timing(rapid ? 160 : direction > 0 ? 380 : 280),easing})];
+    if (ghost) {
+      cardAnimations.push(ghost.animate(direction > 0
+        ? [{transform:'none',opacity:1},{transform:lift(1),opacity:0}]
+        : [{transform:'none',opacity:1},{opacity:1,offset:.7},{transform:back(1),opacity:0}],
+        {duration:timing(direction > 0 ? 170 : 380),easing:direction > 0 ? 'cubic-bezier(.4,0,1,1)' : easing,fill:'forwards'}));
+    }
+    const animations = cardAnimations;
+    Promise.allSettled(animations.map(animation => animation.finished)).then(() => {
+      ghost?.remove(); animations.forEach(animation => animation.cancel());
+      if (cardAnimations === animations) cardAnimations = [];
+    });
+  }
+  async function go(next, {initial = false, instant = false, direction} = {}) {
     if (!initial && same(next, wanted)) {if (same(next, rendered)) savePreference(); return same(next, rendered);}
     wanted = {...next}; const id = ++sequence;
     controls(next, true); settled();
@@ -119,6 +165,8 @@
       const image = await decode(spec);
       if (id !== sequence) return false;
       const ms = instant ? 0 : duration(initial ? 160 : next.mode !== rendered.mode ? 240 : 320);
+      const sceneChanged = next.scene !== rendered.scene;
+      const cardDirection = direction ?? Math.sign(tabs.findIndex(t => t.dataset.scene === next.scene) - tabs.findIndex(t => t.dataset.scene === rendered.scene));
       root.dataset.theme = next.mode;
       document.querySelector('meta[name=theme-color]').content = next.mode === 'light' ? '#F9F8F5' : '#2A2927';
       rendered = {...next};
@@ -128,7 +176,9 @@
       document.querySelector('.plate-number').textContent = String(tabs.findIndex(t => t.dataset.scene === next.scene) + 1).padStart(2, '0') + ' / 05';
       panel.setAttribute('aria-labelledby', 'tab-' + next.scene);
       panel.dataset.scene = next.scene; panel.dataset.mode = next.mode;
-      layerIn(image, ms); settled(); updateLinks(); return true;
+      if (sceneChanged && !initial && ms && typeof sheet.animate === 'function') swapCard(image, cardDirection);
+      else layerIn(image, ms);
+      settled(); updateLinks(); return true;
     } catch {
       if (id !== sequence) return false;
       wanted = {...rendered}; controls(rendered); settled();
@@ -146,7 +196,7 @@
       const index = tabs.indexOf(tab);
       const next = {ArrowRight:(index + 1) % tabs.length, ArrowLeft:(index + tabs.length - 1) % tabs.length, Home:0, End:tabs.length - 1}[event.key];
       if (next === undefined) return;
-      event.preventDefault(); manual(); go({...wanted, scene: tabs[next].dataset.scene}); tabs[next].focus({preventScroll:true});
+      event.preventDefault(); manual(); go({...wanted, scene: tabs[next].dataset.scene}, {direction:event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : undefined}); tabs[next].focus({preventScroll:true});
     });
   }
   for (const button of modes) {
@@ -202,7 +252,7 @@
     }
   }));
   reducedMotion.addEventListener('change', event => {
-    if (event.matches) {document.querySelectorAll('.pending').forEach(reveal); observer?.disconnect(); document.querySelector('.paper-stack').classList.remove('paper-enter');}
+    if (event.matches) {settleCards(); document.querySelectorAll('.pending').forEach(reveal); observer?.disconnect(); document.querySelector('.paper-stack').classList.remove('paper-enter');}
   });
   if (window.gsap && window.ScrollTrigger && (!location.hash || ['#main','#gallery'].includes(location.hash))) {
     gsap.registerPlugin(ScrollTrigger);

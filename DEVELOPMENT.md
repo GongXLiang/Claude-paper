@@ -83,7 +83,7 @@ galleries, CLI companion themes and pages and fails if the committed outputs dif
 The workflow has read-only repository permissions; it neither installs Orca nor
 changes releases. Browser/native visual acceptance remains a separate check.
 
-Evaluate `scripts/check-browser.js` in a real browser on both language pages; evaluate `scripts/check-motion.js` in a normal-motion desktop browser. Also verify native captures, 360 px layout, no-JS, reduced motion, actual keyboard input, image-load failure, slow decode, manual scene selection during pinned scroll, and lightbox zoom. Observe icon recognizability at 16/20 px; geometry uniqueness is not proof of perceptual distinction.
+Evaluate `scripts/check-browser.js` in a real browser on both language pages; evaluate `scripts/check-motion.js` and `scripts/check-card-motion.js` in a normal-motion browser. The card check exercises forward/reverse and rapid switching, keyboard wraparound, delayed/failed images and cleanup at rest. Also verify native captures, 360 px layout, no-JS, reduced motion, actual keyboard input, image-load failure, slow decode, manual scene selection during pinned scroll, and lightbox zoom. Observe icon recognizability at 16/20 px; geometry uniqueness is not proof of perceptual distinction.
 
 中文：文件夹全部同色，不再维护名称别名。文件后缀和固定文件名写入图标生成器；改动后检查实际小尺寸。网页中英文共享模板，运行生成器同步输出。截图必须来自独立公开工作区，保留完整原生窗口，逐张检查隐私。维护步骤和许可适用于本版；旧拼版脚本仅保留作历史记录。
 
