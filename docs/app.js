@@ -9,6 +9,7 @@
   const panel = document.querySelector('#scene-panel');
   const link = document.querySelector('#scene-link');
   const sheet = panel.parentElement;
+  const backSheets = [...document.querySelectorAll('.back-near,.back-far')];
   let cardAnimations = [], lastSwap = -Infinity;
   function settleCards() {
     for (const animation of cardAnimations) animation.cancel();
@@ -121,6 +122,8 @@
     const style = getComputedStyle(sheet.parentElement);
     const value = name => parseFloat(style.getPropertyValue(name));
     const back = amount => `translate(${(value('--back-x') + value('--drift') * 3) * amount}px,${value('--back-y') * amount}px) rotate(${value('--back-r') * amount}deg) scale(${1 + (value('--back-s') - 1) * amount})`;
+    const far = `translate(${value('--far-x') - value('--drift') * 3}px,${value('--far-y')}px) rotate(${value('--far-r')}deg) scale(${value('--far-s')})`;
+    const replenished = `translate(${value('--back-x')}px,${value('--far-y') + value('--back-y')}px) rotate(${value('--back-r')}deg) scale(${value('--far-s') - .01})`;
     const lift = amount => `translateY(${value('--lift-y') * amount}px) scale(${1 + (value('--lift-s') - 1) * amount})`;
     const easing = 'cubic-bezier(.2,.7,.25,1)';
     const timing = ms => duration(ms * (matchMedia('(max-width:700px)').matches ? .85 : 1));
@@ -138,7 +141,7 @@
     // The sheet returns to untransformed CSS after every animation (no fill).
     cardAnimations = [sheet.animate(rapid
       ? [{transform: direction > 0 ? back(.4) : lift(.4)}, {transform:'none'}]
-      : [{transform:direction > 0 ? back(1) : lift(1),opacity:0},
+      : [{transform:direction > 0 ? back(1) : lift(1),opacity:direction > 0 ? 1 : 0},
          {opacity:1,offset:direction > 0 ? .22 : .6}, {transform:'none',opacity:1}],
       {duration:timing(rapid ? 160 : direction > 0 ? 380 : 280),easing})];
     if (ghost) {
@@ -146,6 +149,17 @@
         ? [{transform:'none',opacity:1},{transform:lift(1),opacity:0}]
         : [{transform:'none',opacity:1},{opacity:1,offset:.7},{transform:back(1),opacity:0}],
         {duration:timing(direction > 0 ? 170 : 380),easing:direction > 0 ? 'cubic-bezier(.4,0,1,1)' : easing,fill:'forwards'}));
+    }
+    // Each visible edge advances one slot: back -> middle -> the incoming image.
+    // On reverse navigation the paper stack recedes instead. CSS owns the rest poses.
+    for (const rear of backSheets) {
+      const near = rear.classList.contains('back-near');
+      const end = near ? back(1) : far;
+      const start = direction > 0 ? (near ? far : replenished) : (near ? 'none' : back(1));
+      cardAnimations.push(rear.animate([
+        {transform:rapid ? end : start,opacity:near || direction < 0 ? 1 : 0},
+        {transform:end,opacity:1}
+      ], {duration:timing(rapid ? 160 : near ? 420 : 460),easing}));
     }
     const animations = cardAnimations;
     Promise.allSettled(animations.map(animation => animation.finished)).then(() => {

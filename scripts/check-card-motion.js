@@ -4,15 +4,17 @@
   const panel=document.querySelector('#scene-panel'),sheet=panel.parentElement;
   const ready=async(scene)=>{for(let i=0;i<300;i++){if(panel.dataset.scene===scene&&panel.getAttribute('aria-busy')==='false')return;await sleep(10)}throw Error('Scene timeout: '+scene)};
   const click=scene=>document.querySelector('#tab-'+scene).click();
-  const rest=()=>getComputedStyle(sheet).transform==='none'&&!document.querySelector('.ghost')&&!sheet.getAnimations().length;
+  const rear=[...document.querySelectorAll('.back-sheet')];
+  const rest=()=>getComputedStyle(sheet).transform==='none'&&!document.querySelector('.ghost')&&[sheet,...rear].every(el=>!el.getAnimations().length);
   const waitRest=async()=>{for(let i=0;i<300;i++){if(rest())return;await sleep(10)}throw Error('Card did not settle')};
   click('chat');await ready('chat');await waitRest();await sleep(250);
   // Preload each scene without changing state.
   await Promise.all(['agents','diff','editor','files'].map(scene=>{const i=new Image();i.src='assets/'+scene+'-'+panel.dataset.mode+'.png';return i.decode()}));
   click('agents');await ready('agents');
   const samples=[];
-  for(let i=0;i<30;i++){samples.push({transform:getComputedStyle(sheet).transform,ghosts:document.querySelectorAll('.ghost').length,opacity:getComputedStyle(sheet).opacity});await new Promise(requestAnimationFrame)}
+  for(let i=0;i<30;i++){samples.push({transform:getComputedStyle(sheet).transform,ghosts:document.querySelectorAll('.ghost').length,opacity:getComputedStyle(sheet).opacity,rear:rear.map(el=>getComputedStyle(el).transform)});await new Promise(requestAnimationFrame)}
   assert(samples.some(s=>s.transform!=='none'&&s.ghosts===1),'scene changes move a full paper card above a backing sheet');
+  assert(rear.length===2&&rear.every((_,i)=>new Set(samples.map(s=>s.rear[i])).size>3),'both backing-paper outlines advance across actual animation frames');
   assert(samples.every(s=>s.ghosts<=1),'only one outgoing card is present');
   await waitRest();assert(rest(),'settled screenshots have no transforms, ghosts or retained animations');
   click('chat');await ready('chat');
