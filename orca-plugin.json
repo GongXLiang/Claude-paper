@@ -2,7 +2,7 @@
   "manifestVersion": 2,
   "id": "claude-paper",
   "name": "Claude Paper theme",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Claude-inspired light and dark colors for Orca Chat and agent terminals, with 455 distinct file icons, calm slate folders and optional IBM Plex Mono.",
   "engines": {
     "orca": ">=1.4.255"
@@ -91,9 +91,9 @@
       "caption": "暖夜 · 双智能体同屏 / Agents together"
     },
     {
-      "path": "docs/assets/agents-light.png",
-      "alt": "The same complete Orca workspace and two genuine CLI panes in Warm Paper.",
-      "caption": "暖纸 · 双智能体同屏 / Agents together"
+      "path": "docs/assets/icons.png",
+      "alt": "Light/dark Paper Fold comparison: 36 file types and slate folders, closed and open. Rendered SVG specimens, not an Orca screenshot.",
+      "caption": "图标明暗对照 · 36 种示例 / Icons in light & dark"
     },
     {
       "path": "docs/assets/diff-dark.png",

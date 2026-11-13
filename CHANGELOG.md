@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.2 — Icon specimens in the store gallery
+
+- Added the existing light/dark Paper Fold specimen sheet as the third store gallery image, replacing the second agent-workspace color variant within the six-image limit.
+- Shows 36 representative file types and both folder states directly from the shipped SVGs. Theme palettes and icon artwork are unchanged.
+
+商店画廊新增图标明暗并排对照图，直接复用已有素材；主题配色和图标本身不变。
+
 ## 0.6.1 — Store name and visible installation count
 
 - Renamed the plugin to Claude Paper theme; plugin and contribution IDs remain stable.

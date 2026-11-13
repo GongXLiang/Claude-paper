@@ -21,7 +21,7 @@ All ten current scene images were recaptured on 2026-11-10 in an isolated Orca p
 
 `icons.png` and `icons-zh.png` are clearly labeled SVG specimen sheets, not Orca screenshots. `scripts/build-gallery.py` uses the shipped SVGs; render `docs/icons-gallery.svg` and `docs/icons-gallery-zh.svg` at 1600 × 1000. The website additionally displays true 16/20 px specimens.
 
-The store uses six full-window scenes: light Chat, dark agents, light agents, dark diff, light editor, dark files. The website offers all five scenes in both modes. Older terminal/individual-CLI image files and old composition scripts remain historical assets and are no longer linked from the current website or READMEs.
+The store uses five full-window scenes plus one clearly labeled icon specimen sheet: light Chat, dark agents, light/dark icon specimens, dark diff, light editor, dark files. The specimen sheet reuses `icons.png`; it is not a native window capture. The website offers all five scenes in both modes. Older terminal/individual-CLI image files and old composition scripts remain historical assets and are no longer linked from the current website or READMEs.
 
 ## Privacy and honest presentation
 
