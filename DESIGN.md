@@ -2,7 +2,7 @@
 
 The whole real Orca workspace is the top sheet of a paper stack. Chat leads; native Claude Code + Codex split panes, diff, editor and files follow. Screenshots remain transform/filter-free at rest. The page retains the warm-paper and charcoal palette, with stronger entrances and a short desktop scroll sequence; manual input, reduced motion, mobile and no-JS take precedence.
 
-Paper Fold 2 uses one warm clay folder, independent of its name. Files use family silhouettes, luminance-balanced color and individual suffix/name marks. Common formats are visually checked at 16/20 px. The active source is `scripts/build-icons.py`; old colored-folder aliases below are historical.
+Paper Fold 2 uses one honey-kraft folder, independent of its name. Files use family silhouettes, luminance-balanced color and individual suffix/name marks. Common formats are visually checked at 16/20 px. The active source is `scripts/build-icons.py`; old colored-folder aliases below are historical.
 
 This version uses one bounded Opus 5.5 Medium consultation for visual direction and an independent implementation review. All product screenshots are genuine public native app captures. See [MEDIA.md](docs/MEDIA.md) for exact provenance and limits.
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.4 — Honey-kraft folder pair
+
+- Replaced the folder pair with rounded 1.5-unit outlines and translucent honey-kraft fills. The open state has a distinct inclined front flap; both states share the same tab and baseline.
+- Updated bilingual pages, documentation and store specimen sheets. File icons and application palettes are unchanged.
+
+采用已确认的牛皮纸金棕色文件夹方案：圆角描边、半透明填色，开合状态清晰区分。
+
 ## 0.6.3 — Warm clay folders
 
 - Redrew closed and open folders with a shared baseline and centered geometry. The open state has a visibly lowered front cover and exposed paper insert.

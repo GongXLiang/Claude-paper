@@ -6,7 +6,7 @@ Warm paper by day. Soft charcoal at night. One coherent space for Chat, coding a
 
 ![Claude Paper: Claude Code and Codex together in a complete native Orca workspace](docs/assets/cover.png)
 
-Two app themes, matching terminal palettes, **455 original file icons**, one quiet warm clay folder style, and optional IBM Plex Mono. An unofficial, data-only community theme; no extra capability permissions.
+Two app themes, matching terminal palettes, **455 original file icons**, one quiet honey-kraft folder style, and optional IBM Plex Mono. An unofficial, data-only community theme; no extra capability permissions.
 
 ## Install
 
@@ -42,7 +42,7 @@ These are genuine Claude Code and Codex CLI sessions in Orca's native left/right
 
 ## Quiet folders. Distinct files.
 
-All folder names now use the **same warm clay icon**, with separate closed/open states. A folder called `skills`, `src` or `my-notes` receives the same treatment. Color no longer competes with the files inside it.
+All folder names now use the **same honey-kraft icon**, with separate closed/open states. A folder called `skills`, `src` or `my-notes` receives the same treatment. Color no longer competes with the files inside it.
 
 ![Paper Fold 2: selected original file icons and one uniform folder style in both modes](docs/assets/icons.png)
 

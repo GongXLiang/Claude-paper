@@ -265,15 +265,13 @@ def build(root=ROOT):
     assert len(catalogue)+3<=512,len(catalogue)
     assert len({r['path'] for r in catalogue})==len(catalogue)
     (root/'icons/file.svg').write_text(svg(p('M3 1.5h7l3 3v10H3z',COLORS['ink'],1.4)+p('M10 1.5v3h3',COLORS['ink'],1.3)),encoding='utf-8')
-    # Shared baseline and centered silhouette; open cover exposes a paper insert.
-    clay='#AD7053'
-    closed=p('M2.5 3h4L8 4.5h5.5q1 0 1 1v7q0 1-1 1h-11q-1 0-1-1V4q0-1 1-1Z',clay,fill=True)+p('M3.5 6.5h9','#FAF9F6',1)
-    opened=p('M2.5 12V4q0-1 1-1H6l1.5 1.5h5q1 0 1 1V12Z',clay,fill=True)+rect(4,4.5,8,6,'#FAF9F6',.5)+p('M5.5 6.5h5',clay,1)+p('M1 8.5h14l-1.75 5H2.75Z',clay,fill=True)
-    for name,body in [('folder',closed),('folder-open',opened)]:
-        (root/f'icons/{name}.svg').write_text(svg(body),encoding='utf-8')
+    # Approved kraft folder pair: shared baseline, translucent face and open flap.
+    folders={'folder': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="#A3763A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 12V4.25q0-1 1-1H5.5c.9 0 1.1 1.5 2 1.5h5.25q1 0 1 1V12q0 1-1 1h-9.5q-1 0-1-1Z" fill="#A3763A" fill-opacity=".3"/></svg>\n', 'folder-open': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="#A3763A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13H3.25q-1 0-1-1V4.25q0-1 1-1H5.5c.9 0 1.1 1.5 2 1.5h4.75q1 0 1 1v2H6Z" fill="#A3763A" fill-opacity=".15"/><path d="M6 7.75h7.95q.8 0 .58.77l-1.06 3.71q-.22.77-1.02.77H4.5Z" fill="#A3763A" fill-opacity=".3"/></svg>\n'}
+    for name,asset in folders.items():
+        (root/f'icons/{name}.svg').write_text(asset,encoding='utf-8')
     (root/'icons/theme.json').write_text(json.dumps(mapping,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
     (root/'icons/catalogue.json').write_text(json.dumps(catalogue,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
-    lines=['# Paper Fold 2 · File coverage / 文件覆盖','',f'{len(catalogue)} individual file marks; one warm clay folder family. / {len(catalogue)} 个独立文件图标；文件夹统一陶土色。','',
+    lines=['# Paper Fold 2 · File coverage / 文件覆盖','',f'{len(catalogue)} individual file marks; one honey-kraft folder family. / {len(catalogue)} 个独立文件图标；文件夹统一牛皮纸金棕色。','',
     'Exact filename first, then the longest known suffix, case-insensitive. Unknown files use the neutral paper mark. / 优先匹配完整文件名，再匹配最长已知后缀，不区分大小写。未知文件使用中性纸页。','',
     'These are filename-based visual associations, not content detection. `.h` uses C, `.m` uses MATLAB, `.mm` uses Objective-C++, `.ts` uses TypeScript, and `.key` uses a private key. / 图标依据名称匹配，不分析内容；以上多义后缀按列出的默认含义显示。','',
     '| Match / 匹配 | Meaning / 含义 | SVG |','|---|---|---|']
