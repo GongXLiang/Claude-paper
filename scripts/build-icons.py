@@ -265,14 +265,15 @@ def build(root=ROOT):
     assert len(catalogue)+3<=512,len(catalogue)
     assert len({r['path'] for r in catalogue})==len(catalogue)
     (root/'icons/file.svg').write_text(svg(p('M3 1.5h7l3 3v10H3z',COLORS['ink'],1.4)+p('M10 1.5v3h3',COLORS['ink'],1.3)),encoding='utf-8')
-    back=p('M1 4V2.5h5l1.5 2H15V13H1z','#556570',fill=True)
-    for opened in [False,True]:
-        front=p('M1 5.5h14v8H1Z','#6D8190',fill=True) if not opened else p('M2 6.5h13l-2 7H.5Z','#6D8190',fill=True)
-        insert=p('M3 5h9', '#98A4AF',1) if opened else ''
-        (root/('icons/folder-open.svg' if opened else 'icons/folder.svg')).write_text(svg(back+insert+front),encoding='utf-8')
+    # Shared baseline and centered silhouette; open cover exposes a paper insert.
+    clay='#AD7053'
+    closed=p('M2.5 3h4L8 4.5h5.5q1 0 1 1v7q0 1-1 1h-11q-1 0-1-1V4q0-1 1-1Z',clay,fill=True)+p('M3.5 6.5h9','#FAF9F6',1)
+    opened=p('M2.5 12V4q0-1 1-1H6l1.5 1.5h5q1 0 1 1V12Z',clay,fill=True)+rect(4,4.5,8,6,'#FAF9F6',.5)+p('M5.5 6.5h5',clay,1)+p('M1 8.5h14l-1.75 5H2.75Z',clay,fill=True)
+    for name,body in [('folder',closed),('folder-open',opened)]:
+        (root/f'icons/{name}.svg').write_text(svg(body),encoding='utf-8')
     (root/'icons/theme.json').write_text(json.dumps(mapping,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
     (root/'icons/catalogue.json').write_text(json.dumps(catalogue,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
-    lines=['# Paper Fold 2 · File coverage / 文件覆盖','',f'{len(catalogue)} individual file marks; one slate folder family. / {len(catalogue)} 个独立文件图标；文件夹统一灰蓝。','',
+    lines=['# Paper Fold 2 · File coverage / 文件覆盖','',f'{len(catalogue)} individual file marks; one warm clay folder family. / {len(catalogue)} 个独立文件图标；文件夹统一陶土色。','',
     'Exact filename first, then the longest known suffix, case-insensitive. Unknown files use the neutral paper mark. / 优先匹配完整文件名，再匹配最长已知后缀，不区分大小写。未知文件使用中性纸页。','',
     'These are filename-based visual associations, not content detection. `.h` uses C, `.m` uses MATLAB, `.mm` uses Objective-C++, `.ts` uses TypeScript, and `.key` uses a private key. / 图标依据名称匹配，不分析内容；以上多义后缀按列出的默认含义显示。','',
     '| Match / 匹配 | Meaning / 含义 | SVG |','|---|---|---|']

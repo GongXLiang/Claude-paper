@@ -52,7 +52,7 @@ for key in ('py','ipynb','cpp','f90','js','json','yaml','yml','toml','docx','xls
 for key in ('.gitignore','.env','package.json','cargo.lock','uv.lock'):
     assert key in icons['fileNames'],key
 backgrounds=['#F3F2EF','#E6E5E0','#E1E0DA','#F9F8F5','#201F1D','#31302D','#363532','#2A2927']
-colors=['#817E77','#6D8190','#4D83B5','#6083A0','#2E88A7','#A97416','#578B46','#3C8B87','#996FA9','#C6605D','#C26540','#7F8332','#A07650','#BE5F8F','#7677C4']
+colors=['#AD7053','#817E77','#6D8190','#4D83B5','#6083A0','#2E88A7','#A97416','#578B46','#3C8B87','#996FA9','#C6605D','#C26540','#7F8332','#A07650','#BE5F8F','#7677C4']
 minimum=min(contrast(c,b) for c in colors for b in backgrounds)
 assert minimum>=3,(minimum)
 print(len(paths),'active SVGs,',sum(map(len,maps)),'mappings; unique geometry, catalogue, neutral folders and SVG safety checked; minimum icon contrast',round(minimum,2))

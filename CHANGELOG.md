@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.3 — Warm clay folders
+
+- Redrew closed and open folders with a shared baseline and centered geometry. The open state has a visibly lowered front cover and exposed paper insert.
+- Replaced slate with muted warm clay; all folder names still share one consistent pair. Updated the website and both store specimen sheets from the shipped SVGs.
+
+重新绘制文件夹开合图标：统一底边、展开前盖、露出纸张，并改用贴近主题的柔和陶土色。
+
 ## 0.6.2 — Icon specimens in the store gallery
 
 - Added the existing light/dark Paper Fold specimen sheet as the third store gallery image, replacing the second agent-workspace color variant within the six-image limit.

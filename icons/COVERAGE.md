@@ -1,6 +1,6 @@
 # Paper Fold 2 · File coverage / 文件覆盖
 
-455 individual file marks; one slate folder family. / 455 个独立文件图标；文件夹统一灰蓝。
+455 individual file marks; one warm clay folder family. / 455 个独立文件图标；文件夹统一陶土色。
 
 Exact filename first, then the longest known suffix, case-insensitive. Unknown files use the neutral paper mark. / 优先匹配完整文件名，再匹配最长已知后缀，不区分大小写。未知文件使用中性纸页。
 

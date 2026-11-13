@@ -6,7 +6,7 @@
 
 ![Claude Paper：完整 Orca 工作区中的 Claude Code 与 Codex 同屏协作](docs/assets/cover.png)
 
-两套应用主题、配套终端色板、**455 枚原创文件图标**、统一的灰蓝文件夹，以及可选 IBM Plex Mono 字体。非官方社区主题，纯数据插件，无需额外能力权限。
+两套应用主题、配套终端色板、**455 枚原创文件图标**、统一的陶土色文件夹，以及可选 IBM Plex Mono 字体。非官方社区主题，纯数据插件，无需额外能力权限。
 
 ## 安装
 
@@ -42,7 +42,7 @@ orca plugin install GongXLiang/Claude-paper --json
 
 ## 文件夹安静，文件有个性
 
-所有文件夹统一使用**灰蓝色**，仅区分折叠与展开。无论叫 `skills`、`src`，还是 `my-notes`，效果都一致，不再用大量目录颜色干扰文件识别。
+所有文件夹统一使用**陶土色**，仅区分折叠与展开。无论叫 `skills`、`src`，还是 `my-notes`，效果都一致，不再用大量目录颜色干扰文件识别。
 
 ![Paper Fold 2：两种模式下的精选文件图标与统一文件夹](docs/assets/icons-zh.png)
 

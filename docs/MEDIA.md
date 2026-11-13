@@ -34,3 +34,5 @@ The identity asset is unchanged; see [IDENTITY.md](IDENTITY.md). App palette, AN
 ## Verification
 
 Check actual image dimensions and PNG metadata with `node scripts/check-site.mjs`, validate the plugin, review light/dark captures, and exercise desktop/mobile, all scenes, keyboard paging, lightbox zoom, fast/slow image switching, no-JS and reduced-motion fallbacks. Store cover ≤1 MiB; each of up to six screenshots ≤1.5 MiB; gallery total ≤8 MiB.
+
+As of 0.6.3, the icon specimen sheets and live website use the new warm clay folder pair. Native window captures retain the earlier slate folders; they have not been retouched.

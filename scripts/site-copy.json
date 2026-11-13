@@ -38,7 +38,7 @@
     "terminal_body": "Warm Paper and Warm Night for coding agents, with matching Codex syntax themes and an optional IBM Plex Mono font. Claude Code can also follow the palette through Orca’s theme sync.",
     "folders_title": "Common names. Familiar colors.",
     "folders_intro": "{folder_name_count} common folder names are grouped by purpose, including skills, plugins, source code, data and output. Existing graphify aliases remain compatible; no particular project layout is required.",
-    "folder_limit": "Every folder uses the same slate color, whatever its name. Open and closed states still show where you are.",
+    "folder_limit": "Every folder uses the same warm clay color, whatever its name. Open and closed states still show where you are.",
     "folder_details": "See every supported folder name",
     "folder_table_caption": "Folder categories and exact names",
     "category": "Category",
@@ -96,7 +96,7 @@
       ],
       "files": [
         "Files",
-        "One slate folder family · distinct file marks in the native explorer"
+        "Uniform folders · distinct file marks in the native explorer"
       ]
     },
     "scope_rows": [
@@ -106,7 +106,7 @@
       ],
       [
         "Files and folders",
-        "455 distinct file SVGs; uniform slate folders for every name"
+        "455 distinct file SVGs; uniform warm clay folders for every name"
       ],
       [
         "Terminal",
@@ -193,7 +193,7 @@
     "terminal_body": "为编码智能体准备暖纸与暖夜色板，附 Codex 语法主题与可选 IBM Plex Mono 字体。Claude Code 还可通过 Orca 的主题同步采用同一套配色。",
     "folders_title": "常用命名，熟悉的颜色。",
     "folders_intro": "按用途整理 {folder_name_count} 个常用目录名称，涵盖技能、插件、源码、数据和输出。保留 graphify 等既有别名兼容，不要求采用特定项目结构。",
-    "folder_limit": "所有文件夹统一灰蓝，不受命名影响；开合状态保留，方便辨认当前位置。",
+    "folder_limit": "所有文件夹统一陶土色，不受命名影响；开合状态保留，方便辨认当前位置。",
     "folder_details": "查看全部支持的目录名称",
     "folder_table_caption": "目录用途与精确匹配名称",
     "category": "用途分类",
@@ -251,7 +251,7 @@
       ],
       "files": [
         "文件",
-        "统一灰蓝文件夹 · 在原生文件树中辨认不同文件类型"
+        "统一文件夹 · 在原生文件树中辨认不同文件类型"
       ]
     },
     "scope_rows": [
@@ -261,7 +261,7 @@
       ],
       [
         "文件与目录",
-        "455 枚独立文件 SVG；所有文件夹名称统一灰蓝"
+        "455 枚独立文件 SVG；所有文件夹名称统一陶土色"
       ],
       [
         "终端",
