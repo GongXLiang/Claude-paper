@@ -22,7 +22,7 @@ for lang,strings in copy.items():
     count=str(stats['installs']) if stats else '';stamp=stats['generatedAt'] if stats else ''
     date=datetime.fromisoformat(stamp.replace('Z','+00:00')).date().isoformat() if stats else ''
     data['store_url']='https://orca.dev/plugins/gongxliang/claude-paper'
-    data['stats_html']='<p class="install-stats" data-install-stats'+('' if stats else ' hidden')+'><a href="'+data['store_url']+'">'+data['installs_prefix']+'<span data-install-count>'+count+'</span>'+data['installs_unit']+'</a>'+data['installs_asof']+'<time datetime="'+html.escape(stamp,quote=True)+'">'+date+'</time></p>'
+    data['stats_html']='<p class="install-stats" data-install-stats'+('' if stats else ' hidden')+'><a href="'+data['store_url']+'">'+data['installs_prefix']+'<span data-install-count>'+count+'</span>'+data['installs_unit']+'</a> <span class="stats-date">'+data['installs_asof'].strip()+' <time datetime="'+html.escape(stamp,quote=True)+'">'+date+'</time></span></p>'
     tabs=[];links=[]
     for scene,(label,caption) in strings['scenes'].items():
         tabs.append(f'<button id="tab-{scene}" role="tab" aria-controls="scene-panel" aria-selected="{str(scene=="chat").lower()}" tabindex="{0 if scene=="chat" else -1}" data-scene="{scene}" data-large="true" data-file="{scene}" data-paired="false" data-caption="{html.escape(caption,quote=True)}">{html.escape(label)}</button>')

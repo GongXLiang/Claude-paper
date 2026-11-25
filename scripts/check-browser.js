@@ -30,12 +30,24 @@
   for(let i=0;i<10;i++)tabs[i%tabs.length].click();
   await ready(tabs[9%tabs.length].dataset.scene,'light');
   check(document.querySelectorAll('#scene-link img').length<=3,'rapid scene switching bounds layers');
+  const compare=document.querySelector('#compare-toggle'), overlay=document.querySelector('#comparison');
+  compare.click();await waitFor(()=>!overlay.hidden,'comparison visible');
+  check(overlay.querySelector('img').src.endsWith('files-dark.png'),'comparison matches current file scene');
+  check(!document.querySelector('.showcase.scroll-enabled'),'manual preview releases pinned scrolling');
+  const range=overlay.querySelector('input');
+  range.value=72;range.dispatchEvent(new Event('input'));
+  check(overlay.style.getPropertyValue('--split')==='72%','comparison range moves the split');
+  const size=document.querySelector('#icon-size');
+  size.value='16';size.dispatchEvent(new Event('change'));
+  check(getComputedStyle(document.querySelector('.specimen>svg')).width==='16px','actual-size icon switch');
+  size.value='20';size.dispatchEvent(new Event('change'));
   for(const swatch of document.querySelectorAll('.palette>span')) {
     const color=swatch.querySelector('i').getBoundingClientRect(),label=swatch.querySelector('.swatch-label').getBoundingClientRect();
     check(label.left-color.right>=0&&label.left-color.right<=10,'swatch and label stay together');
   }
   document.querySelector('#tab-chat').click();await ready('chat','light');
   check(new URL(location.href).searchParams.get('scene')==='chat','returning to chat updates URL');
+  check(overlay.hidden&&!document.querySelector('#scene-link').inert,'changing scenes restores normal preview');
   const tab=document.querySelector('#tab-chat');tab.focus();tab.dispatchEvent(new KeyboardEvent('keydown',{key:'End',bubbles:true}));
   await ready('files','light');check(document.activeElement.id==='tab-files','keyboard tabs');
   document.querySelector('[data-mode=dark]').click();document.querySelector('#tab-files').click();await ready('files','dark');
@@ -47,6 +59,12 @@
   check(document.documentElement.scrollWidth<=innerWidth,'no horizontal page overflow');details.open=false;
   const imageLink=document.querySelector('#scene-link');imageLink.focus();imageLink.click();
   const dialog=document.querySelector('#lightbox');check(dialog.open,'lightbox opens');
+  if(innerWidth<=700){
+    const img=dialog.querySelector('img');
+    check(img.getBoundingClientRect().width>innerWidth*2,'mobile opens on a readable detail');
+    document.querySelector('#zoom-preview').click();
+    check(img.getBoundingClientRect().width<=innerWidth,'fit restores the complete screenshot');
+  }
   check(dialog.querySelector('img').alt===document.querySelector('#scene-image').alt,'lightbox localized alt');
   dialog.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));await ready('chat','dark');
   await waitFor(()=>dialog.querySelector('p').textContent.includes(document.querySelector('#tab-chat').dataset.caption),'lightbox page label');

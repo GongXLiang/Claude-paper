@@ -26,9 +26,17 @@
   let rendered = {mode: root.dataset.theme, scene: 'chat'};
   let wanted = {...rendered, scene: Object.hasOwn(scenes, params.get('scene')) ? params.get('scene') : 'chat'};
   let sequence = 0, cleanup, loading, statusTimer;
-  let manualScene = false, resumeAllowed = false, scrollTrigger;
+  let manualScene = false, scrollTrigger;
   const showcase = document.querySelector('.showcase');
-  const manual = () => {manualScene = true; resumeAllowed = false; showcase.classList.add('is-manual'); document.querySelector('.paper-stack').classList.remove('paper-enter');};
+  function manual() {
+    manualScene = true;
+    document.querySelector('.paper-stack').classList.remove('paper-enter');
+    if (!scrollTrigger) return;
+    const pin = showcase.querySelector('.proof-pin');
+    const pinnedTop = scrollTrigger.isActive ? pin.getBoundingClientRect().top : null;
+    stopSequence();
+    if (pinnedTop !== null) window.scrollBy({top:pin.getBoundingClientRect().top - pinnedTop, behavior:'instant'});
+  }
   const duration = ms => reducedMotion.matches ? 0 : ms;
   const same = (a, b) => a.mode === b.mode && a.scene === b.scene;
   const savePreference = () => {if (chosen) {try {localStorage.setItem('claude-paper-theme', chosen);} catch {}}};
@@ -93,7 +101,44 @@
   }
   function settled() {
     clearTimeout(loading); panel.classList.remove('loading'); panel.setAttribute('aria-busy', 'false');
+    compareButton.disabled = false;
   }
+  const compareButton = document.querySelector('#compare-toggle');
+  const comparison = document.querySelector('#comparison');
+  const compareImage = comparison.querySelector('.compare-image');
+  const split = comparison.querySelector('input');
+  let compareRequest = 0;
+  function closeComparison() {
+    ++compareRequest;
+    comparison.hidden = true;
+    link.inert = false;
+    compareButton.setAttribute('aria-pressed','false');
+    compareImage.replaceChildren();
+  }
+  compareButton.hidden = false;
+  compareButton.addEventListener('click', async () => {
+    if (compareButton.getAttribute('aria-pressed') === 'true') {closeComparison(); return;}
+    manual();
+    const id = ++compareRequest;
+    compareButton.setAttribute('aria-pressed','true');
+    const other = rendered.mode === 'light' ? 'dark' : 'light';
+    try {
+      const image = await decode(specFor({scene:rendered.scene,mode:other}));
+      if (id !== compareRequest) return;
+      image.alt = '';
+      compareImage.replaceChildren(image);
+      comparison.dataset.overlay = other;
+      comparison.hidden = false;
+      link.inert = true;
+      split.focus({preventScroll:true});
+    } catch {
+      if (id === compareRequest) {closeComparison(); notify(panel.dataset.loadError,true);}
+    }
+  });
+  split.addEventListener('input', () => comparison.style.setProperty('--split', split.value + '%'));
+  split.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {closeComparison(); compareButton.focus({preventScroll:true});}
+  });
   function layerIn(image, ms) {
     settleCards(); clearTimeout(cleanup);
     // Keep an opaque base during rapid changes; never expose an empty stage.
@@ -169,10 +214,12 @@
   }
   async function go(next, {initial = false, instant = false, direction} = {}) {
     if (!initial && same(next, wanted)) {if (same(next, rendered)) savePreference(); return same(next, rendered);}
+    closeComparison();
     wanted = {...next}; const id = ++sequence;
     controls(next, true); settled();
     if (!initial && same(next, rendered)) {savePreference(); updateLinks(); return true;}
     panel.setAttribute('aria-busy', 'true');
+    compareButton.disabled = true;
     loading = setTimeout(() => {if (id === sequence) panel.classList.add('loading');}, 300);
     const spec = specFor(next);
     try {
@@ -214,7 +261,7 @@
     });
   }
   for (const button of modes) {
-    button.addEventListener('click', () => {chosen = button.dataset.mode; go({...wanted, mode: chosen});});
+    button.addEventListener('click', () => {manual(); closeComparison(); chosen = button.dataset.mode; go({...wanted, mode: chosen});});
     button.addEventListener('pointerenter', () => preload({...wanted, mode: button.dataset.mode}));
     button.addEventListener('focus', () => preload({...wanted, mode: button.dataset.mode}));
   }
@@ -271,12 +318,12 @@
   if (window.gsap && window.ScrollTrigger && (!location.hash || ['#main','#gallery'].includes(location.hash))) {
     gsap.registerPlugin(ScrollTrigger);
     gsap.matchMedia().add('(min-width: 1024px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)', () => {
-      if (navigator.connection?.saveData) return;
+      if (navigator.connection?.saveData || manualScene) return;
       showcase.classList.add('scroll-enabled');
       let scrollIndex = 0;
-      const resume = self => {if (manualScene && !resumeAllowed) return; manualScene = false; resumeAllowed = false; scrollIndex = Math.max(0,Math.min(4,Math.round(self.progress*4))); showcase.classList.remove('is-manual'); go({...wanted,scene:tabs[scrollIndex].dataset.scene});};
+      const resume = self => {scrollIndex = Math.max(0,Math.min(4,Math.round(self.progress*4))); go({...wanted,scene:tabs[scrollIndex].dataset.scene});};
       scrollTrigger = ScrollTrigger.create({trigger:'.proof-pin',start:'top 18px',end:()=>'+='+Math.min(innerHeight*2.1,2200),pin:true,pinSpacing:true,anticipatePin:1,invalidateOnRefresh:true,
-        onEnter:resume,onEnterBack:resume,onLeave:()=>{resumeAllowed=true;},onLeaveBack:()=>{resumeAllowed=true;},
+        onEnter:resume,onEnterBack:resume,
         onUpdate:self => {
           document.querySelector('.paper-stack').style.setProperty('--drift',self.progress.toFixed(3));
           if (manualScene || document.querySelector('#lightbox').open) return;
@@ -307,16 +354,46 @@
     });
   }).catch(() => {}); // The dated build-time snapshot remains useful offline.
 
+  const iconSize = document.querySelector('#icon-size');
+  const grid = document.querySelector('.specimen-grid');
+  const setIconSize = () => {grid.dataset.size = iconSize.value;};
+  iconSize.parentElement.parentElement.hidden = false;
+  iconSize.addEventListener('change', setIconSize); setIconSize();
+
+  let touchStart, wasSwipe = false;
+  link.addEventListener('pointerdown', event => {
+    wasSwipe = false;
+    touchStart = event.pointerType === 'touch' && event.isPrimary ? {x:event.clientX,y:event.clientY,id:event.pointerId} : null;
+  });
+  link.addEventListener('pointercancel', () => {touchStart = null;});
+  link.addEventListener('pointerup', event => {
+    if (!touchStart || event.pointerId !== touchStart.id) return;
+    const dx = event.clientX - touchStart.x, dy = event.clientY - touchStart.y;
+    touchStart = null;
+    if (Math.abs(dx) < 44 || Math.abs(dx) < 1.5 * Math.abs(dy)) return;
+    wasSwipe = true; manual();
+    const direction = dx < 0 ? 1 : -1;
+    const index = tabs.findIndex(tab => tab.dataset.scene === wanted.scene);
+    go({...wanted,scene:tabs[(index + direction + tabs.length) % tabs.length].dataset.scene},{direction});
+  });
+  link.addEventListener('click', event => {
+    if (wasSwipe && event.detail) {event.preventDefault(); event.stopImmediatePropagation(); wasSwipe = false;}
+  }, true);
+
   const dialog = document.querySelector('#lightbox');
   if (typeof dialog.showModal !== 'function') return;
   let opener, fromStage = false, lightboxSequence = 0, closingTimer;
   const dialogImage = dialog.querySelector('img');
   const zoom = document.querySelector('#zoom-preview');
-  zoom.addEventListener('click', () => {const detail=dialog.classList.toggle('detail'); zoom.textContent=detail?zoom.dataset.fit:'100%';});
-  document.querySelector('[data-enlarge]').addEventListener('click', event => {
-    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-    event.preventDefault(); link.click();
-  });
+  const imageArea = dialogImage.parentElement;
+  function setDetail(enabled) {
+    dialog.classList.toggle('detail', enabled);
+    zoom.textContent = enabled ? zoom.dataset.fit : zoom.dataset.detail;
+    // Files are in the right sidebar; other scenes start just beyond the left navigation.
+    imageArea.scrollLeft = enabled ? (rendered.scene === 'files' ? imageArea.scrollWidth : imageArea.scrollWidth * .15) : 0;
+    imageArea.scrollTop = 0;
+  }
+  zoom.addEventListener('click', () => setDetail(!dialog.classList.contains('detail')));
   const previous = document.querySelector('#previous-preview'), next = document.querySelector('#next-preview');
   async function showLarge(spec) {
     const id = ++lightboxSequence;
@@ -333,12 +410,14 @@
   }
   for (const anchor of document.querySelectorAll('[data-lightbox]')) anchor.addEventListener('click', event => {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-    event.preventDefault(); manual(); opener = anchor; fromStage = anchor === link;
-    const source = anchor.querySelector('#scene-image') || anchor.querySelector('img');
+    event.preventDefault(); manual(); opener = anchor; fromStage = anchor === link || anchor.hasAttribute('data-enlarge');
+    const source = fromStage ? link.querySelector('#scene-image') : anchor.querySelector('img');
     dialogImage.src = source.currentSrc || source.src; dialogImage.alt = source.alt;
     dialog.querySelector('p').textContent = source.alt;
     previous.hidden = next.hidden = !fromStage;
-    clearTimeout(closingTimer); dialog.classList.remove('is-closing'); dialog.classList.remove('detail'); zoom.textContent='100%'; dialog.showModal(); requestAnimationFrame(()=>dialog.classList.add('is-open'));
+    clearTimeout(closingTimer); dialog.classList.remove('is-closing'); dialog.showModal();
+    setDetail(matchMedia('(max-width:700px)').matches);
+    requestAnimationFrame(()=>dialog.classList.add('is-open'));
     showLarge({src:source.src, full:anchor.href, label:source.alt});
   });
   async function pageImage(direction) {
@@ -352,6 +431,7 @@
     dialogImage.src = source.currentSrc || source.src; dialogImage.alt = source.alt;
     dialog.querySelector('p').textContent = source.alt;
     if (!reducedMotion.matches) dialogImage.animate([{opacity:.45,transform:`translateX(${direction * 12}px)`},{opacity:1,transform:'none'}], {duration:180,easing:'cubic-bezier(.2,0,0,1)'});
+    setDetail(dialog.classList.contains('detail'));
     showLarge(specFor(rendered));
   }
   previous.addEventListener('click', () => pageImage(-1)); next.addEventListener('click', () => pageImage(1));
