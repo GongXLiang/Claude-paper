@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.5 — Community store screenshots
+
+- Updated the store cover and four native Orca screenshots. Chat, the side-by-side Claude Code and Codex sessions, the editor and Markdown preview now show the honey-kraft folders in the file tree.
+
+社区商店封面和四张 Orca 实拍图已换新。暖纸和暖夜场景的文件树都能看到金棕色文件夹的展开和收起状态。
+
 ## 0.6.4 — Honey-kraft folder pair
 
 - Replaced the folder pair with rounded 1.5-unit outlines and translucent honey-kraft fills. The open state has a distinct inclined front flap; both states share the same tab and baseline.
