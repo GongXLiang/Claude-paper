@@ -33,6 +33,9 @@ def main():
             new = datetime.fromisoformat(data['generatedAt'].replace('Z', '+00:00'))
             if new < old:
                 raise ValueError('Ignoring an older upstream snapshot')
+            if previous.get('installs') == data['installs']:
+                print(f"Install count unchanged at {data['installs']}; keeping published snapshot.")
+                return
         temporary = path.with_suffix('.json.tmp')
         temporary.write_text(json.dumps(data, indent=2) + '\n', encoding='utf-8')
         temporary.replace(path)

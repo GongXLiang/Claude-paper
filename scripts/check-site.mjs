@@ -41,7 +41,9 @@ png(manifest.icon,256,256,256*1024);
 for(const page of ['index.html','zh-CN.html']) {
 const html=readFileSync(resolve(root,'docs',page),'utf8');
 assert.ok(html.includes('data-language-link'));
-assert.equal((html.match(/data-install-stats/g)||[]).length,2,'Count must appear in hero and install section');
+const storeUrl='https://orca.dev/plugins/gongxliang/claude-paper';
+const countLinks=[...html.matchAll(/data-install-stats[^>]*>\s*<a href="([^"]+)"/g)].map(match=>match[1]);
+assert.deepEqual(countLinks,[storeUrl,storeUrl],`${page}: both install counts must link to the store listing`);
 assert.ok(/class="hero-action"[\s\S]*?data-install-count[\s\S]*?<\/section>/.test(html),'Missing first-screen count');
 
 assert.ok(html.includes(page==='index.html' ? '<html lang="en"' : '<html lang="zh-CN"'));

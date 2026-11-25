@@ -114,6 +114,6 @@ orca plugin install . --json
 
 Bump the manifest version and changelog, pass the checks and publish a **new** `vX.Y.Z` tag. Never move an existing release tag. The repository retains the `orca-plugin` topic; the community index scans tags asynchronously. Check the [store status](https://www.onorca.dev/plugins/gongxliang/claude-paper) separately from the GitHub release.
 
-GitHub Pages serves `main:/docs`. `.github/workflows/install-stats.yml` refreshes official installation totals twice daily and explicitly requests a Pages build after its own commit. `scripts/refresh-stats.py` rejects invalid or older snapshots and retains the last valid dated count on network failure. Regenerate the pages after refreshing the snapshot.
+GitHub Pages serves `main:/docs`. `.github/workflows/install-stats.yml` checks the official installation total daily at 05:23 UTC. When the count changes, it regenerates both pages, commits the snapshot and requests a Pages build. An unchanged count keeps its published source date. `scripts/refresh-stats.py` rejects invalid or older snapshots and retains the last valid dated count on network failure.
 
 Only public, privacy-reviewed assets enter Git. No personal captures, account details, credentials or private paths. Public fixture paths such as `D:/paper-demo/date-kit` are intentional. No third-party screenshots or SVGs are copied.

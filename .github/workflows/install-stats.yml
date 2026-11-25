@@ -1,7 +1,7 @@
 name: Refresh community install count
 on:
   schedule:
-    - cron: '23 5,17 * * *'
+    - cron: '23 5 * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -15,19 +15,29 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - name: Refresh dated snapshot and bilingual pages
+      - name: Refresh dated snapshot
+        id: stats
         run: |
           python3 scripts/refresh-stats.py
+          if ! git diff --quiet -- docs/install-stats.json; then echo "changed=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Build and check bilingual pages
+        if: steps.stats.outputs.changed == 'true'
+        run: |
           python3 scripts/build-site.py
           node scripts/check-site.mjs
-      - name: Publish only changed statistics
+      - name: Publish changed statistics
+        if: steps.stats.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if git diff --quiet -- docs/install-stats.json docs/index.html docs/zh-CN.html; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/install-stats.json docs/index.html docs/zh-CN.html
           git commit -m "docs: refresh official community install statistics"
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then break; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            echo "::warning::Statistics push failed on attempt $attempt. Retrying."
+            sleep $((attempt * 5))
+          done
           gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"

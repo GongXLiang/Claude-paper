@@ -1,6 +1,8 @@
 """Check companion color parity, fonts and malformed upstream statistics."""
 from pathlib import Path
 from datetime import datetime, timezone
+from io import BytesIO
+from unittest.mock import patch
 import importlib.util, json, plistlib, tempfile, subprocess
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -19,6 +21,22 @@ for stamp in ('bad-date','2026-11-15T00:00:00Z','2026-11-10T00:00:00'):
     try:stats.snapshot(bad,now)
     except ValueError:pass
     else:raise AssertionError('accepted invalid date')
+with tempfile.TemporaryDirectory() as temp, patch.object(stats, 'ROOT', Path(temp)):
+    path = Path(temp) / 'docs/install-stats.json'
+    path.parent.mkdir()
+    upstream = {**valid, 'generatedAt': '2020-01-02T00:00:00Z'}
+    previous = {**stats.snapshot(upstream), 'generatedAt': '2020-01-01T00:00:00Z'}
+    published = json.dumps(previous).encode()
+    path.write_bytes(published)
+    for count in (31, 32):
+        upstream['plugins'] = {stats.PLUGIN: {'installs': count}}
+        with patch.object(stats.urllib.request, 'urlopen', return_value=BytesIO(json.dumps(upstream).encode())):
+            stats.main()
+        if count == 31:
+            assert path.read_bytes() == published, 'Timestamp-only refresh rewrote published snapshot'
+        else:
+            assert json.loads(path.read_bytes()) == stats.snapshot(upstream), 'New count was not saved'
+
 for mode in ('light','dark'):
     theme=plistlib.loads((ROOT/f'extras/codex/claude-paper-{mode}.tmTheme').read_bytes())
     app=json.loads((ROOT/f'themes/{mode}.json').read_text(encoding='utf-8'))
